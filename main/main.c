@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "body.h"
 
 int main(void){
     // Initialization
@@ -8,8 +9,8 @@ int main(void){
 
     InitWindow(screenWidth, screenHeight, "Joguinho");
 
-    Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 };
-
+    // Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 };
+    initCharacter(screenWidth, screenHeight);
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
@@ -18,16 +19,17 @@ int main(void){
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 2.0f;
-        if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
-        if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
-        if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
-
+        // if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 2.0f;
+        // if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
+        // if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
+        // if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
+        checkMovement();
+        colision();
         //colisao janela
-        if (ballPosition.y<=0) ballPosition.y += 2.0f;
-        if (ballPosition.y>=screenHeight)  ballPosition.y -= 2.0f;
-        if (ballPosition.x<=0) ballPosition.x += 2.0f;
-        if (ballPosition.x>=screenHeight)  ballPosition.x -= 2.0f;
+        // if (ballPosition.y<=0) ballPosition.y += 2.0f;
+        // if (ballPosition.y>=screenHeight)  ballPosition.y -= 2.0f;
+        // if (ballPosition.x<=0) ballPosition.x += 2.0f;
+        // if (ballPosition.x>=screenHeight)  ballPosition.x -= 2.0f;
 
         //----------------------------------------------------------------------------------
 
@@ -37,9 +39,9 @@ int main(void){
 
             ClearBackground(RAYWHITE);
 
-            DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
+            DrawText("setinha pai", 10, 10, 20, DARKGRAY);
 
-            DrawCircleV(ballPosition, 50, MAROON);
+            drawBall();
 
         EndDrawing();
         //----------------------------------------------------------------------------------
