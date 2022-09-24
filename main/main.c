@@ -22,6 +22,13 @@ int main(void){
         if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
         if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
         if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
+
+        //colisao janela
+        if (ballPosition.y<=0) ballPosition.y += 2.0f;
+        if (ballPosition.y>=screenHeight)  ballPosition.y -= 2.0f;
+        if (ballPosition.x<=0) ballPosition.x += 2.0f;
+        if (ballPosition.x>=screenHeight)  ballPosition.x -= 2.0f;
+
         //----------------------------------------------------------------------------------
 
         // Draw
