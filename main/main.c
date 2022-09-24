@@ -1,5 +1,5 @@
 #include "raylib.h"
-#include "body.h"
+#include "character/body.h"
 
 int main(void){
     // Initialization
@@ -19,18 +19,11 @@ int main(void){
     {
         // Update
         //----------------------------------------------------------------------------------
-        // if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 2.0f;
-        // if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
-        // if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
-        // if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
+        //movimentação do personagem
         checkMovement();
-        colision();
+        
         //colisao janela
-        // if (ballPosition.y<=0) ballPosition.y += 2.0f;
-        // if (ballPosition.y>=screenHeight)  ballPosition.y -= 2.0f;
-        // if (ballPosition.x<=0) ballPosition.x += 2.0f;
-        // if (ballPosition.x>=screenHeight)  ballPosition.x -= 2.0f;
-
+        colision();
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -41,7 +34,7 @@ int main(void){
 
             DrawText("setinha pai", 10, 10, 20, DARKGRAY);
 
-            drawBall();
+            drawCharacter();
 
         EndDrawing();
         //----------------------------------------------------------------------------------

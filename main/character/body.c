@@ -19,6 +19,6 @@ void colision(){
     if (ballPosition.x<=0) ballPosition.x += 2.0f;
     if (ballPosition.x>= GetScreenWidth())  ballPosition.x -= 2.0f;
 }
-void drawBall(){
+void drawCharacter(){
     DrawCircleV(ballPosition, 50, MAROON);
 }

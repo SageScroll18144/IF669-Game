@@ -6,6 +6,6 @@
 void initCharacter();
 void checkMovement();
 void colision();
-void drawBall();
+void drawCharacter();
 
 #endif
