@@ -65,7 +65,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
     }
     if (IsKeyDown(KEY_UP)) {
         player->playerRec.y  -= 20;
-        player->position.y  -= 20;
+        //player->position.y  -= 20;
     }if (IsKeyDown(KEY_DOWN)) {
         player->playerRec.y  += 20;
         player->position.y  += 20;
