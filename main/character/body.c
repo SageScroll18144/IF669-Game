@@ -30,6 +30,8 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
 
     if (*currentFrame > 5) *currentFrame = 0;
     player->playerRec.x = (float)*currentFrame * (float) player->playerRec.width;
+    player->playerRec.y = (float)*currentFrame * (float) player->playerRec.width;
+
 
     if (IsKeyDown(KEY_RIGHT)) {
         (*frameCounter)++;
@@ -64,10 +66,10 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
             
     }
     if (IsKeyDown(KEY_UP)) {
-        player->playerRec.y  -= 20;
-        //player->position.y  -= 20;
+        //player->playerRec.y  -= 20;
+        player->position.y  -= 20;
     }if (IsKeyDown(KEY_DOWN)) {
-        player->playerRec.y  += 20;
+        //player->playerRec.y  += 20;
         player->position.y  += 20;
     }
 }
