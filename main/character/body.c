@@ -45,7 +45,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
             }
             player->position.x += 20;
         }
-    };
+    }
 
     if (IsKeyDown(KEY_LEFT)) {
         (*frameCounter)++;
@@ -63,6 +63,13 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
         }   
             
     }
+    if (IsKeyDown(KEY_UP)) {
+        player->playerRec.y  -= 20;
+        player->position.y  -= 20;
+    }if (IsKeyDown(KEY_DOWN)) {
+        player->playerRec.y  += 20;
+        player->position.y  += 20;
+    }
 }
 void updatePlayerMain(){
     orientation = currentOrientation ? 1 : -1;
@@ -74,17 +81,11 @@ void updatePlayerMain(){
     updatePlayer(&player, &currentFrame, &frameCounter, &currentOrientation, deltaTime);
 }
 
-void checkMovement(){
-    // if (IsKeyDown(KEY_RIGHT)) player->position.x  += 2.0f;
-    // if (IsKeyDown(KEY_LEFT)) player->position.x  -= 2.0f;
-    // if (IsKeyDown(KEY_UP)) player->position.y  -= 2.0f;
-    // if (IsKeyDown(KEY_DOWN)) player->position.y += 2.0f;
-}
 void colision(){
-    // if (player->position.y<=0) player->position.y += 2.0f;
-    // if (player->position.y>= GetScreenHeight())  player->position.y  -= 2.0f;
-    // if (player->position.x <=0) player->position.x  += 2.0f;
-    // if (player->position.x >= GetScreenWidth())  player->position.x  -= 2.0f;
+    if (player.position.y<=0) player.position.y += 20;
+    if (player.position.y>= GetScreenHeight())  player.position.y  -= 20;
+    if (player.position.x <=0) player.position.x  += 20;
+    if (player.position.x >= GetScreenWidth())  player.position.x  -= 20;
 }
 void drawCharacter(){
     //DrawCircleV(ballPosition, 50, MAROON);

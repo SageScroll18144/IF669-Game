@@ -22,6 +22,7 @@ int main(void){
         //movimentação do personagem
         //checkMovement();
         updatePlayerMain();
+        colision();
         //colisao janela
         //colision();
         //----------------------------------------------------------------------------------
