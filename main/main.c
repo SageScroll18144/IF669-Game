@@ -10,7 +10,7 @@ int main(void){
     InitWindow(screenWidth, screenHeight, "Joguinho");
 
     // Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 };
-    initCharacter(screenWidth, screenHeight);
+    initCharacter();
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
@@ -20,10 +20,10 @@ int main(void){
         // Update
         //----------------------------------------------------------------------------------
         //movimentação do personagem
-        checkMovement();
-        
+        //checkMovement();
+        updatePlayerMain();
         //colisao janela
-        colision();
+        //colision();
         //----------------------------------------------------------------------------------
 
         // Draw

@@ -60,6 +60,7 @@ int main(void)
     player.position = (Vector2) {400, 280};
     player.speed = 0;
     player.canJump = false;
+Texture2D charaTex = LoadTexture("scarfy.png");
 
     EnvItem envItems[] = {
         {{ 0, 0, 1000, 400 }, 0, LIGHTGRAY },
@@ -75,8 +76,7 @@ int main(void)
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
-    Texture2D charaTex = LoadTexture("scarfy.png");
-
+    
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {

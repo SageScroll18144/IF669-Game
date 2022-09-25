@@ -1,24 +1,93 @@
 #include "raylib.h"
+#include "raymath.h"
 #include "body.h"
+#include <stdbool.h>
 
-Vector2 ballPosition;
+Player player = {0};
+Texture2D charaTex;
+//Rectangle frameRec;
+int currentFrame = 1, currentOrientation = 1, orientation = 1;
+int frameCounter = 0;
+EnvItem envItems[] = {
+    {{ 0, 0, 1000, 400 }, 0, LIGHTGRAY },
+    {{ 0, 400, 1000, 200 }, 1, GRAY },
+    {{ 300, 200, 400, 10 }, 1, GRAY },
+    {{ 250, 300, 100, 10 }, 1, GRAY },
+    {{ 650, 300, 100, 10 }, 1, GRAY }
+};
+int envItemLength = sizeof(envItems) / sizeof(envItems[0]);
 
 void initCharacter(){
-    ballPosition = (Vector2) { (float) GetScreenWidth()/2, (float) GetScreenHeight()/2 };
+    //player = {0};
+    player.position = (Vector2) {400, 280};
+    player.speed = 0;
+    player.canJump = false;
+    charaTex = LoadTexture("scarfy.png");
+}
+
+void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int deltaTime) {
+    int frameSpeed = 8;
+
+    if (*currentFrame > 5) *currentFrame = 0;
+    player->playerRec.x = (float)*currentFrame * (float) player->playerRec.width;
+
+    if (IsKeyDown(KEY_RIGHT)) {
+        (*frameCounter)++;
+
+        if (*frameCounter >= 60/frameSpeed) {
+            (*frameCounter) = 0;
+            
+            (*currentFrame)++;
+
+            if (!(*currentOrientation)) {
+                (*currentOrientation) = 1;
+                player->playerRec.width *= -1;
+            }
+            player->position.x += 20;
+        }
+    };
+
+    if (IsKeyDown(KEY_LEFT)) {
+        (*frameCounter)++;
+
+        if (*frameCounter >= 60/frameSpeed) {
+            *frameCounter = 0;
+            
+            (*currentFrame)++;
+
+            if (*currentOrientation) {
+                *currentOrientation = 0;
+                player->playerRec.width *= -1;
+            }
+            player->position.x -= 20;
+        }   
+            
+    }
+}
+void updatePlayerMain(){
+    orientation = currentOrientation ? 1 : -1;
+    Rectangle frameRec = {player.position.x, player.position.y - 24, (float) orientation * charaTex.width / 6, (float) charaTex.height};
+    player.playerRec = frameRec;
+
+    float deltaTime = GetFrameTime();
+    
+    updatePlayer(&player, &currentFrame, &frameCounter, &currentOrientation, deltaTime);
 }
 
 void checkMovement(){
-    if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 2.0f;
-    if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
-    if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
-    if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
+    // if (IsKeyDown(KEY_RIGHT)) player->position.x  += 2.0f;
+    // if (IsKeyDown(KEY_LEFT)) player->position.x  -= 2.0f;
+    // if (IsKeyDown(KEY_UP)) player->position.y  -= 2.0f;
+    // if (IsKeyDown(KEY_DOWN)) player->position.y += 2.0f;
 }
 void colision(){
-    if (ballPosition.y<=0) ballPosition.y += 2.0f;
-    if (ballPosition.y>= GetScreenHeight())  ballPosition.y -= 2.0f;
-    if (ballPosition.x<=0) ballPosition.x += 2.0f;
-    if (ballPosition.x>= GetScreenWidth())  ballPosition.x -= 2.0f;
+    // if (player->position.y<=0) player->position.y += 2.0f;
+    // if (player->position.y>= GetScreenHeight())  player->position.y  -= 2.0f;
+    // if (player->position.x <=0) player->position.x  += 2.0f;
+    // if (player->position.x >= GetScreenWidth())  player->position.x  -= 2.0f;
 }
 void drawCharacter(){
-    DrawCircleV(ballPosition, 50, MAROON);
+    //DrawCircleV(ballPosition, 50, MAROON);
+    for (int i = 0; i < envItemLength; i++) DrawRectangleRec(envItems[i].rect, envItems[i].color);
+    DrawTextureRec(charaTex, player.playerRec, player.position, WHITE);
 }
