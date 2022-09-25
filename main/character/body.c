@@ -22,7 +22,7 @@ void initCharacter(){
     player.position = (Vector2) {400, 280};
     player.speed = 0;
     player.canJump = false;
-    charaTex = LoadTexture("scarfy.png");
+    charaTex = LoadTexture("sprites/scarfy.png");
 }
 
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int deltaTime) {
