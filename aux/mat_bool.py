@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread('mapa.png')
+img = cv2.imread('mapa_colisao.png')
 
 height, width = img.shape[:2]
 with open('mat.txt', 'w') as f:
