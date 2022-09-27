@@ -22,6 +22,7 @@ void checkMovement();
 void colision();
 void drawCharacter();
 void updatePlayerMain();
-void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int deltaTime);
+void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime);
+void unloadBodyTextures();
 
 #endif
