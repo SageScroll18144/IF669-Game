@@ -8,9 +8,9 @@ img = cv2.resize(img, (800, 450))
 height, width = img.shape[:2]
 
 with open('mat.txt', 'w') as f:
-    f.write(str(height));
-    f.write(' ');
     f.write(str(width));
+    f.write(' ');
+    f.write(str(height));
     f.write('\n')
 
     for i in range(height):

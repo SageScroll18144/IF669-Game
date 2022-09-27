@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 Texture2D backTex;
-int bitmap[450][800];
+int bitmap[800][450];
 
 void loadImageColision(char *file_name){
     FILE *file = fopen(file_name, "r");
@@ -17,7 +17,7 @@ void loadImageColision(char *file_name){
     }
     fscanf(file, "%d %d", &l[0], &l[1]);
 
-    if(l[0]!=450 && l[1]!=800){
+    if(l[0]!=800 && l[1]!=450){
         printf("*ERRO NA DIMENSÃO DA IMAGEM*\n");
         exit(1);
     }
