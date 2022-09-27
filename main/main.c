@@ -28,6 +28,7 @@ int main(void){
         colision();
         //colisao janela
         //colision();
+        hasAColision(getCharacterPosition());
         //----------------------------------------------------------------------------------
 
         // Draw
