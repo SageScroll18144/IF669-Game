@@ -5,16 +5,20 @@ import matplotlib.pyplot as plt
 img = cv2.imread('mapa_colisao.png')
 
 height, width = img.shape[:2]
-with open('mat.txt', 'w') as f:
+with open('mat.bitmap', 'w') as f:
+    f.write(str(height));
+    f.write(' ');
+    f.write(str(width));
+    
     for i in range(height):
         for j in range(width):
             #print(img[i, j])
             if((img[i, j]==[255,255,255]).all()):
                 #print(1, end=' ')
-                f.write('1');
+                f.write('1 ');
             else:
                 #print(0, end=' ')
-                f.write('0')
+                f.write('0 ')
         #print()
         f.write('\n')
 f.close()
