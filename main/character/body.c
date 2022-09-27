@@ -131,7 +131,7 @@ void colision(){
 }
 void drawCharacter(){
     //DrawCircleV(ballPosition, 50, MAROON);
-    for (int i = 0; i < envItemLength; i++) DrawRectangleRec(envItems[i].rect, envItems[i].color);
+    // for (int i = 0; i < envItemLength; i++) DrawRectangleRec(envItems[i].rect, envItems[i].color);
 
     switch (axisOrientation) {
     case 0:
