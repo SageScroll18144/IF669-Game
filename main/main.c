@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "character/body.h"
+#include "scene/background.h"
 
 int main(void){
     // Initialization
@@ -10,7 +11,9 @@ int main(void){
     InitWindow(screenWidth, screenHeight, "Joguinho");
 
     // Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 };
+    initScene();
     initCharacter();
+    
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
@@ -35,8 +38,10 @@ int main(void){
 
             DrawText("setinha pai", 10, 10, 20, DARKGRAY);
 
+            drawScene();
             drawCharacter();
 
+            
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
@@ -45,6 +50,7 @@ int main(void){
     //--------------------------------------------------------------------------------------
     CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
+    closeScene();
 
     return 0;
 }
