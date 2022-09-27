@@ -56,7 +56,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
         }
     }
 
-    if (IsKeyDown(KEY_LEFT)) {
+    else if (IsKeyDown(KEY_LEFT)) {
         *axisOrientation = 0;
         (*frameCounter)++;
 
@@ -74,7 +74,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
             
     }
 
-    if (IsKeyDown(KEY_UP)) {
+    else if (IsKeyDown(KEY_UP)) {
         *axisOrientation = 1;
         (*frameCounter)++;
 
@@ -91,7 +91,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
         }
     }
     
-    if (IsKeyDown(KEY_DOWN)) {
+    else if (IsKeyDown(KEY_DOWN)) {
         *axisOrientation = 2;
         (*frameCounter)++;
 
@@ -108,9 +108,9 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
         }
     }
 
-    if (IsKeyReleased(KEY_RIGHT) || IsKeyReleased(KEY_LEFT))  *axisOrientation = 3;
-    if (IsKeyReleased(KEY_UP)) *axisOrientation = 4;
-    if (IsKeyReleased(KEY_DOWN)) *axisOrientation = 5;
+    else if (IsKeyReleased(KEY_RIGHT) || IsKeyReleased(KEY_LEFT))  *axisOrientation = 3;
+    else if (IsKeyReleased(KEY_UP)) *axisOrientation = 4;
+    else if (IsKeyReleased(KEY_DOWN)) *axisOrientation = 5;
     
 }
 void updatePlayerMain(){
@@ -163,4 +163,8 @@ void unloadBodyTextures() {
     UnloadTexture(charaTexIdle);
     UnloadTexture(charaTexIdleUp);
     UnloadTexture(charaTexDown);
+}
+
+Vector2 getCharacterPosition(){
+    return player.position;
 }

@@ -24,5 +24,6 @@ void drawCharacter();
 void updatePlayerMain();
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime);
 void unloadBodyTextures();
+Vector2 getCharacterPosition();
 
 #endif
