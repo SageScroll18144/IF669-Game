@@ -7,7 +7,7 @@ img = cv2.imread('mapa_colisao.png')
 img = cv2.resize(img, (800, 450)) 
 height, width = img.shape[:2]
 
-with open('mat.bitmap', 'w') as f:
+with open('mat.txt', 'w') as f:
     f.write(str(height));
     f.write(' ');
     f.write(str(width));
