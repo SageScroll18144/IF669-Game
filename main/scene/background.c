@@ -1,6 +1,5 @@
 #include "raylib.h"
 #include "background.h"
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -42,7 +41,10 @@ void drawScene(){
 void closeScene(){
     UnloadTexture(backTex);
 }
-void hasAColision(Vector2 object){
+int hasAColision(Vector2 object){
+    printf("(%d,  %d) ", (int)object.x, (int)object.y);
     if(bitmap[(int)object.x][(int)object.y]) printf("COLISAO\n");
     else printf("NAO\n");
+    
+    return bitmap[(int)object.x][(int)object.y];
 }

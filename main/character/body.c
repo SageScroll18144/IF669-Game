@@ -128,6 +128,7 @@ void colision(){
     if (player.position.y>= GetScreenHeight())  player.position.y  -= 20;
     if (player.position.x <=0) player.position.x  += 20;
     if (player.position.x >= GetScreenWidth())  player.position.x  -= 20;
+
 }
 void drawCharacter(){
     //DrawCircleV(ballPosition, 50, MAROON);
@@ -167,4 +168,20 @@ void unloadBodyTextures() {
 
 Vector2 getCharacterPosition(){
     return player.position;
+}
+
+Vector2 orientationForColision(){
+    Vector2 ans = {0,0};
+    if(axisOrientation == 0){
+        if(currentOrientation == 1) ans.x = -1;
+        else ans.x = 1;
+    }
+    else if(axisOrientation == 2) ans.y = 1;
+    else if(axisOrientation == 3) ans.y = -1;
+
+    return ans;
+}
+void reboundPlayer(Vector2 rebound_cononic){
+    player.position.x += rebound_cononic.x * 20;
+    player.position.y += rebound_cononic.y * 20;
 }

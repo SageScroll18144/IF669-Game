@@ -25,5 +25,7 @@ void updatePlayerMain();
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime);
 void unloadBodyTextures();
 Vector2 getCharacterPosition();
+Vector2 orientationForColision();
+void reboundPlayer(Vector2 rebound_cononic);
 
 #endif

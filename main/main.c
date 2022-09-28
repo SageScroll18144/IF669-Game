@@ -28,7 +28,10 @@ int main(void){
         //colision();
         //colisao janela
         //colision();
-        hasAColision(getCharacterPosition());
+        if(hasAColision(getCharacterPosition())){
+            Vector2 compensation = orientationForColision();
+            reboundPlayer(compensation);
+        }
         //----------------------------------------------------------------------------------
 
         // Draw

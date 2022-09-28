@@ -7,6 +7,6 @@ void loadImageColision(char *file_name);
 void initScene();
 void drawScene();
 void closeScene();
-void hasAColision(Vector2 object);
+int hasAColision(Vector2 object);
 
 #endif
