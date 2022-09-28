@@ -30,7 +30,7 @@ int main(void){
         //colision();
         if(hasAColision(getCharacterPosition())){
             Vector2 compensation = orientationForColision();
-            reboundPlayer(compensation);
+            //reboundPlayer(compensation);
         }
         //----------------------------------------------------------------------------------
 

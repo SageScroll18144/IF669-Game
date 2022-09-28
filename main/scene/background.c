@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 Texture2D backTex;
-int bitmap[800][450];
+int bitmap[450][800];
 
 void loadImageColision(char *file_name){
     FILE *file = fopen(file_name, "r");
@@ -21,7 +21,7 @@ void loadImageColision(char *file_name){
         exit(1);
     }
     
-    for(int i=0;i<l[0];i++) for(int j=0;j<l[1];j++) fscanf(file, "%d", &bitmap[i][j]);
+    for(int i=0;i<l[1];i++) for(int j=0;j<l[0];j++) fscanf(file, "%d", &bitmap[i][j]);
     
     fclose(file);
 
@@ -46,5 +46,5 @@ int hasAColision(Vector2 object){
     if(bitmap[(int)object.y][(int)object.x]) printf("COLISAO\n");
     else printf("NAO\n");
     
-    return bitmap[(int)object.x][(int)object.y];
+    return bitmap[(int)object.y][(int)object.x];
 }
