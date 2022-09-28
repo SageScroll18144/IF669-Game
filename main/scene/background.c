@@ -42,9 +42,9 @@ void closeScene(){
     UnloadTexture(backTex);
 }
 int hasAColision(Vector2 object){
-    printf("(%d,  %d) ", (int)object.x, (int)object.y);
-    if(bitmap[(int)object.y][(int)object.x]) printf("COLISAO\n");
+    printf("(%d,  %d) ", (int)object.x, (int)object.y+54);
+    if(bitmap[(int)object.y+54][(int)object.x]) printf("COLISAO\n");
     else printf("NAO\n");
     
-    return bitmap[(int)object.y][(int)object.x];
+    return bitmap[(int)object.y+54][(int)object.x];
 }
