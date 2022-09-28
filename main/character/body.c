@@ -2,12 +2,13 @@
 #include "raymath.h"
 #include "body.h"
 #include <stdbool.h>
+#include "stdio.h"
 
 Player player = {0};
-Texture2D charaTex, charaTexUp, charaTexDown, charaTexIdle, charaTexIdleUp, charaTexIdleDown;
+Texture2D charaTex, charaTexUp, charaTexDown, charaTexIdle, charaTexIdleUp, charaTexIdleDown, charaTexAtkSide, charaTexAtkUp, charaTexAtkDown;
 //Rectangle frameRec;
 int currentFrame = 1, currentOrientation = 1, orientation = 1, axisOrientation = 0;
-int frameCounter = 0;
+int frameCounter = 0, isAttacking = 0, atkCnt = 0;
 EnvItem envItems[] = {
     {{ 0, 0, 1000, 400 }, 0, LIGHTGRAY },
     {{ 0, 400, 1000, 200 }, 1, GRAY },
@@ -29,6 +30,9 @@ void initCharacter(){
     charaTexIdle = LoadTexture("sprites/IDLE_SIDE.png");
     charaTexIdleUp = LoadTexture("sprites/IDLE_UP.png");
     charaTexIdleDown = LoadTexture("sprites/IDLE_DOWN.png");
+    charaTexAtkSide = LoadTexture("sprites/ATTACK_SIDES.png");
+    charaTexAtkUp = LoadTexture("sprites/ATTACK_UP.png");
+    charaTexAtkDown = LoadTexture("sprites/ATTACK_DOWN.png");
 }
 
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime) {
@@ -40,7 +44,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
 
 
     if (IsKeyDown(KEY_RIGHT)) {
-        *axisOrientation = 0;
+        *axisOrientation = 3;
         (*frameCounter)++;
 
         if (*frameCounter >= 60/frameSpeed) {
@@ -57,7 +61,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
     }
 
     else if (IsKeyDown(KEY_LEFT)) {
-        *axisOrientation = 0;
+        *axisOrientation = 3;
         (*frameCounter)++;
 
         if (*frameCounter >= 60/frameSpeed) {
@@ -83,10 +87,6 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
             
             (*currentFrame)++;
 
-            if (!(*currentOrientation)) {
-                (*currentOrientation) = 1;
-                player->playerRec.height *= -1;
-            }
             player->position.y -= 20;
         }
     }
@@ -100,24 +100,30 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
             
             (*currentFrame)++;
 
-            if (!(*currentOrientation)) {
-                (*currentOrientation) = 1;
-                player->playerRec.height *= -1;
-            }
             player->position.y += 20;
         }
     }
 
-    else if (IsKeyReleased(KEY_RIGHT) || IsKeyReleased(KEY_LEFT))  *axisOrientation = 3;
+    else if (IsKeyReleased(KEY_RIGHT) || IsKeyReleased(KEY_LEFT))  *axisOrientation = 0;
     else if (IsKeyReleased(KEY_UP)) *axisOrientation = 4;
     else if (IsKeyReleased(KEY_DOWN)) *axisOrientation = 5;
+
+    if (IsKeyPressed(KEY_SPACE)) {
+        // currentFrame e frameCounter interferindo
+
+        isAttacking = 1;
+    }
+    
+    if (IsKeyReleased(KEY_SPACE)) isAttacking = 0;
     
 }
+
 void updatePlayerMain(){
     orientation = currentOrientation ? 1 : -1;
     Rectangle frameRec = {player.position.x, player.position.y - 24, (float) orientation * charaTex.width / 6, (float) charaTex.height};
-    player.playerRec = frameRec;
 
+    player.playerRec = frameRec;
+    
     float deltaTime = GetFrameTime();
     
     updatePlayer(&player, &currentFrame, &frameCounter, &currentOrientation, &axisOrientation, deltaTime);
@@ -134,25 +140,43 @@ void drawCharacter(){
     //DrawCircleV(ballPosition, 50, MAROON);
     // for (int i = 0; i < envItemLength; i++) DrawRectangleRec(envItems[i].rect, envItems[i].color);
 
-    switch (axisOrientation) {
-    case 0:
-        DrawTextureRec(charaTex, player.playerRec, player.position, WHITE);
-        break;
-    case 1:
-        DrawTextureRec(charaTexUp, player.playerRec, player.position, WHITE);
-        break;
-    case 2:
-        DrawTextureRec(charaTexDown, player.playerRec, player.position, WHITE);
-        break;
-    case 3:
-        DrawTextureRec(charaTexIdle, player.playerRec, player.position, WHITE);
-        break;
-    case 4:
-        DrawTextureRec(charaTexIdleUp, player.playerRec, player.position, WHITE);
-        break;
-    case 5:
-        DrawTextureRec(charaTexIdleDown, player.playerRec, player.position, WHITE);
-        break;
+    if (isAttacking) {
+
+        switch (axisOrientation) {
+        case 0:
+            DrawTextureRec(charaTexAtkSide, player.playerRec, player.position, WHITE);
+            break;
+        case 4:
+            DrawTextureRec(charaTexAtkUp, player.playerRec, player.position, WHITE);
+            break;
+        case 5:
+            DrawTextureRec(charaTexAtkDown, player.playerRec, player.position, WHITE);
+            break;
+        }
+        
+    } else {
+
+        switch (axisOrientation) {
+        case 0:
+            DrawTextureRec(charaTexIdle, player.playerRec, player.position, WHITE);
+            break;
+        case 1:
+            DrawTextureRec(charaTexUp, player.playerRec, player.position, WHITE);
+            break;
+        case 2:
+            DrawTextureRec(charaTexDown, player.playerRec, player.position, WHITE);
+            break;
+        case 3:
+            DrawTextureRec(charaTex, player.playerRec, player.position, WHITE);
+            break;
+        case 4:
+            DrawTextureRec(charaTexIdleUp, player.playerRec, player.position, WHITE);
+            break;
+        case 5:
+            DrawTextureRec(charaTexIdleDown, player.playerRec, player.position, WHITE);
+            break;
+        }
+
     }
 
 }
@@ -164,6 +188,8 @@ void unloadBodyTextures() {
     UnloadTexture(charaTexIdle);
     UnloadTexture(charaTexIdleUp);
     UnloadTexture(charaTexDown);
+    UnloadTexture(charaTexAtkSide);
+    UnloadTexture(charaTexAtkUp);
 }
 
 Vector2 getCharacterPosition(){

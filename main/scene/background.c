@@ -43,7 +43,7 @@ void closeScene(){
 }
 int hasAColision(Vector2 object){
     printf("(%d,  %d) ", (int)object.x, (int)object.y);
-    if(bitmap[(int)object.x][(int)object.y]) printf("COLISAO\n");
+    if(bitmap[(int)object.y][(int)object.x]) printf("COLISAO\n");
     else printf("NAO\n");
     
     return bitmap[(int)object.x][(int)object.y];
