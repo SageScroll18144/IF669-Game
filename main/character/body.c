@@ -198,12 +198,13 @@ Vector2 getCharacterPosition(){
 
 Vector2 orientationForColision(){
     Vector2 ans = {0,0};
-    if(axisOrientation == 0){
+    //printf("-> %d ", axisOrientation);
+    if(axisOrientation == 3){
         if(currentOrientation == 1) ans.x = -1;
         else ans.x = 1;
     }
-    else if(axisOrientation == 2) ans.y = 1;
-    else if(axisOrientation == 3) ans.y = -1;
+    else if(axisOrientation == 1) ans.y = 1;
+    else if(axisOrientation == 2) ans.y = -1;
 
     return ans;
 }

@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "character/body.h"
 #include "scene/background.h"
+#include <stdio.h>
 
 int main(void){
     // Initialization
@@ -30,7 +31,9 @@ int main(void){
         //colision();
         if(hasAColision(getCharacterPosition())){
             Vector2 compensation = orientationForColision();
-            //reboundPlayer(compensation);
+            //printf("(%d, %d)\n", compensation.x, compensation.y);
+            reboundPlayer(compensation);
+           // printf("Colidiu dnv carai\n");
         }
         //----------------------------------------------------------------------------------
 
