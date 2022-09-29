@@ -55,6 +55,7 @@ int main(void){
 
     // De-Initialization
     unloadBodyTextures();
+    unloadAudios();
     //--------------------------------------------------------------------------------------
     CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------

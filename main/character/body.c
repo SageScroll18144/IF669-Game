@@ -17,6 +17,7 @@ EnvItem envItems[] = {
     {{ 650, 300, 100, 10 }, 1, GRAY }
 };
 int envItemLength = sizeof(envItems) / sizeof(envItems[0]);
+Sound walk;
 
 void initCharacter(){
     //player = {0};
@@ -33,6 +34,8 @@ void initCharacter(){
     charaTexAtkSide = LoadTexture("sprites/ATTACK_SIDES.png");
     charaTexAtkUp = LoadTexture("sprites/ATTACK_UP.png");
     charaTexAtkDown = LoadTexture("sprites/ATTACK_DOWN.png");
+
+    walk = LoadSound("sounds/walk.ogg");
 }
 
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime) {
@@ -127,6 +130,8 @@ void updatePlayerMain(){
     float deltaTime = GetFrameTime();
     
     updatePlayer(&player, &currentFrame, &frameCounter, &currentOrientation, &axisOrientation, deltaTime);
+
+    PlaySound(walk);
 }
 
 void colision(){
@@ -211,4 +216,8 @@ Vector2 orientationForColision(){
 void reboundPlayer(Vector2 rebound_cononic){
     player.position.x += rebound_cononic.x * 20;
     player.position.y += rebound_cononic.y * 20;
+}
+void unloadAudios(){
+    UnloadSound(walk);
+    CloseAudioDevice(); 
 }
