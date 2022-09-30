@@ -37,7 +37,7 @@ void initCharacter(){
     charaTexAtkUp = LoadTexture("sprites/ATTACK_UP.png");
     charaTexAtkDown = LoadTexture("sprites/ATTACK_DOWN.png");
 
-    walk = LoadSound("sounds/walking_sound3.mp3");
+    walk = LoadSound("sounds/walking_sound4.mp3");
     SetSoundVolume(walk, 1.0f);
 }
 
@@ -50,15 +50,17 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
 
 
     if (IsKeyDown(KEY_RIGHT)) {
-        PlaySound(walk);
+        
         *axisOrientation = 3;
         (*frameCounter)++;
 
         if (*frameCounter >= 60/frameSpeed) {
+            
             (*frameCounter) = 0;
             
             (*currentFrame)++;
-
+            if(!IsSoundPlaying(walk)) PlaySound(walk);
+            
             if (!(*currentOrientation)) {
                 (*currentOrientation) = 1;
                 player->playerRec.width *= -1;
@@ -66,7 +68,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
             player->position.x += 20;
         }
         
-        //while();
+    
     }
 
     else if (IsKeyDown(KEY_LEFT)) {
@@ -77,14 +79,15 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
             *frameCounter = 0;
             
             (*currentFrame)++;
-
+            if(!IsSoundPlaying(walk)) PlaySound(walk);
+            
             if (*currentOrientation) {
                 *currentOrientation = 0;
                 player->playerRec.width *= -1;
             }
             player->position.x -= 20;
         }   
-        PlaySound(walk);
+        
     }
 
     else if (IsKeyDown(KEY_UP)) {
@@ -95,10 +98,11 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
             (*frameCounter) = 0;
             
             (*currentFrame)++;
+            if(!IsSoundPlaying(walk)) PlaySound(walk);
+            
 
             player->position.y -= 20;
         }
-        PlaySound(walk);
     }
     
     else if (IsKeyDown(KEY_DOWN)) {
@@ -109,10 +113,10 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
             (*frameCounter) = 0;
             
             (*currentFrame)++;
+            if(!IsSoundPlaying(walk)) PlaySound(walk);
 
             player->position.y += 20;
         }
-        PlaySound(walk);
     }
 
     else if (IsKeyReleased(KEY_RIGHT) || IsKeyReleased(KEY_LEFT))  *axisOrientation = 0;
