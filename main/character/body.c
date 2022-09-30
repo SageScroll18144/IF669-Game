@@ -50,6 +50,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
 
 
     if (IsKeyDown(KEY_RIGHT)) {
+        PlaySound(walk);
         *axisOrientation = 3;
         (*frameCounter)++;
 
@@ -64,7 +65,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
             }
             player->position.x += 20;
         }
-        PlaySound(walk);
+        
         //while();
     }
 
