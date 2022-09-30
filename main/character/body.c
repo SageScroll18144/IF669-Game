@@ -37,7 +37,7 @@ void initCharacter(){
     charaTexAtkUp = LoadTexture("sprites/ATTACK_UP.png");
     charaTexAtkDown = LoadTexture("sprites/ATTACK_DOWN.png");
 
-    walk = LoadSound("sounds/walk.ogg");
+    walk = LoadSound("sounds/walk-def.mp3");
     SetSoundVolume(walk, 1.0f);
 }
 
@@ -64,6 +64,8 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
             }
             player->position.x += 20;
         }
+        PlaySound(walk);
+        //while();
     }
 
     else if (IsKeyDown(KEY_LEFT)) {
@@ -81,7 +83,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
             }
             player->position.x -= 20;
         }   
-            
+        PlaySound(walk);
     }
 
     else if (IsKeyDown(KEY_UP)) {
@@ -95,6 +97,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
 
             player->position.y -= 20;
         }
+        PlaySound(walk);
     }
     
     else if (IsKeyDown(KEY_DOWN)) {
@@ -108,6 +111,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
 
             player->position.y += 20;
         }
+        PlaySound(walk);
     }
 
     else if (IsKeyReleased(KEY_RIGHT) || IsKeyReleased(KEY_LEFT))  *axisOrientation = 0;
@@ -163,7 +167,7 @@ void updatePlayerMain(){
     
     updatePlayer(&player, &currentFrame, &frameCounter, &currentOrientation, &axisOrientation, deltaTime);
 
-    PlaySound(walk);
+    
 }
 
 void colision(){
