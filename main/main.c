@@ -11,7 +11,7 @@ int main(void){
 
     InitWindow(screenWidth, screenHeight, "Joguinho");
     InitAudioDevice();
-    // Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 };
+    
     initScene();
     initCharacter();
     
@@ -24,16 +24,13 @@ int main(void){
         // Update
         //----------------------------------------------------------------------------------
         //movimentação do personagem
-        //checkMovement();
+    
         updatePlayerMain();
-        //colision();
-        //colisao janela
-        //colision();
+        
         if(hasAColision(getCharacterPosition())){
             Vector2 compensation = orientationForColision();
-            //printf("(%d, %d)\n", compensation.x, compensation.y);
+            
             reboundPlayer(compensation);
-           // printf("Colidiu dnv carai\n");
         }
         //----------------------------------------------------------------------------------
 
@@ -42,8 +39,6 @@ int main(void){
         BeginDrawing();
 
             ClearBackground(RAYWHITE);
-
-            DrawText("setinha pai", 10, 10, 20, DARKGRAY);
 
             drawScene();
             drawCharacter();
