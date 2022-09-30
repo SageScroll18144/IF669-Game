@@ -14,6 +14,18 @@ const int screenHeight = 450;
 InitWindow(screenWidth, screenHeight, "raylib [shapes] example - following eyes");
 
 
+int cont = 0; //contador pra as imagens da sprite não ficarem passando muito rapido 
+Texture2D backTex = LoadTexture("assets/map.png");
+Rectangle recSrc = {0, 0, backTex.width, backTex.height};
+Rectangle recDest = {0, 0, 800, 450};
+Vector2 vecOrigin = {0, 0};
+Texture2D zombie = LoadTexture ("sprites/ZOMBIE_RUN.png");
+Rectangle recZ;
+int i = 0;//variavel pra movimentar a sprite
+recZ.x = 0;
+recZ.y = 0;
+recZ.height = zombie.height;
+recZ.width = (float)(zombie.width / 8);
 Vector2 zombiesPosition = { GetScreenWidth()/2.0f, GetScreenHeight()/2.0f };
 Vector2 playerPosition = {100 , 50};
 SetTargetFPS(60);
@@ -46,6 +58,7 @@ while(!WindowShouldClose()){
                 distY = 1;
             }
             if(zombiesPosition.x > playerPosition.x && zombiesPosition.y > playerPosition.y){
+                recZ.width = (float)((zombie.width / 8) * (-1));
                 Vector2 auxiliar1 = {zombiesPosition.x - distX, zombiesPosition.y};
                 Vector2 auxiliar2 = {zombiesPosition.x ,zombiesPosition.y - distY};
                 if(CheckCollisionPointRec(auxiliar1, obst) == true || CheckCollisionPointRec(auxiliar1, obst2) == true){
@@ -61,6 +74,7 @@ while(!WindowShouldClose()){
 
             }
             else if(zombiesPosition.x <= playerPosition.x && zombiesPosition.y > playerPosition.y){
+                recZ.width = (float)(zombie.width / 8);
                 Vector2 auxiliar1 = {zombiesPosition.x + distX, zombiesPosition.y};
                 Vector2 auxiliar2 = {zombiesPosition.x ,zombiesPosition.y - distY};
                 if(CheckCollisionPointRec(auxiliar1, obst) == true || CheckCollisionPointRec(auxiliar1, obst2) == true){
@@ -75,6 +89,7 @@ while(!WindowShouldClose()){
                 }
             }
             else if(zombiesPosition.x <= playerPosition.x && zombiesPosition.y <= playerPosition.y){
+                recZ.width = (float)(zombie.width / 8);
                     Vector2 auxiliar1 = {zombiesPosition.x + distX, zombiesPosition.y};
                 Vector2 auxiliar2 = {zombiesPosition.x ,zombiesPosition.y + distY};
                 if(CheckCollisionPointRec(auxiliar1, obst) == true || CheckCollisionPointRec(auxiliar1, obst2) == true){
@@ -89,6 +104,7 @@ while(!WindowShouldClose()){
                 }
             }
             else if(zombiesPosition.x >= playerPosition.x && zombiesPosition.y <= playerPosition.y){
+                recZ.width = (float)((zombie.width / 8) * (-1));
                 Vector2 auxiliar1 = {zombiesPosition.x - distX, zombiesPosition.y};
                 Vector2 auxiliar2 = {zombiesPosition.x ,zombiesPosition.y + distY};
                 if(CheckCollisionPointRec(auxiliar1, obst) == true || CheckCollisionPointRec(auxiliar1, obst2) == true){
@@ -137,11 +153,20 @@ while(!WindowShouldClose()){
     }
     //fim do controle do movimento do zumbi
     BeginDrawing();
+     DrawTexturePro(backTex, recSrc, recDest, vecOrigin, 0, WHITE);
+    i %= 8;
+    recZ.x = i * recZ.width;
     DrawRectangleV(obstaclePosition, obstacleSize, BLACK);
     DrawRectangleV(obstaclePosition2, obstacleSize2, BLACK);
     ClearBackground(WHITE);
-    DrawCircleV(zombiesPosition, 5, RED);
+    DrawTextureRec(zombie, recZ, zombiesPosition, WHITE);
     DrawCircleV(playerPosition, 5, BLUE);
+    cont++;
+    if (cont == 4){
+        cont = 0;
+        i++;
+    }
+    
 
     EndDrawing();
 }
