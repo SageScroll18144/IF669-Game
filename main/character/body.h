@@ -23,6 +23,7 @@ void colision();
 void drawCharacter();
 void updatePlayerMain();
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime);
+void drawAttack();
 void unloadBodyTextures();
 Vector2 getCharacterPosition();
 Vector2 orientationForColision();

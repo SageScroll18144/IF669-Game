@@ -27,9 +27,11 @@ void initCharacter(){
     charaTex = LoadTexture("sprites/RUN_SIDES.png");
     charaTexUp = LoadTexture("sprites/RUN_UP.png");
     charaTexDown = LoadTexture("sprites/RUN_DOWN.png");
+
     charaTexIdle = LoadTexture("sprites/IDLE_SIDE.png");
     charaTexIdleUp = LoadTexture("sprites/IDLE_UP.png");
     charaTexIdleDown = LoadTexture("sprites/IDLE_DOWN.png");
+
     charaTexAtkSide = LoadTexture("sprites/ATTACK_SIDES.png");
     charaTexAtkUp = LoadTexture("sprites/ATTACK_UP.png");
     charaTexAtkDown = LoadTexture("sprites/ATTACK_DOWN.png");
@@ -109,13 +111,42 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
     else if (IsKeyReleased(KEY_DOWN)) *axisOrientation = 5;
 
     if (IsKeyPressed(KEY_SPACE)) {
-        // currentFrame e frameCounter interferindo
-
         isAttacking = 1;
     }
     
-    if (IsKeyReleased(KEY_SPACE)) isAttacking = 0;
-    
+}
+
+void drawAttack(Player *player) {
+
+    int frameCounter = 0, frameSpeed = 8, currentFrame = 1;
+    while (isAttacking) {
+        frameCounter++;
+
+        if (frameCounter >= 60/frameSpeed) {
+            frameCounter = 0;
+            currentFrame++;
+
+            switch (axisOrientation) {
+            case 0:
+                player->playerRec.x = (float) currentFrame * (float) player->playerRec.width;
+                DrawTextureRec(charaTexAtkSide, player->playerRec, player->position, WHITE);
+                break;
+            
+            case 1:
+                player->playerRec.y = (float) currentFrame * (float) player->playerRec.height;
+                DrawTextureRec(charaTexAtkUp, player->playerRec, player->position, WHITE);
+                break;
+            
+            case 2:
+                player->playerRec.y = (float) currentFrame * (float) player->playerRec.height;
+                DrawTextureRec(charaTexAtkDown, player->playerRec, player->position, WHITE);
+                break;
+            }
+        }
+
+        if (currentFrame == 6) isAttacking = 0;
+    }
+          
 }
 
 void updatePlayerMain(){
@@ -139,21 +170,8 @@ void colision(){
 void drawCharacter(){
     //DrawCircleV(ballPosition, 50, MAROON);
     // for (int i = 0; i < envItemLength; i++) DrawRectangleRec(envItems[i].rect, envItems[i].color);
-
     if (isAttacking) {
-
-        switch (axisOrientation) {
-        case 0:
-            DrawTextureRec(charaTexAtkSide, player.playerRec, player.position, WHITE);
-            break;
-        case 4:
-            DrawTextureRec(charaTexAtkUp, player.playerRec, player.position, WHITE);
-            break;
-        case 5:
-            DrawTextureRec(charaTexAtkDown, player.playerRec, player.position, WHITE);
-            break;
-        }
-        
+        drawAttack(&player);
     } else {
 
         switch (axisOrientation) {
@@ -178,6 +196,8 @@ void drawCharacter(){
         }
 
     }
+
+    
 
 }
 
