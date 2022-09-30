@@ -8,7 +8,7 @@ int main()
 {
 
 const int tamLinha = 800;
-const int tamColuna = 500;
+const int tamColuna = 450;
 InitWindow(tamLinha, tamColuna, "tecla");
 InitAudioDevice();
 
@@ -18,7 +18,7 @@ char msg2[] = "press P to stop the music";
 
 Font font = LoadFont("resources/fonts/jupiter_crash.png");
 
-Music music = LoadMusicStream("C:\\Users\\Guilherme\\OneDrive\\¡rea de Trabalho\\Gusttavo Lima - Bloqueado (Buteco In Boston) (320 kbps).mp3");
+Music music = LoadMusicStream("C:\\Users\\Guilherme\\OneDrive\\√Årea de Trabalho\\Gusttavo Lima - Bloqueado (Buteco In Boston) (320 kbps).mp3");
 SetTargetFPS(60);
 PlayMusicStream(music);
 int ifPause = 0;
@@ -50,7 +50,7 @@ while(!WindowShouldClose()){
 
     position.x = 300;
     position.y = 180;
-    //*****ComeÁo do desenho*****
+    //*****Come√ßo do desenho*****
     BeginDrawing();
 
     ClearBackground(DARKGREEN);
