@@ -37,7 +37,7 @@ void initCharacter(){
     charaTexAtkUp = LoadTexture("sprites/ATTACK_UP.png");
     charaTexAtkDown = LoadTexture("sprites/ATTACK_DOWN.png");
 
-    walk = LoadSound("sounds/walk-def.mp3");
+    walk = LoadSound("sounds/walking_sound3.mp3");
     SetSoundVolume(walk, 1.0f);
 }
 
