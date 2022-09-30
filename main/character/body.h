@@ -28,5 +28,6 @@ void unloadBodyTextures();
 Vector2 getCharacterPosition();
 Vector2 orientationForColision();
 void reboundPlayer(Vector2 rebound_cononic);
+void unloadAudios();
 
 #endif

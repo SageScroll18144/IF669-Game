@@ -8,3 +8,23 @@ cc character/body.c scene/background.c  main.c -lraylib -lGL -lm -lpthread -ldl 
 ```
 
 - Para ambiente linux
+
+## scene
+
+- Código referente ao cenário
+
+## character
+
+- Código referente ao personagem principal
+
+## bitmaps
+
+- Pasta com os arquivos _.txt_ da bitmap
+
+## assets
+
+- Cenários
+
+## sprites
+
+- Sprites do jogo

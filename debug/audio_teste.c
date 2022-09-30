@@ -1,20 +1,22 @@
 #include "raylib.h"
-#include "character/body.h"
-#include "scene/background.h"
-#include <stdio.h>
 
-int main(void){
+//------------------------------------------------------------------------------------
+// Program main entry point
+//------------------------------------------------------------------------------------
+int main(void)
+{
     // Initialization
     //--------------------------------------------------------------------------------------
     const int screenWidth = 800;
     const int screenHeight = 450;
 
-    InitWindow(screenWidth, screenHeight, "Joguinho");
+    InitWindow(screenWidth, screenHeight, "raylib [audio] example - sound loading and playing");
 
-    // Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 };
-    initScene();
-    initCharacter();
-    
+    InitAudioDevice();      // Initialize audio device
+
+    Sound fxWav = LoadSound("resources/sound.wav");         // Load WAV audio file
+    Sound fxOgg = LoadSound("resources/target.ogg");        // Load OGG audio file
+
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
@@ -23,18 +25,8 @@ int main(void){
     {
         // Update
         //----------------------------------------------------------------------------------
-        //movimentação do personagem
-        //checkMovement();
-        updatePlayerMain();
-        //colision();
-        //colisao janela
-        //colision();
-        if(hasAColision(getCharacterPosition())){
-            Vector2 compensation = orientationForColision();
-            //printf("(%d, %d)\n", compensation.x, compensation.y);
-            reboundPlayer(compensation);
-           // printf("Colidiu dnv carai\n");
-        }
+        if (IsKeyPressed(KEY_SPACE)) PlaySound(fxWav);      // Play WAV sound
+        if (IsKeyPressed(KEY_ENTER)) PlaySound(fxOgg);      // Play OGG sound
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -43,23 +35,22 @@ int main(void){
 
             ClearBackground(RAYWHITE);
 
-            DrawText("setinha pai", 10, 10, 20, DARKGRAY);
+            DrawText("Press SPACE to PLAY the WAV sound!", 200, 180, 20, LIGHTGRAY);
+            DrawText("Press ENTER to PLAY the OGG sound!", 200, 220, 20, LIGHTGRAY);
 
-            drawScene();
-            drawCharacter();
-
-            
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
 
     // De-Initialization
-    unloadBodyTextures();
-    unloadAudios();
     //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
+    UnloadSound(fxWav);     // Unload sound data
+    UnloadSound(fxOgg);     // Unload sound data
+
+    CloseAudioDevice();     // Close audio device
+
+    CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
-    closeScene();
 
     return 0;
 }

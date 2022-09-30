@@ -17,6 +17,7 @@ EnvItem envItems[] = {
     {{ 650, 300, 100, 10 }, 1, GRAY }
 };
 int envItemLength = sizeof(envItems) / sizeof(envItems[0]);
+Sound walk;
 
 void initCharacter(){
     //player = {0};
@@ -35,6 +36,8 @@ void initCharacter(){
     charaTexAtkSide = LoadTexture("sprites/ATTACK_SIDES.png");
     charaTexAtkUp = LoadTexture("sprites/ATTACK_UP.png");
     charaTexAtkDown = LoadTexture("sprites/ATTACK_DOWN.png");
+
+    walk = LoadSound("sounds/walk.ogg");
 }
 
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime) {
@@ -118,17 +121,17 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
 
 void drawAttack(Player *player) {
 
-    int frameCounter = 0, frameSpeed = 8, currentFrame = 1;
+    int frameCounter1 = 0, frameSpeed1 = 1, currentFrame1 = 1;
     while (isAttacking) {
-        frameCounter++;
+        frameCounter1++;
 
-        if (frameCounter >= 60/frameSpeed) {
-            frameCounter = 0;
-            currentFrame++;
+        if (frameCounter1 >= 60/frameSpeed1) {
+            frameCounter1 = 0;
+            currentFrame1++;
 
             switch (axisOrientation) {
             case 0:
-                player->playerRec.x = (float) currentFrame * (float) player->playerRec.width;
+                player->playerRec.x = (float) currentFrame1 * (float) player->playerRec.width;
                 DrawTextureRec(charaTexAtkSide, player->playerRec, player->position, WHITE);
                 break;
             
@@ -144,7 +147,7 @@ void drawAttack(Player *player) {
             }
         }
 
-        if (currentFrame == 6) isAttacking = 0;
+        if (currentFrame1 == 6) isAttacking = 0;
     }
           
 }
@@ -158,6 +161,8 @@ void updatePlayerMain(){
     float deltaTime = GetFrameTime();
     
     updatePlayer(&player, &currentFrame, &frameCounter, &currentOrientation, &axisOrientation, deltaTime);
+
+    PlaySound(walk);
 }
 
 void colision(){
@@ -172,6 +177,7 @@ void drawCharacter(){
     // for (int i = 0; i < envItemLength; i++) DrawRectangleRec(envItems[i].rect, envItems[i].color);
     if (isAttacking) {
         drawAttack(&player);
+        isAttacking = 0;
     } else {
 
         switch (axisOrientation) {
@@ -218,16 +224,21 @@ Vector2 getCharacterPosition(){
 
 Vector2 orientationForColision(){
     Vector2 ans = {0,0};
-    if(axisOrientation == 0){
+    //printf("-> %d ", axisOrientation);
+    if(axisOrientation == 3){
         if(currentOrientation == 1) ans.x = -1;
         else ans.x = 1;
     }
-    else if(axisOrientation == 2) ans.y = 1;
-    else if(axisOrientation == 3) ans.y = -1;
+    else if(axisOrientation == 1) ans.y = 1;
+    else if(axisOrientation == 2) ans.y = -1;
 
     return ans;
 }
 void reboundPlayer(Vector2 rebound_cononic){
     player.position.x += rebound_cononic.x * 20;
     player.position.y += rebound_cononic.y * 20;
+}
+void unloadAudios(){
+    UnloadSound(walk);
+    CloseAudioDevice(); 
 }

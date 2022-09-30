@@ -45,10 +45,10 @@ int hasAColision(Vector2 object){
     int x = (int)object.x+40;
     int y = (int)object.y+80;
     
-    printf("(%d,  %d) ", x, y); 
+    //printf("(%d,  %d) ", x, y); 
 
-    if(x<0||y<0||x>=800||y>=450||bitmap[y][x]) printf("COLISAO\n");
-    else printf("NAO\n");
+    // if(x<0||y<0||x>=800||y>=450||bitmap[y][x]) printf("COLISAO\n");
+    // else printf("NAO\n");
     
     return (x<0||y<0||x>=800||y>=450||bitmap[y][x]);
 }
