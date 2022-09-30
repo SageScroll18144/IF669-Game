@@ -10,7 +10,7 @@ int main(void){
     const int screenHeight = 450;
 
     InitWindow(screenWidth, screenHeight, "Joguinho");
-
+    InitAudioDevice();
     // Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 };
     initScene();
     initCharacter();

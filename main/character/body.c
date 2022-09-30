@@ -38,6 +38,7 @@ void initCharacter(){
     charaTexAtkDown = LoadTexture("sprites/ATTACK_DOWN.png");
 
     walk = LoadSound("sounds/walk.ogg");
+    SetSoundVolume(walk, 1.0f);
 }
 
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime) {
