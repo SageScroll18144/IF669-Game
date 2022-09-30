@@ -170,7 +170,8 @@ while(!WindowShouldClose()){
 
     EndDrawing();
 }
-
+UnloadTexture(backTex);
+UnloadTexture(zombie);
 CloseWindow();
 
     return 0;
