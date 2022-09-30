@@ -3,6 +3,9 @@
 #include "scene/background.h"
 #include <stdio.h>
 
+void drawGame();
+void drawMenu();
+
 int main(void){
     // Initialization
     //--------------------------------------------------------------------------------------
@@ -17,31 +20,31 @@ int main(void){
     
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
-
+    int flag_screen = 0;
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        // Update
-        //----------------------------------------------------------------------------------
-        //movimentação do personagem
-    
-        updatePlayerMain();
-        
-        if(hasAColision(getCharacterPosition())){
-            Vector2 compensation = orientationForColision();
-            
-            reboundPlayer(compensation);
-        }
-        //----------------------------------------------------------------------------------
+        // seta a transição de tela
+        if(IsKeyDown(KEY_E)) flag_screen = 1;
 
+        if(flag_screen == 1){
+            //movimentação do personagem
+            updatePlayerMain();
+            
+            if(hasAColision(getCharacterPosition())){
+                Vector2 compensation = orientationForColision();
+                
+                reboundPlayer(compensation);
+            }
+        }
+        
         // Draw
-        //----------------------------------------------------------------------------------
         BeginDrawing();
 
             ClearBackground(RAYWHITE);
-
-            drawScene();
-            drawCharacter();
+            
+            if(flag_screen == 0) drawMenu();
+            if(flag_screen == 1) drawGame();
 
             
         EndDrawing();
@@ -57,4 +60,12 @@ int main(void){
     closeScene();
 
     return 0;
+}
+
+void drawGame(){
+    drawScene();
+    drawCharacter();
+}
+void drawMenu(){
+    printf("Digite E para começar o jogo");
 }
