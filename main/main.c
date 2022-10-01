@@ -2,10 +2,10 @@
 #include "character/body.h"
 #include "scene/background.h"
 #include "enemy/zombie.h"
+#include "menu/menu.h"
 #include <stdio.h>
 
 void drawGame();
-void drawMenu();
 
 int main(void){
     // Initialization
@@ -16,6 +16,7 @@ int main(void){
     InitWindow(screenWidth, screenHeight, "Joguinho");
     InitAudioDevice();
     
+    initMenu();
     initScene();
     initCharacter();
     
@@ -66,7 +67,4 @@ int main(void){
 void drawGame(){
     drawScene();
     drawCharacter();
-}
-void drawMenu(){
-    // printf("Digite E para começar o jogo");
 }
