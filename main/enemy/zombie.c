@@ -4,8 +4,8 @@
 #include "zombie.h"
 
 //Variaveis da perseguição do backtracking
-int l[] = {0,1,0,-1};
-int c[] = {1,0,-1,0};
+int l[4];
+int c[4];
 int map[450][800];
 int mark[450][800];
 Vector2 *path_ans;
@@ -91,17 +91,45 @@ void backtracking(Vector2 **path, int *length, Vector2 player){
 }
 
 void whichDirect(Vector2 zombie_pos, Vector2 player_pos){
+    int dist_x = player_pos.x - zombie_pos.x;
+    int dist_y = player_pos.y - zombie_pos.y;
+    if(dist_x > 0){
+        l[1] = 1;
+        c[1] = 0;
 
+        l[3] = -1;
+        c[3] = 0;
+    }else{
+        l[1] = -1;
+        c[1] = 0;
+
+        l[3] = 1;
+        c[3] = 0;
+    }
+    
+    if(dist_y > 0) {
+        l[0] = 0;
+        c[0] = 1;
+
+        l[2] = 0;
+        c[2] = -1;
+    }else{
+        l[0] = 0;
+        c[0] = -1;
+
+        l[2] = 0;
+        c[2] = 1;
+    }
 }
 
 void setMovementByBacktracking(Vector2 zombie_pos, Vector2 player_pos){
     //l & c
-
+    whichDirect(zombie_pos, player_pos);
 
     Vector2 *path = NULL;
     int length = 0;
     append(&path, &length, zombie_pos);
-    //backtracking(&path, &length, player_pos);
+    backtracking(&path, &length, player_pos);
 
     for(int i=1;i<length_path_ans;i++) goAt(path_ans[i]);
 }
