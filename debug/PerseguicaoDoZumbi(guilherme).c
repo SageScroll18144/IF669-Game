@@ -37,14 +37,14 @@ Rectangle obst2 = {450, 140, 100, 80};
 Vector2 obstaclePosition2 = {450, 140};
 Vector2 obstacleSize2 = {100 , 80};
 float angulo;
-int controlVelocity = 1;
+int controlVelocity = 1, sameLineX = 0, sameLineY = 0;
 int distX, distY;
 while(!WindowShouldClose()){
     //CheckCollisionPointRec()
     playerPosition = GetMousePosition();
     //comeco do controle do movimento do zumbi
     if(controlVelocity == 1){
-        if(zombiesPosition.x != playerPosition.x){
+        if(zombiesPosition.x != playerPosition.x && zombiesPosition.y != playerPosition.y && sameLineX == 0 && sameLineY == 0){
             angulo = atan((zombiesPosition.y - playerPosition.y)/(zombiesPosition.x - playerPosition.x));
             if(cos(angulo) > sin(angulo)){
                 distX = 2;
@@ -74,7 +74,7 @@ while(!WindowShouldClose()){
                 }
 
             }
-            else if(zombiesPosition.x <= playerPosition.x && zombiesPosition.y > playerPosition.y){
+            else if(zombiesPosition.x < playerPosition.x && zombiesPosition.y > playerPosition.y){
                 recZ.width = (float)(zombie.width / 8);
                 Vector2 auxiliar1 = {zombiesPosition.x + distX, zombiesPosition.y};
                 Vector2 auxiliar2 = {zombiesPosition.x ,zombiesPosition.y - distY};
@@ -89,7 +89,7 @@ while(!WindowShouldClose()){
                     zombiesPosition.y = zombiesPosition.y - distY;
                 }
             }
-            else if(zombiesPosition.x <= playerPosition.x && zombiesPosition.y <= playerPosition.y){
+            else if(zombiesPosition.x < playerPosition.x && zombiesPosition.y < playerPosition.y){
                 recZ.width = (float)(zombie.width / 8);
                     Vector2 auxiliar1 = {zombiesPosition.x + distX, zombiesPosition.y};
                 Vector2 auxiliar2 = {zombiesPosition.x ,zombiesPosition.y + distY};
@@ -104,7 +104,7 @@ while(!WindowShouldClose()){
                     zombiesPosition.y = zombiesPosition.y + distY;
                 }
             }
-            else if(zombiesPosition.x >= playerPosition.x && zombiesPosition.y <= playerPosition.y){
+            else if(zombiesPosition.x > playerPosition.x && zombiesPosition.y < playerPosition.y){
                 recZ.width = (float)((zombie.width / 8) * (-1));
                 Vector2 auxiliar1 = {zombiesPosition.x - distX, zombiesPosition.y};
                 Vector2 auxiliar2 = {zombiesPosition.x ,zombiesPosition.y + distY};
@@ -120,14 +120,41 @@ while(!WindowShouldClose()){
                 }
             }
         }
-        else{
+        else if(sameLineX == 1){
+            Vector2 auxiliar1 = {zombiesPosition.x, zombiesPosition.y - 1};
+            Vector2 auxiliar2 = {zombiesPosition.x, zombiesPosition.y + 1};
+
+                if(HasACollision(auxiliar1) == 1 || HasACollision(auxiliar2) == 1){
+                    zombiesPosition.x = zombiesPosition.x + 1;
+                    zombiesPosition.y = zombiesPosition.y;
+                }
+                else{
+                    sameLineX = 0;
+                }
+
+        }
+        else if(sameLineY == 1){
+            Vector2 auxiliar1 = {zombiesPosition.x - 1, zombiesPosition.y};
+            Vector2 auxiliar2 = {zombiesPosition.x + 1, zombiesPosition.y};
+
+                if(HasACollision(auxiliar1) == 1 || HasACollision(auxiliar2) == 1){
+                    zombiesPosition.x = zombiesPosition.x;
+                    zombiesPosition.y = zombiesPosition.y + 1;
+                }
+                else{
+                    sameLineY = 0;
+                    zombiesPosition.y = zombiesPosition.y + 1;
+                }
+        }
+        else if(zombiesPosition.x == playerPosition.x && sameLineX == 0 && sameLineY == 0){
             Vector2 auxiliar1 = {zombiesPosition.x, zombiesPosition.y - 1};
             Vector2 auxiliar2 = {zombiesPosition.x, zombiesPosition.y + 1};
 
             if(zombiesPosition.y > playerPosition.y){
-                if(HasAColision(auxiliar1) == 1){//checando colisao do zumbi no cenario
+                if(HasACollision(auxiliar1) == 1 || HasACollision(auxiliar2) == 1){
                     zombiesPosition.x = zombiesPosition.x;
                     zombiesPosition.y = zombiesPosition.y;
+                    sameLineX = 1;
                 }
                 else{
                     zombiesPosition.x = zombiesPosition.x;
@@ -135,13 +162,42 @@ while(!WindowShouldClose()){
                 }
             }
             else if(zombiesPosition.y < playerPosition.y){
-                if(HasAColision(auxiliar2) == 1){//checando colisao do zumbi no cenario
+                if(HasACollision(auxiliar1) == 1 || HasACollision(auxiliar2) == 1){
                     zombiesPosition.x = zombiesPosition.x;
                     zombiesPosition.y = zombiesPosition.y;
+                    sameLineX = 1;
                 }
                 else{
                     zombiesPosition.x = zombiesPosition.x;
                     zombiesPosition.y = zombiesPosition.y + 1;
+            }
+        }
+
+    }
+    else if(zombiesPosition.y == playerPosition.y && sameLineX == 0 && sameLineY == 0){
+            Vector2 auxiliar1 = {zombiesPosition.x - 1, zombiesPosition.y};
+            Vector2 auxiliar2 = {zombiesPosition.x + 1, zombiesPosition.y};
+
+            if(zombiesPosition.x > playerPosition.x){
+                if(HasACollision(auxiliar1) == 1 || HasACollision(auxiliar2) == 1){
+                    zombiesPosition.x = zombiesPosition.x;
+                    zombiesPosition.y = zombiesPosition.y;
+                    sameLineY = 1;
+                }
+                else{
+                    zombiesPosition.x = zombiesPosition.x - 1;
+                    zombiesPosition.y = zombiesPosition.y;
+                }
+            }
+            else if(zombiesPosition.x < playerPosition.x){
+                if(HasACollision(auxiliar1) == 1 || HasACollision(auxiliar2) == 1){
+                    zombiesPosition.x = zombiesPosition.x;
+                    zombiesPosition.y = zombiesPosition.y;
+                    sameLineY = 1;
+                }
+                else{
+                    zombiesPosition.x = zombiesPosition.x + 1;
+                    zombiesPosition.y = zombiesPosition.y;
             }
         }
 
