@@ -11,15 +11,57 @@ int mark[450][800];
 Vector2 *path_ans;
 int length_path_ans;
 
+//Inicialização do zumbi
+Zombie zombie;
+Texture2D zombieTex;
+float animTimeZ = 0;
+int currentFramZ = 0;
+
 //Função de inicialização
 void initZombie(){
     path_ans = NULL;
     for(int i=0;i<450;i++) for(int j=0;j<450;j++) mark[i][j] = 0;
+
+    zombie.position = (Vector2) {300, 200};
+    
+    zombieTex = LoadTexture("sprites/ZOMBIE_RUN.png");
+
+    
 }
 
 //Função de animação
-void goAt(Vector2 point){
+void goAt(Zombie *zombieObj, Vector2 dest){
 
+    animTimeZ += GetFrameTime();
+
+    if (animTimeZ >= 0.2f) {
+        currentFramZ++;
+        animTimeZ = 0.0f;
+
+        if (zombieObj->position.x != dest.x) zombieObj->position.x += 20;
+        if (zombieObj->position.y != dest.y && zombieObj->position.x == dest.x) zombieObj->position.y += 20;
+        
+    }
+
+    zombieObj->zombieRec.x = (float) currentFramZ * (float) zombieObj->zombieRec.width;
+    zombieObj->zombieRec.y = (float) currentFramZ * (float) zombieObj->zombieRec.height;
+
+    if (currentFramZ > 7) {
+        currentFramZ = 0;
+        animTimeZ = 0;
+    }
+    
+}
+
+void updateZombieMain() {
+    Rectangle frameRec = {zombie.position.x - 55, zombie.position.y - 20, (float) zombieTex.width / 8, (float) zombieTex.height};
+    zombie.zombieRec = frameRec;
+
+    goAt(&zombie, (Vector2) {400, 300});
+}
+
+void drawZombie() {
+    DrawTextureRec(zombieTex, zombie.zombieRec, zombie.position, WHITE);
 }
 
 //Funções de perseguição da backtracking
@@ -135,5 +177,5 @@ void setMovementByBacktracking(Vector2 zombie_pos, Vector2 player_pos, int map_i
     append(&path, &length, zombie_pos);
     backtracking(&path, &length, player_pos);
 
-    for(int i=1;i<length_path_ans;i++) goAt(path_ans[i]);
+    // for(int i=1;i<length_path_ans;i++) goAt(path_ans[i]);
 }

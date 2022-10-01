@@ -3,8 +3,15 @@
 
 #include "raylib.h"
 
+typedef struct {
+    Vector2 position;
+    Rectangle zombieRec;
+} Zombie;
+
 void initZombie();
-void goAt(Vector2 point);
+void drawZombie();
+void updateZombieMain();
+void goAt(Zombie *zombie, Vector2 dest);
 
 void append(Vector2 **path, int *length, Vector2 element);
 void pop(Vector2 **path, int *length);

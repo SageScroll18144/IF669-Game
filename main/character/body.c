@@ -13,14 +13,6 @@ int frameCounter = 0, isAttacking = 0, atkCnt = 0;
 float animTime = 0;
 int currentFram = 0;
 
-EnvItem envItems[] = {
-    {{ 0, 0, 1000, 400 }, 0, LIGHTGRAY },
-    {{ 0, 400, 1000, 200 }, 1, GRAY },
-    {{ 300, 200, 400, 10 }, 1, GRAY },
-    {{ 250, 300, 100, 10 }, 1, GRAY },
-    {{ 650, 300, 100, 10 }, 1, GRAY }
-};
-int envItemLength = sizeof(envItems) / sizeof(envItems[0]);
 Sound walk;
 Sound attack_sound;
 
@@ -28,7 +20,6 @@ void initCharacter(){
     //player = {0};
     player.position = (Vector2) {400, 280};
     player.speed = 0;
-    player.canJump = false;
 
     charaTex = LoadTexture("sprites/RUN_SIDES.png");
     charaTexUp = LoadTexture("sprites/RUN_UP.png");
@@ -185,7 +176,7 @@ void drawAttack(Player *player) {
 
 void updatePlayerMain(){
     orientation = currentOrientation ? 1 : -1;
-    Rectangle frameRec = {player.position.x, player.position.y, (float) orientation * charaTex.width / 6, (float) charaTex.height};
+    Rectangle frameRec = {player.position.x , player.position.y, (float) orientation * charaTex.width / 6, (float) charaTex.height};
   
     player.playerRec = frameRec;
     
