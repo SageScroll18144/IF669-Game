@@ -14,6 +14,7 @@ int length_path_ans;
 //Função de inicialização
 void initZombie(){
     path_ans = NULL;
+    for(int i=0;i<450;i++) for(int j=0;j<450;j++) mark[i][j] = 0;
 }
 
 //Função de animação
@@ -121,10 +122,13 @@ void whichDirect(Vector2 zombie_pos, Vector2 player_pos){
         c[2] = 1;
     }
 }
+void setMap(int a[450][800]){
+    for(int i=0;i<450;i++) for(int j=0;j<450;j++) map[i][j] = a[i][j];
+}
+void setMovementByBacktracking(Vector2 zombie_pos, Vector2 player_pos, int map_input[450][800]){
 
-void setMovementByBacktracking(Vector2 zombie_pos, Vector2 player_pos){
-    //l & c
     whichDirect(zombie_pos, player_pos);
+    setMap(map_input);
 
     Vector2 *path = NULL;
     int length = 0;
