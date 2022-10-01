@@ -8,5 +8,6 @@ void initScene();
 void drawScene();
 void closeScene();
 int hasAColision(Vector2 object);
+int** getBitmap();
 
 #endif

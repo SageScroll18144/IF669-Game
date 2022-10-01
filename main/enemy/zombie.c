@@ -65,9 +65,9 @@ void drawZombie() {
 }
 
 //Funções de perseguição da backtracking
-void append(Vector2 **path, int *length, Vector2 element){
-    Vector2 *tmp = *path;
-    *path = (Vector2 *)realloc(*path, sizeof(Vector2)*(*length+1));
+void append(pair **path, int *length, pair element){
+    pair *tmp = *path;
+    *path = (pair *)realloc(*path, sizeof(pair)*(*length+1));
 
     if(*path == NULL){
         printf("erro na alocação\n");
@@ -78,12 +78,11 @@ void append(Vector2 **path, int *length, Vector2 element){
     (*path)[(*length)] = element;
     (*length)++;
 }
-
-void pop(Vector2** path, int *length){
+void remover(pair** path, int *length){
     if(*length>1){
-        Vector2 *tmp = *path;
+        pair *tmp = *path;
         (*length)--;
-        *path = (Vector2 *) realloc(*path, (*length)*sizeof(Vector2));
+        *path = (pair *) realloc(*path, (*length)*sizeof(pair));
 
         if(*path == NULL){
             printf("erro na alocação\n");
@@ -96,46 +95,37 @@ void pop(Vector2** path, int *length){
     }
 }
 
-void backtracking(Vector2 **path, int *length, Vector2 player){
-    mark[(int)((*path)[*length-1].x)][(int)((*path)[*length-1].y)] = 1;
+void backtracking(pair** path, int *length, pair player){
+    mark[(*path)[*length-1].x][(*path)[*length-1].y] = 1;
     if(player.x == (*path)[*length-1].x && player.y == (*path)[*length-1].y) {
-        // printf("path.: ");
-        // for(int k=0;k<(*length);k++){
-        //     printf("(%d, %d) ", (*path)[k].x, (*path)[k].y);
-        // }
-        // printf("\n");
-        Vector2 *tmp = path_ans;
-        path_ans = (Vector2 *) malloc((*length)*sizeof(Vector2));
-
-        if(path_ans == NULL){
-            printf("erro na alocação da resposta\n");
-            free(tmp);
-            exit(1);
+        printf("path.: ");
+        for(int k=0;k<(*length);k++){
+            printf("(%d, %d) ", (*path)[k].x, (*path)[k].y);
         }
+        printf("\n");
         
-        for(int k=0;k<(*length);k++) path_ans[k] = (*path)[k];
-        length_path_ans = (*length);
         return;   
     }
     for(int k=0;k<4;k++){
+        //printf("klj");
         int i = (*path)[*length-1].x + l[k];
         int j = (*path)[*length-1].y + c[k];
 
         if(i<0||j<0||i>=450||j>=800||map[i][j]||mark[i][j]) continue;
 
-        Vector2 next_node;
+        pair next_node;
         next_node.x = i;
         next_node.y = j;
         append(&(*path), length, next_node);
         //printf("%d, %d\n", (*path)[*length-1].x, (*path)[*length-1].y);
         backtracking(&(*path), length, player);
-        pop(&(*path), length);
+        remover(&(*path), length);
     }
 }
 
-void whichDirect(Vector2 zombie_pos, Vector2 player_pos){
-    int dist_x = player_pos.x - zombie_pos.x;
-    int dist_y = player_pos.y - zombie_pos.y;
+void whichDirect(Vector2 player_pos){
+    int dist_x = (int)player_pos.x - zombie.position.x;
+    int dist_y = (int)player_pos.y - zombie.position.y;
     if(dist_x > 0){
         l[1] = 1;
         c[1] = 0;
@@ -167,15 +157,50 @@ void whichDirect(Vector2 zombie_pos, Vector2 player_pos){
 void setMap(int a[450][800]){
     for(int i=0;i<450;i++) for(int j=0;j<450;j++) map[i][j] = a[i][j];
 }
-void setMovementByBacktracking(Vector2 zombie_pos, Vector2 player_pos, int map_input[450][800]){
+void setMovementByBacktracking(Vector2 player_pos_arg, int map_input[450][800]){
 
-    whichDirect(zombie_pos, player_pos);
+    Rectangle frameRec = {zombie.position.x - 55, zombie.position.y - 20, (float) zombieTex.width / 8, (float) zombieTex.height};
+    zombie.zombieRec = frameRec;
+
+    whichDirect(player_pos_arg);
     setMap(map_input);
+    pair player_pos;
+    pair zombie_pos;
 
-    Vector2 *path = NULL;
+    zombie_pos.x = (int)zombie.position.x;
+    zombie_pos.y = (int)zombie.position.y;
+
+    player_pos.x = (int)player_pos_arg.x;
+    player_pos.y = (int)player_pos_arg.y;
+    
+    pair *path = NULL;
     int length = 0;
     append(&path, &length, zombie_pos);
-    backtracking(&path, &length, player_pos);
+    printf("(%d, %d)\n", player_pos.x, player_pos.y);
+    printf("(%d, %d)\n", zombie_pos.x, zombie_pos.y);
+    // for(int i=0;i<450;i++) {
+    //     for(int j=0;j<800;j++){
+    //         printf("%d", map[i][j]);
+    //     }
+    //     printf("\n");
+    // }
+    
+    backtracking(&path, &length, player_pos);//certo 
 
-    // for(int i=1;i<length_path_ans;i++) goAt(path_ans[i]);
+    for(int i=1;i<length_path_ans;i++) {
+        printf("(%d, %d)\n", path_ans[i].x, path_ans[i].y);
+        goAt(&zombie, path_ans[i]);
+    }
+    // for(int i=0;i<length_path_ans;i++) {
+    //     free((*path_ans)[i]);
+    // }
+    printf("cheguei aq\n");
+    //pop(&path, &length);
+    //while(!length_path_ans) pop(&path_ans, &length_path_ans);
+    //free(path);
+    //free(path_ans);
+    
+}
+Vector2 getZombiePosition(){
+    return zombie.position;
 }

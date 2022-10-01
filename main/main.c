@@ -6,6 +6,9 @@
 #include <stdio.h>
 
 void drawGame();
+void getBitmapForMain();
+
+int bit[450][800];
 
 int main(void){
     // Initialization
@@ -21,9 +24,18 @@ int main(void){
     initCharacter();
     initZombie();
     
+    getBitmapForMain();
+    // for(int i=0;i<450;i++) {
+    //     for(int j=0;j<800;j++){
+    //         printf("%d ", bit[i][j]);
+    //     } 
+    //     printf("\n");
+    // }
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
     int flag_screen = 0;
+    setMovementByBacktracking(getCharacterPosition(), bit);
+            
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
@@ -32,8 +44,8 @@ int main(void){
 
         if(flag_screen == 1){
             // zombie
-            updateZombieMain();
-
+            //updateZombieMain();
+            //setMovementByBacktracking(getZombiePosition(), getCharacterPosition(), bit);
             //movimentação do personagem
             updatePlayerMain();
             if(hasAColision(getCharacterPosition())){
@@ -71,4 +83,13 @@ void drawGame(){
     drawScene();
     drawCharacter();
     drawZombie();
+}
+void getBitmapForMain(){
+    int **ans = getBitmap();
+    for(int i=0;i<450;i++){
+        for(int j=0;j<800;j++){
+            bit[i][j] = ans[i][j];
+        }
+    }    
+    
 }

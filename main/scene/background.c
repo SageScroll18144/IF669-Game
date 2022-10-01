@@ -52,3 +52,14 @@ int hasAColision(Vector2 object){
     
     return (x<0||y<0||x>=800||y>=450||bitmap[y][x]);
 }
+
+int** getBitmap(){
+    int **ans;
+
+    ans = (int **) malloc(sizeof(int *) * 450);
+    for(int i=0;i<450;i++) ans[i] = (int *) malloc(sizeof(int) * 800); 
+
+    for(int i=0;i<450;i++) for(int j=0;j<800;j++) ans[i][j] = bitmap[i][j];
+
+    return ans;
+}
