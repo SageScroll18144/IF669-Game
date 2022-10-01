@@ -5,8 +5,8 @@ typedef struct{
     int x, y;
 }pair;
 
-int l[] = {0,0,-1,1};
-int c[] = {-1,1,0,0};
+int l[] = {0,1,0,-1};
+int c[] = {1,0,-1,0};
 int bitmap[5][5];
 int mark[5][5];
 
@@ -42,7 +42,15 @@ void remover(pair** path, int *length){
 
 void backtracking(pair** path, int *length, pair player){
     mark[(*path)[*length-1].x][(*path)[*length-1].y] = 1;
-    if(player.x == (*path)[*length-1].x && player.y == (*path)[*length-1].y) return;
+    if(player.x == (*path)[*length-1].x && player.y == (*path)[*length-1].y) {
+        printf("path.: ");
+        for(int k=0;k<(*length);k++){
+            printf("(%d, %d) ", (*path)[k].x, (*path)[k].y);
+        }
+        printf("\n");
+        
+        return;   
+    }
     for(int k=0;k<4;k++){
         int i = (*path)[*length-1].x + l[k];
         int j = (*path)[*length-1].y + c[k];
@@ -53,7 +61,7 @@ void backtracking(pair** path, int *length, pair player){
         next_node.x = i;
         next_node.y = j;
         append(&(*path), length, next_node);
-        printf("%d, %d\n", (*path)[*length-1].x, (*path)[*length-1].y);
+        //printf("%d, %d\n", (*path)[*length-1].x, (*path)[*length-1].y);
         backtracking(&(*path), length, player);
         remover(&(*path), length);
     }
