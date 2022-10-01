@@ -56,6 +56,6 @@ void pop(Vector2 **path, int *length);
 
 - Remove o último elemento da lista
 
-### OBs.: Na main apenas chame ```void initZombie()``` e ```void setMovementByBacktracking(Vector2 zombie_pos, Vector2 player_pos, int map_input[450][800]);``` para a utilização do algoritmo por backtracking. 
+##### OBs.: Na main apenas chame ```void initZombie()``` e ```void setMovementByBacktracking(Vector2 zombie_pos, Vector2 player_pos, int map_input[450][800]);``` para a utilização do algoritmo por backtracking. 
 
 
