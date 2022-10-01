@@ -67,5 +67,5 @@ void drawGame(){
     drawCharacter();
 }
 void drawMenu(){
-    printf("Digite E para começar o jogo");
+    // printf("Digite E para começar o jogo");
 }

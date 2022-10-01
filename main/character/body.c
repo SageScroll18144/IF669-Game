@@ -9,6 +9,10 @@ Texture2D charaTex, charaTexUp, charaTexDown, charaTexIdle, charaTexIdleUp, char
 //Rectangle frameRec;
 int currentFrame = 1, currentOrientation = 1, orientation = 1, axisOrientation = 0;
 int frameCounter = 0, isAttacking = 0, atkCnt = 0;
+
+float animTime = 0;
+int currentFram = 0;
+
 EnvItem envItems[] = {
     {{ 0, 0, 1000, 400 }, 0, LIGHTGRAY },
     {{ 0, 400, 1000, 200 }, 1, GRAY },
@@ -18,6 +22,7 @@ EnvItem envItems[] = {
 };
 int envItemLength = sizeof(envItems) / sizeof(envItems[0]);
 Sound walk;
+
 
 void initCharacter(){
     //player = {0};
@@ -48,81 +53,82 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
     player->playerRec.x = (float)*currentFrame * (float) player->playerRec.width;
     player->playerRec.y = (float)*currentFrame * (float) player->playerRec.height;
 
+    if (!isAttacking) {
+        if (IsKeyDown(KEY_RIGHT)) {
+            
+            *axisOrientation = 3;
+            (*frameCounter)++;
 
-    if (IsKeyDown(KEY_RIGHT)) {
-        
-        *axisOrientation = 3;
-        (*frameCounter)++;
-
-        if (*frameCounter >= 60/frameSpeed) {
-            
-            (*frameCounter) = 0;
-            
-            (*currentFrame)++;
-            if(!IsSoundPlaying(walk)) PlaySound(walk);
-            
-            if (!(*currentOrientation)) {
-                (*currentOrientation) = 1;
-                player->playerRec.width *= -1;
+            if (*frameCounter >= 60/frameSpeed) {
+                
+                (*frameCounter) = 0;
+                
+                (*currentFrame)++;
+                if(!IsSoundPlaying(walk)) PlaySound(walk);
+                
+                if (!(*currentOrientation)) {
+                    (*currentOrientation) = 1;
+                    player->playerRec.width *= -1;
+                }
+                player->position.x += 20;
             }
-            player->position.x += 20;
-        }
+            
         
-    
-    }
+        }
 
-    else if (IsKeyDown(KEY_LEFT)) {
-        *axisOrientation = 3;
-        (*frameCounter)++;
+        else if (IsKeyDown(KEY_LEFT)) {
+            *axisOrientation = 3;
+            (*frameCounter)++;
 
-        if (*frameCounter >= 60/frameSpeed) {
-            *frameCounter = 0;
+            if (*frameCounter >= 60/frameSpeed) {
+                *frameCounter = 0;
+                
+                (*currentFrame)++;
+                if(!IsSoundPlaying(walk)) PlaySound(walk);
+                
+                if (*currentOrientation) {
+                    *currentOrientation = 0;
+                    player->playerRec.width *= -1;
+                }
+                player->position.x -= 20;
+            }   
             
-            (*currentFrame)++;
-            if(!IsSoundPlaying(walk)) PlaySound(walk);
-            
-            if (*currentOrientation) {
-                *currentOrientation = 0;
-                player->playerRec.width *= -1;
+        }
+
+        else if (IsKeyDown(KEY_UP)) {
+            *axisOrientation = 1;
+            (*frameCounter)++;
+
+            if (*frameCounter >= 60/frameSpeed) {
+                (*frameCounter) = 0;
+                
+                (*currentFrame)++;
+                if(!IsSoundPlaying(walk)) PlaySound(walk);
+                
+
+                player->position.y -= 20;
             }
-            player->position.x -= 20;
-        }   
-        
-    }
-
-    else if (IsKeyDown(KEY_UP)) {
-        *axisOrientation = 1;
-        (*frameCounter)++;
-
-        if (*frameCounter >= 60/frameSpeed) {
-            (*frameCounter) = 0;
-            
-            (*currentFrame)++;
-            if(!IsSoundPlaying(walk)) PlaySound(walk);
-            
-
-            player->position.y -= 20;
         }
+        
+        else if (IsKeyDown(KEY_DOWN)) {
+            *axisOrientation = 2;
+            (*frameCounter)++;
+
+            if (*frameCounter >= 60/frameSpeed) {
+                (*frameCounter) = 0;
+                
+                (*currentFrame)++;
+                if(!IsSoundPlaying(walk)) PlaySound(walk);
+
+                player->position.y += 20;
+            }
+        }
+
+        else if (IsKeyReleased(KEY_RIGHT) || IsKeyReleased(KEY_LEFT))  *axisOrientation = 0;
+        else if (IsKeyReleased(KEY_UP)) *axisOrientation = 4;
+        else if (IsKeyReleased(KEY_DOWN)) *axisOrientation = 5;
     }
     
-    else if (IsKeyDown(KEY_DOWN)) {
-        *axisOrientation = 2;
-        (*frameCounter)++;
-
-        if (*frameCounter >= 60/frameSpeed) {
-            (*frameCounter) = 0;
-            
-            (*currentFrame)++;
-            if(!IsSoundPlaying(walk)) PlaySound(walk);
-
-            player->position.y += 20;
-        }
-    }
-
-    else if (IsKeyReleased(KEY_RIGHT) || IsKeyReleased(KEY_LEFT))  *axisOrientation = 0;
-    else if (IsKeyReleased(KEY_UP)) *axisOrientation = 4;
-    else if (IsKeyReleased(KEY_DOWN)) *axisOrientation = 5;
-
     if (IsKeyPressed(KEY_SPACE)) {
         isAttacking = 1;
     }
@@ -131,41 +137,45 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
 
 void drawAttack(Player *player) {
 
-    int frameCounter1 = 0, frameSpeed1 = 1, currentFrame1 = 1;
-    while (isAttacking) {
-        frameCounter1++;
+        animTime += GetFrameTime();
 
-        if (frameCounter1 >= 60/frameSpeed1) {
-            frameCounter1 = 0;
-            currentFrame1++;
-
-            switch (axisOrientation) {
-            case 0:
-                player->playerRec.x = (float) currentFrame1 * (float) player->playerRec.width;
-                DrawTextureRec(charaTexAtkSide, player->playerRec, player->position, WHITE);
-                break;
-            
-            case 1:
-                player->playerRec.y = (float) currentFrame * (float) player->playerRec.height;
-                DrawTextureRec(charaTexAtkUp, player->playerRec, player->position, WHITE);
-                break;
-            
-            case 2:
-                player->playerRec.y = (float) currentFrame * (float) player->playerRec.height;
-                DrawTextureRec(charaTexAtkDown, player->playerRec, player->position, WHITE);
-                break;
-            }
+        if (animTime > 0.2f) {
+            currentFram++;
+            animTime = 0.0f;     
         }
+       
+        switch (axisOrientation) {
+        case 0:
+            player->playerRec.x = (float) currentFram * (float) player->playerRec.width;
+            DrawTextureRec(charaTexAtkSide, player->playerRec, player->position, WHITE);
+            break;
+        
+        case 4:
+            player->playerRec.y = (float) currentFram * (float) player->playerRec.height;
+            DrawTextureRec(charaTexAtkUp, player->playerRec, player->position, WHITE);
+            break;
 
-        if (currentFrame1 == 6) isAttacking = 0;
-    }
-          
+        case 5:
+            player->playerRec.y = (float) currentFram * (float) player->playerRec.height;
+            DrawTextureRec(charaTexAtkDown, player->playerRec, player->position, WHITE);
+            break;
+
+        default:
+            break;
+        }
+        
+        if (currentFram > 2) {
+            isAttacking = 0;
+            currentFram = 0;
+            animTime = 0;
+        };
+        
 }
 
 void updatePlayerMain(){
     orientation = currentOrientation ? 1 : -1;
-    Rectangle frameRec = {player.position.x, player.position.y - 24, (float) orientation * charaTex.width / 6, (float) charaTex.height};
-
+    Rectangle frameRec = {player.position.x, player.position.y, (float) orientation * charaTex.width / 6, (float) charaTex.height};
+  
     player.playerRec = frameRec;
     
     float deltaTime = GetFrameTime();
@@ -185,9 +195,9 @@ void colision(){
 void drawCharacter(){
     //DrawCircleV(ballPosition, 50, MAROON);
     // for (int i = 0; i < envItemLength; i++) DrawRectangleRec(envItems[i].rect, envItems[i].color);
+    
     if (isAttacking) {
         drawAttack(&player);
-        isAttacking = 0;
     } else {
 
         switch (axisOrientation) {
