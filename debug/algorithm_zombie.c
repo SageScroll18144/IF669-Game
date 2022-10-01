@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "raylib.h"
 typedef struct{
     int x, y;
 }pair;
