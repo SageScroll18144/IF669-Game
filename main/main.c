@@ -34,7 +34,7 @@ int main(void){
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
     int flag_screen = 0;
-    setMovementByBacktracking(getCharacterPosition(), bit);
+    //setMovementByBacktracking(getCharacterPosition(), bit);
             
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
