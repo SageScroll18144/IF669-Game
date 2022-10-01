@@ -53,42 +53,42 @@ void pop(Vector2** path, int *length){
     }
 }
 
-// void backtracking(Vector2 **path, int *length, Vector2 player){
-//     mark[(*path)[*length-1].x][(*path)[*length-1].y] = 1;
-//     if(player.x == (*path)[*length-1].x && player.y == (*path)[*length-1].y) {
-//         // printf("path.: ");
-//         // for(int k=0;k<(*length);k++){
-//         //     printf("(%d, %d) ", (*path)[k].x, (*path)[k].y);
-//         // }
-//         // printf("\n");
-//         Vector2 *tmp = path_ans;
-//         path_ans = (Vector2 *) malloc((*length)*sizeof(Vector2));
+void backtracking(Vector2 **path, int *length, Vector2 player){
+    mark[(int)((*path)[*length-1].x)][(int)((*path)[*length-1].y)] = 1;
+    if(player.x == (*path)[*length-1].x && player.y == (*path)[*length-1].y) {
+        // printf("path.: ");
+        // for(int k=0;k<(*length);k++){
+        //     printf("(%d, %d) ", (*path)[k].x, (*path)[k].y);
+        // }
+        // printf("\n");
+        Vector2 *tmp = path_ans;
+        path_ans = (Vector2 *) malloc((*length)*sizeof(Vector2));
 
-//         if(path_ans == NULL){
-//             printf("erro na alocação da resposta\n");
-//             free(tmp);
-//             exit(1);
-//         }
+        if(path_ans == NULL){
+            printf("erro na alocação da resposta\n");
+            free(tmp);
+            exit(1);
+        }
         
-//         for(int k=0;k<(*length);k++) path_ans[k] = (*path)[k];
-//         length_path_ans = (*length);
-//         return;   
-//     }
-//     for(int k=0;k<4;k++){
-//         int i = (*path)[*length-1].x + l[k];
-//         int j = (*path)[*length-1].y + c[k];
+        for(int k=0;k<(*length);k++) path_ans[k] = (*path)[k];
+        length_path_ans = (*length);
+        return;   
+    }
+    for(int k=0;k<4;k++){
+        int i = (*path)[*length-1].x + l[k];
+        int j = (*path)[*length-1].y + c[k];
 
-//         if(i<0||j<0||i>=450||j>=800||map[i][j]||mark[i][j]) continue;
+        if(i<0||j<0||i>=450||j>=800||map[i][j]||mark[i][j]) continue;
 
-//         Vector2 next_node;
-//         next_node.x = i;
-//         next_node.y = j;
-//         append(&(*path), length, next_node);
-//         //printf("%d, %d\n", (*path)[*length-1].x, (*path)[*length-1].y);
-//         backtracking(&(*path), length, player);
-//         pop(&(*path), length);
-//     }
-// }
+        Vector2 next_node;
+        next_node.x = i;
+        next_node.y = j;
+        append(&(*path), length, next_node);
+        //printf("%d, %d\n", (*path)[*length-1].x, (*path)[*length-1].y);
+        backtracking(&(*path), length, player);
+        pop(&(*path), length);
+    }
+}
 
 void whichDirect(Vector2 zombie_pos, Vector2 player_pos){
 
