@@ -153,16 +153,19 @@ void drawAttack(Player *player) {
         }
        
         switch (axisOrientation) {
+        case 3:
         case 0:
             player->playerRec.x = (float) currentFram * (float) player->playerRec.width;
             DrawTextureRec(charaTexAtkSide, player->playerRec, player->position, WHITE);
             break;
         
+        case 1:
         case 4:
             player->playerRec.y = (float) currentFram * (float) player->playerRec.height;
             DrawTextureRec(charaTexAtkUp, player->playerRec, player->position, WHITE);
             break;
 
+        case 2:
         case 5:
             player->playerRec.y = (float) currentFram * (float) player->playerRec.height;
             DrawTextureRec(charaTexAtkDown, player->playerRec, player->position, WHITE);
