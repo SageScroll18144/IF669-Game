@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "background.h"
 
 
 
@@ -11,7 +12,7 @@ int main()
 {
 const int screenWidth = 800;
 const int screenHeight = 450;
-InitWindow(screenWidth, screenHeight, "raylib [shapes] example - following eyes");
+InitWindow(screenWidth, screenHeight, "perseguicao do zumbi");
 
 
 int cont = 0; //contador pra as imagens da sprite não ficarem passando muito rapido 
@@ -61,10 +62,10 @@ while(!WindowShouldClose()){
                 recZ.width = (float)((zombie.width / 8) * (-1));
                 Vector2 auxiliar1 = {zombiesPosition.x - distX, zombiesPosition.y};
                 Vector2 auxiliar2 = {zombiesPosition.x ,zombiesPosition.y - distY};
-                if(CheckCollisionPointRec(auxiliar1, obst) == true || CheckCollisionPointRec(auxiliar1, obst2) == true){
+                if(HasAColision(auxiliar1) == 1){//checando colisao do zumbi no cenario
                     zombiesPosition.y = zombiesPosition.y - distY;
                 }
-                else if(CheckCollisionPointRec(auxiliar2 , obst) == true || CheckCollisionPointRec(auxiliar2 , obst2) == true){
+                else if(HasAColision(auxiliar2) == 1){//checando colisao do zumbi no cenario
                     zombiesPosition.x = zombiesPosition.x - distX;
                 }
                 else{
@@ -77,10 +78,10 @@ while(!WindowShouldClose()){
                 recZ.width = (float)(zombie.width / 8);
                 Vector2 auxiliar1 = {zombiesPosition.x + distX, zombiesPosition.y};
                 Vector2 auxiliar2 = {zombiesPosition.x ,zombiesPosition.y - distY};
-                if(CheckCollisionPointRec(auxiliar1, obst) == true || CheckCollisionPointRec(auxiliar1, obst2) == true){
+                if(HasAColision(auxiliar1) == 1){//checando colisao do zumbi no cenario
                     zombiesPosition.y = zombiesPosition.y - distY;
                 }
-                else if(CheckCollisionPointRec(auxiliar2 , obst) == true || CheckCollisionPointRec(auxiliar2 , obst2) == true){
+                else if(HasAColision(auxiliar2) == 1){//checando colisao do zumbi no cenario
                     zombiesPosition.x = zombiesPosition.x + distX;
                 }
                 else{
@@ -92,10 +93,10 @@ while(!WindowShouldClose()){
                 recZ.width = (float)(zombie.width / 8);
                     Vector2 auxiliar1 = {zombiesPosition.x + distX, zombiesPosition.y};
                 Vector2 auxiliar2 = {zombiesPosition.x ,zombiesPosition.y + distY};
-                if(CheckCollisionPointRec(auxiliar1, obst) == true || CheckCollisionPointRec(auxiliar1, obst2) == true){
+                if(HasAColision(auxiliar1) == 1){//checando colisao do zumbi no cenario
                     zombiesPosition.y = zombiesPosition.y + distY;
                 }
-                else if(CheckCollisionPointRec(auxiliar2 , obst) == true || CheckCollisionPointRec(auxiliar2 , obst2) == true){
+                else if(HasAColision(auxiliar2) == 1){//checando colisao do zumbi no cenario
                     zombiesPosition.x = zombiesPosition.x + distX;
                 }
                 else{
@@ -107,10 +108,10 @@ while(!WindowShouldClose()){
                 recZ.width = (float)((zombie.width / 8) * (-1));
                 Vector2 auxiliar1 = {zombiesPosition.x - distX, zombiesPosition.y};
                 Vector2 auxiliar2 = {zombiesPosition.x ,zombiesPosition.y + distY};
-                if(CheckCollisionPointRec(auxiliar1, obst) == true || CheckCollisionPointRec(auxiliar1, obst2) == true){
+                if(HasAColision(auxiliar1) == 1){//checando colisao do zumbi no cenario
                     zombiesPosition.y = zombiesPosition.y + distY;
                 }
-                else if(CheckCollisionPointRec(auxiliar2 , obst) == true || CheckCollisionPointRec(auxiliar2 , obst2) == true){
+                else if(HasAColision(auxiliar2) == 1){//checando colisao do zumbi no cenario
                     zombiesPosition.x = zombiesPosition.x - distX;
                 }
                 else{
@@ -124,7 +125,7 @@ while(!WindowShouldClose()){
             Vector2 auxiliar2 = {zombiesPosition.x, zombiesPosition.y + 1};
 
             if(zombiesPosition.y > playerPosition.y){
-                if(CheckCollisionPointRec(auxiliar1 , obst) == true || CheckCollisionPointRec(auxiliar1 , obst2) == true){
+                if(HasAColision(auxiliar1) == 1){//checando colisao do zumbi no cenario
                     zombiesPosition.x = zombiesPosition.x;
                     zombiesPosition.y = zombiesPosition.y;
                 }
@@ -134,7 +135,7 @@ while(!WindowShouldClose()){
                 }
             }
             else if(zombiesPosition.y < playerPosition.y){
-                if(CheckCollisionPointRec(auxiliar2 , obst) == true || CheckCollisionPointRec(auxiliar2 , obst2) == true){
+                if(HasAColision(auxiliar2) == 1){//checando colisao do zumbi no cenario
                     zombiesPosition.x = zombiesPosition.x;
                     zombiesPosition.y = zombiesPosition.y;
                 }
