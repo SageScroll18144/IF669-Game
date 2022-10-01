@@ -22,7 +22,7 @@ EnvItem envItems[] = {
 };
 int envItemLength = sizeof(envItems) / sizeof(envItems[0]);
 Sound walk;
-
+Sound attack_sound;
 
 void initCharacter(){
     //player = {0};
@@ -44,6 +44,11 @@ void initCharacter(){
 
     walk = LoadSound("sounds/walking_sound4.mp3");
     SetSoundVolume(walk, 1.0f);
+
+    attack_sound = LoadSound("sounds/sword.wav");
+    SetSoundVolume(attack_sound, 0.5f);
+
+    
 }
 
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime) {
@@ -52,6 +57,11 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
     if (*currentFrame > 5) *currentFrame = 0;
     player->playerRec.x = (float)*currentFrame * (float) player->playerRec.width;
     player->playerRec.y = (float)*currentFrame * (float) player->playerRec.height;
+
+    if (IsKeyPressed(KEY_SPACE)) {
+        isAttacking = 1;
+        if(!IsSoundPlaying(attack_sound)) PlaySound(attack_sound);
+    }
 
     if (!isAttacking) {
         if (IsKeyDown(KEY_RIGHT)) {
@@ -129,9 +139,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
         else if (IsKeyReleased(KEY_DOWN)) *axisOrientation = 5;
     }
     
-    if (IsKeyPressed(KEY_SPACE)) {
-        isAttacking = 1;
-    }
+    
     
 }
 
@@ -260,5 +268,6 @@ void reboundPlayer(Vector2 rebound_cononic){
 }
 void unloadAudios(){
     UnloadSound(walk);
+    UnloadSound(attack_sound);
     CloseAudioDevice(); 
 }
