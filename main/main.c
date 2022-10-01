@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "character/body.h"
 #include "scene/background.h"
+#include "enemy/zombie.h"
 #include <stdio.h>
 
 void drawGame();
