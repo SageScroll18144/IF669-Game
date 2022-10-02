@@ -38,9 +38,13 @@ void goAt(Zombie *zombieObj, Vector2 dest){
         currentFramZ++;
         animTimeZ = 0.0f;
 
-        if (zombieObj->position.x != dest.x) zombieObj->position.x += 20;
-        if (zombieObj->position.y != dest.y && zombieObj->position.x == dest.x) zombieObj->position.y += 20;
-        
+        if (dest.x != zombieObj->position.x) {
+            if (zombieObj->position.x != dest.x && dest.x > zombieObj->position.x) zombieObj->position.x += 20;
+            else zombieObj->position.x -= 20;
+        } else {
+            if (zombieObj->position.y != dest.y && dest.y > zombieObj->position.y) zombieObj->position.y += 20;
+            else zombieObj->position.y -= 20;
+        }
     }
 
     zombieObj->zombieRec.x = (float) currentFramZ * (float) zombieObj->zombieRec.width;
