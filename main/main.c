@@ -44,8 +44,8 @@ int main(void){
 
         if(flag_screen == 1){
             // zombie
-            //updateZombieMain((Vector2){400,300});
-            setMovementByBacktracking(getCharacterPosition(), bit);
+            updateZombieMain(getCharacterPosition());
+            //setMovementByBacktracking(getCharacterPosition(), bit);
             
             //movimentação do personagem
             updatePlayerMain();
