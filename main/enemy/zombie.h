@@ -14,7 +14,7 @@ typedef struct{
 
 void initZombie();
 void drawZombie();
-void updateZombieMain();
+void updateZombieMain(Vector2 toHere);
 void goAt(Zombie *zombie, Vector2 dest);
 
 void append(pair **path, int *length, pair element);
@@ -24,5 +24,6 @@ void whichDirect(Vector2 player_pos);
 void setMap(int a[450][800]);
 void setMovementByBacktracking(Vector2 player_pos_arg, int map_input[450][800]);
 Vector2 getZombiePosition();
+int hasAMovement();
 
 #endif

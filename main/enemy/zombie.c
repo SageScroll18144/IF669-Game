@@ -8,18 +8,18 @@ int l[4];
 int c[4];
 int map[450][800];
 int mark[450][800];
-Vector2 *path_ans;
+//Vector2 *path_ans;
 int length_path_ans;
-
+pair path_ans[360000];
 //Inicialização do zumbi
 Zombie zombie;
 Texture2D zombieTex;
 float animTimeZ = 0;
 int currentFramZ = 0;
-
+int flag_movement=0;
 //Função de inicialização
 void initZombie(){
-    path_ans = NULL;
+    //path_ans = NULL;
     for(int i=0;i<450;i++) for(int j=0;j<450;j++) mark[i][j] = 0;
 
     zombie.position = (Vector2) {300, 200};
@@ -53,11 +53,11 @@ void goAt(Zombie *zombieObj, Vector2 dest){
     
 }
 
-void updateZombieMain() {
+void updateZombieMain(Vector2 toHere) {
     Rectangle frameRec = {zombie.position.x - 55, zombie.position.y - 20, (float) zombieTex.width / 8, (float) zombieTex.height};
     zombie.zombieRec = frameRec;
 
-    goAt(&zombie, (Vector2) {400, 300});
+    goAt(&zombie, toHere);
 }
 
 void drawZombie() {
@@ -100,11 +100,14 @@ void backtracking(pair** path, int *length, pair player){
     mark[(*path)[*length-1].x][(*path)[*length-1].y] = 1;
     if(player.x == (*path)[*length-1].x && player.y == (*path)[*length-1].y) {
         printf("path.: ");
-        for(int k=0;k<(*length);k++){
-            printf("(%d, %d) ", (*path)[k].x, (*path)[k].y);
+        // for(int k=0;k<(*length);k++){
+        //     printf("(%d, %d) ", (*path)[k].x, (*path)[k].y);
+        // }
+        // printf("\n");
+        length_path_ans = *length;
+        for(int k=0;k<length_path_ans;k++){
+            path_ans[k] = (*path)[k]; 
         }
-        printf("\n");
-
         return;   
     }
     for(int k=0;k<4;k++){
@@ -125,8 +128,8 @@ void backtracking(pair** path, int *length, pair player){
 }
 
 void whichDirect(Vector2 player_pos){
-    int dist_x = (int)player_pos.x - zombie.position.x;
-    int dist_y = (int)player_pos.y - zombie.position.y;
+    float dist_x = player_pos.x - zombie.position.x;
+    float dist_y = player_pos.y - zombie.position.y;
     if(dist_x > 0){
         l[1] = 1;
         c[1] = 0;
@@ -160,9 +163,6 @@ void setMap(int a[450][800]){
 }
 void setMovementByBacktracking(Vector2 player_pos_arg, int map_input[450][800]){
 
-    Rectangle frameRec = {zombie.position.x - 55, zombie.position.y - 20, (float) zombieTex.width / 8, (float) zombieTex.height};
-    zombie.zombieRec = frameRec;
-
     whichDirect(player_pos_arg);
     setMap(map_input);
     pair player_pos;
@@ -187,14 +187,23 @@ void setMovementByBacktracking(Vector2 player_pos_arg, int map_input[450][800]){
     // }
     
     backtracking(&path, &length, player_pos);//certo 
-    //free(path);
-    // for(int i=1;i<length_path_ans;i++) {
-    //     printf("(%d, %d)\n", path_ans[i].x, path_ans[i].y);
-    //     goAt(&zombie, path_ans[i]);
-    // }
+    free(path);
+    Vector2 tmp;
+    flag_movement=1;
+    for(int i=1;i<6;i++) {
+        
+        tmp.x = (float)path_ans[i].x;
+        tmp.y = (float)path_ans[i].y;
+        printf("(%d, %d) ", path_ans[i].x, path_ans[i].y);
+        printf("(%f, %f)\n", tmp.x, tmp.y);
+        //goAt(&zombie, tmp);
+        updateZombieMain(tmp); 
+    }
+    //goAt(&zombie, (Vector2){0,0});
     // for(int i=0;i<length_path_ans;i++) {
     //     free((*path_ans)[i]);
     // }
+    flag_movement=0;
     printf("cheguei aq\n");
     //pop(&path, &length);
     //while(!length_path_ans) pop(&path_ans, &length_path_ans);
@@ -204,4 +213,7 @@ void setMovementByBacktracking(Vector2 player_pos_arg, int map_input[450][800]){
 }
 Vector2 getZombiePosition(){
     return zombie.position;
+}
+int hasAMovement(){
+    return flag_movement;
 }

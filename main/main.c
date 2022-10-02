@@ -34,9 +34,9 @@ int main(void){
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
     int flag_screen = 0;
-    setMovementByBacktracking(getCharacterPosition(), bit);
-            
+    //updateZombieMain();
     // Main game loop
+    int teste=1;
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         // seta a transição de tela
@@ -44,8 +44,9 @@ int main(void){
 
         if(flag_screen == 1){
             // zombie
-            //updateZombieMain();
-            //setMovementByBacktracking(getZombiePosition(), getCharacterPosition(), bit);
+            //updateZombieMain((Vector2){400,300});
+            setMovementByBacktracking(getCharacterPosition(), bit);
+            
             //movimentação do personagem
             updatePlayerMain();
             if(hasAColision(getCharacterPosition())){
