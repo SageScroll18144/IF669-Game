@@ -26,4 +26,7 @@ void setMovementByBacktracking(Vector2 player_pos_arg, int map_input[450][800]);
 Vector2 getZombiePosition();
 int hasAMovement();
 
+void reboundZombie(Vector2 compensation);
+Vector2 orientationForColisionZombie();
+
 #endif

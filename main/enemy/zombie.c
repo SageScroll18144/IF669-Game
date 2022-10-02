@@ -17,6 +17,9 @@ Texture2D zombieTex;
 float animTimeZ = 0;
 int currentFramZ = 0;
 int flag_movement=0;
+
+int axisOrientationZombie;
+
 //Função de inicialização
 void initZombie(){
     //path_ans = NULL;
@@ -26,7 +29,6 @@ void initZombie(){
     
     zombieTex = LoadTexture("sprites/ZOMBIE_RUN.png");
 
-    
 }
 
 //Função de animação
@@ -39,11 +41,23 @@ void goAt(Zombie *zombieObj, Vector2 dest){
         animTimeZ = 0.0f;
 
         if (dest.x != zombieObj->position.x) {
-            if (zombieObj->position.x != dest.x && dest.x > zombieObj->position.x) zombieObj->position.x += 20;
-            else zombieObj->position.x -= 20;
+            if (zombieObj->position.x != dest.x && dest.x > zombieObj->position.x) {
+                zombieObj->position.x += 20;
+                axisOrientationZombie=0;
+            }
+            else{
+                zombieObj->position.x -= 20;
+                axisOrientationZombie=1;
+            } 
         } else {
-            if (zombieObj->position.y != dest.y && dest.y > zombieObj->position.y) zombieObj->position.y += 20;
-            else zombieObj->position.y -= 20;
+            if (zombieObj->position.y != dest.y && dest.y > zombieObj->position.y){
+                zombieObj->position.y += 20;
+                axisOrientationZombie=2; 
+            } 
+            else{
+                zombieObj->position.y -= 20;
+                axisOrientationZombie=3;
+            } 
         }
     }
 
@@ -220,4 +234,17 @@ Vector2 getZombiePosition(){
 }
 int hasAMovement(){
     return flag_movement;
+}
+void reboundZombie(Vector2 compensation){
+    zombie.position.x += compensation.x * 20;
+    zombie.position.y += compensation.y * 20;
+}
+Vector2 orientationForColisionZombie(){
+    Vector2 ans = {0, 0};
+    if( axisOrientationZombie==0) ans.x = -1;
+    else if(axisOrientationZombie==1) ans.x = 1;
+    else if(axisOrientationZombie==2) ans.y = -1;
+    else if(axisOrientationZombie==3) ans.y = 1;
+
+    return ans;
 }

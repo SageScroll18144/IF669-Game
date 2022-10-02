@@ -45,6 +45,11 @@ int main(void){
         if(flag_screen == 1){
             // zombie
             updateZombieMain(getCharacterPosition());
+            if(hasAColision(getZombiePosition())){
+                Vector2 compensation = orientationForColisionZombie();
+                
+                reboundZombie(compensation);
+            }
             //setMovementByBacktracking(getCharacterPosition(), bit);
             
             //movimentação do personagem
