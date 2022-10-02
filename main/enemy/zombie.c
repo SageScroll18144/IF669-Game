@@ -90,6 +90,7 @@ void remover(pair** path, int *length){
             exit(1);
         }
     }else if(*length>0){
+        //printf("HKHFLSHD\n");
         (*length)--;
         *path = NULL;
     }
@@ -103,13 +104,13 @@ void backtracking(pair** path, int *length, pair player){
             printf("(%d, %d) ", (*path)[k].x, (*path)[k].y);
         }
         printf("\n");
-        
+
         return;   
     }
     for(int k=0;k<4;k++){
         //printf("klj");
-        int i = (*path)[*length-1].x + l[k];
-        int j = (*path)[*length-1].y + c[k];
+        int i = (*path)[*length-1].x + (20*l[k]);
+        int j = (*path)[*length-1].y + (20*c[k]);
 
         if(i<0||j<0||i>=450||j>=800||map[i][j]||mark[i][j]) continue;
 
@@ -186,11 +187,11 @@ void setMovementByBacktracking(Vector2 player_pos_arg, int map_input[450][800]){
     // }
     
     backtracking(&path, &length, player_pos);//certo 
-
-    for(int i=1;i<length_path_ans;i++) {
-        printf("(%d, %d)\n", path_ans[i].x, path_ans[i].y);
-        goAt(&zombie, path_ans[i]);
-    }
+    //free(path);
+    // for(int i=1;i<length_path_ans;i++) {
+    //     printf("(%d, %d)\n", path_ans[i].x, path_ans[i].y);
+    //     goAt(&zombie, path_ans[i]);
+    // }
     // for(int i=0;i<length_path_ans;i++) {
     //     free((*path_ans)[i]);
     // }
