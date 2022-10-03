@@ -15,7 +15,7 @@ typedef struct{
 void initZombie();
 void drawZombie();
 void updateZombieMain(Vector2 toHere);
-void goAt(Zombie *zombie, Vector2 dest);
+void goAt(Zombie *zombie, Vector2 player_pos);
 
 void append(pair **path, int *length, pair element);
 void remover(pair** path, int *length);
