@@ -17,7 +17,7 @@ const int spacings = 1;
 void initMenu(){
     font = LoadFont("fonts/jupiter_crash.png");
     imagem = LoadImage("assets/menu.png"); 
-    ImageResize(imagem, 800, 450);
+    ImageResize(&imagem, 800, 450);
     textura = LoadTextureFromImage(imagem);
    
     position.x = 300;
