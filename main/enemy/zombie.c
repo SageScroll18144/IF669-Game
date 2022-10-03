@@ -32,7 +32,7 @@ void initZombie(){
 }
 
 //Função de animação
-void goAt(Zombie *zombieObj, Vector2 dest, Vector2 player_pos){
+void goAt(Zombie *zombieObj, Vector2 player_pos){
 
    float dist_x = player_pos.x - zombie.position.x;
     float dist_y = player_pos.y - zombie.position.y;
@@ -47,7 +47,7 @@ void goAt(Zombie *zombieObj, Vector2 dest, Vector2 player_pos){
         animTimeZ = 0.0f;
 
         if (dist_x > dist_y) {
-            if (dest.x > zombieObj->position.x) {
+            if (player_pos.x  > zombieObj->position.x) {
                 zombieObj->position.x += 20;
                 axisOrientationZombie=0;
             }
@@ -56,7 +56,7 @@ void goAt(Zombie *zombieObj, Vector2 dest, Vector2 player_pos){
                 axisOrientationZombie=1;
             } 
         } else if(dist_x < dist_y) {
-            if (dest.y > zombieObj->position.y){
+            if (player_pos.y > zombieObj->position.y){
                 zombieObj->position.y += 20;
                 axisOrientationZombie=2; 
             } 
