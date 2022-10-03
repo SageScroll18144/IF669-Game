@@ -34,14 +34,20 @@ void initZombie(){
 //Função de animação
 void goAt(Zombie *zombieObj, Vector2 dest){
 
+   float dist_x = player_pos.x - zombie.position.x;
+    float dist_y = player_pos.y - zombie.position.y;
+    
+    if(dist_x < 0) dist_x = -dist_x;
+    if(dist_y < 0) dist_y = -dist_y;
+
     animTimeZ += GetFrameTime();
 
     if (animTimeZ >= 0.2f) {
         currentFramZ++;
         animTimeZ = 0.0f;
 
-        if (dest.x != zombieObj->position.x) {
-            if (zombieObj->position.x != dest.x && dest.x > zombieObj->position.x) {
+        if (dist_x > dist_y) {
+            if (dest.x > zombieObj->position.x) {
                 zombieObj->position.x += 20;
                 axisOrientationZombie=0;
             }
@@ -49,8 +55,8 @@ void goAt(Zombie *zombieObj, Vector2 dest){
                 zombieObj->position.x -= 20;
                 axisOrientationZombie=1;
             } 
-        } else {
-            if (zombieObj->position.y != dest.y && dest.y > zombieObj->position.y){
+        } else if(dist_x < dist_y) {
+            if (dest.y > zombieObj->position.y){
                 zombieObj->position.y += 20;
                 axisOrientationZombie=2; 
             } 
@@ -60,7 +66,6 @@ void goAt(Zombie *zombieObj, Vector2 dest){
             } 
         }
     }
-
     zombieObj->zombieRec.x = (float) currentFramZ * (float) zombieObj->zombieRec.width;
     zombieObj->zombieRec.y = (float) currentFramZ * (float) zombieObj->zombieRec.height;
 
