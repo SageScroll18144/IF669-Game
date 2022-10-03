@@ -3,10 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char title[] = "TITULO DO JOGO";
-char msg1[] = "Press Enter to start";
-char msg2[] = "Press y for instructions";
-char msg3[] = "Press esc to exit the game";
+char title[] = "Zumbis S.A";
+char msg1[] = "Play";
+char msg2[] = "Instructions";
+char msg3[] = "Exit";
 
 Font font;
 Image imagem;
