@@ -46,7 +46,7 @@ void goAt(Zombie *zombieObj, Vector2 player_pos){
         currentFramZ++;
         animTimeZ = 0.0f;
 
-        if (dist_x > dist_y) {
+        if (dist_x >= dist_y && dist_x != 0) {
             if (player_pos.x  > zombieObj->position.x) {
                 zombieObj->position.x += 20;
                 axisOrientationZombie=0;
