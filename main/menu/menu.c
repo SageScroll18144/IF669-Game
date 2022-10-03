@@ -10,17 +10,20 @@ char msg3[] = "Press x to exit the game";
 
 Font font;
 Image imagem;
+Texture2D textura;
 Vector2 position;
 const int spacings = 1;
 
 void initMenu(){
     font = LoadFont("fonts/jupiter_crash.png");
     imagem = LoadImage("assets/menu.jpg");
-
+    textura = LoadTextureFromImage(imagem);
     position.x = 300;
     position.y = 180;
 }
+
 void drawMenu(){
+    DrawTexture(textura, 0, 0, WHITE);
     DrawRectangle(0, 0, 50, 450, BLACK);
     DrawRectangle(0, 0, 800, 50, BLACK);
     DrawRectangle(0,450 - 50, 800, 50, BLACK);
