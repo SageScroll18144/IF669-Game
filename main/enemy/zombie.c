@@ -287,8 +287,8 @@ Vector2 obstacleDeviation(){
             pointer_vertical_down++;
         }
         int min = (cnt_first<cnt_second) ? pointer_vertical_up : pointer_vertical_down;
-
-        ans.y = ans.y + (float)min;
+        if(cnt_first == min) ans.y = ans.y - (float)min;
+        else ans.y = ans.y + (float)min;
         printf("%f ", ans.y);
 
     }
