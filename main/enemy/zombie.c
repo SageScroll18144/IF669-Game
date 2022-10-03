@@ -241,10 +241,54 @@ void reboundZombie(Vector2 compensation){
 }
 Vector2 orientationForColisionZombie(){
     Vector2 ans = {0, 0};
-    if( axisOrientationZombie==0) ans.x = -1;
+    if(axisOrientationZombie==0) ans.x = -1;
     else if(axisOrientationZombie==1) ans.x = 1;
     else if(axisOrientationZombie==2) ans.y = -1;
     else if(axisOrientationZombie==3) ans.y = 1;
 
+    return ans;
+}
+Vector2 obstacleDeviation(Vector2 pos_zombie){
+    Vector2 ans = pos_zombie;
+    //lembrar q é invertido
+    int pointer_horizontal_left = pos_zombie.x-1;
+    int pointer_horizontal_right = pos_zombie.x+1;
+
+    int pointer_vertical_up = pos_zombie.y-1;
+    int pointer_vertical_down = pos_zombie.y+1;
+
+    int cnt_first = 0;
+    int cnt_second = 0;
+
+    printf("%f ", ans.y);
+
+    if(axisOrientationZombie==0);
+    else if(axisOrientationZombie==1) {
+        while(map[pointer_vertical_up][pointer_horizontal_left]){
+            if(map[pointer_vertical_up][pointer_horizontal_left]<0 || map[pointer_vertical_up][pointer_horizontal_left]>=450){
+                cnt_first = 1000000101;
+                break;
+            }
+            cnt_first++;
+            pointer_vertical_up--;
+        }
+
+        while(map[pointer_vertical_down][pointer_horizontal_left]){
+            if(map[pointer_vertical_down][pointer_horizontal_left]<0 || map[pointer_vertical_down][pointer_horizontal_left]>=450){
+                cnt_second = 1000000101;
+                break;
+            }
+            cnt_second++;
+            pointer_vertical_down++;
+        }
+        int min = (cnt_first<cnt_second) ? pointer_vertical_up : pointer_vertical_down;
+
+        ans.y = ans.y + 20*(float)min;
+        printf("%f ", ans.y);
+
+    }
+    else if(axisOrientationZombie==2);
+    else if(axisOrientationZombie==3);
+    printf("orientação %d\n", axisOrientationZombie);
     return ans;
 }

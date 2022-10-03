@@ -25,6 +25,7 @@ int main(void){
     initZombie();
     
     getBitmapForMain();
+    setMap(bit);
     // for(int i=0;i<450;i++) {
     //     for(int j=0;j<800;j++){
     //         printf("%d ", bit[i][j]);
@@ -46,9 +47,12 @@ int main(void){
             // zombie
             updateZombieMain(getCharacterPosition());
             if(hasAColision(getZombiePosition())){
+                //printf("colidiu %d\n", teste);teste++;
                 Vector2 compensation = orientationForColisionZombie();
                 
                 reboundZombie(compensation);
+                updateZombieMain(obstacleDeviation(getCharacterPosition()));
+                //obstacleDeviation();
             }
             //setMovementByBacktracking(getCharacterPosition(), bit);
             
