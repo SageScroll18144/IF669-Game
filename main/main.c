@@ -45,15 +45,16 @@ int main(void){
 
         if(flag_screen == 1){
             // zombie
-            updateZombieMain(getCharacterPosition());
+            
             if(hasAColision(getZombiePosition())){
                 //printf("colidiu %d\n", teste);teste++;
                 Vector2 compensation = orientationForColisionZombie();
                 
                 reboundZombie(compensation);
-                updateZombieMain(obstacleDeviation(getCharacterPosition()));
+                obstacleDeviation(getCharacterPosition());
+                updateZombieMain((Vector2){400, 300});
                 //obstacleDeviation();
-            }
+            }else updateZombieMain(getCharacterPosition());
             //setMovementByBacktracking(getCharacterPosition(), bit);
             
             //movimentação do personagem

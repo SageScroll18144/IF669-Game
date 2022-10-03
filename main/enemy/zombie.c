@@ -283,12 +283,13 @@ Vector2 obstacleDeviation(Vector2 pos_zombie){
         }
         int min = (cnt_first<cnt_second) ? pointer_vertical_up : pointer_vertical_down;
 
-        ans.y = ans.y + 20*(float)min;
+        ans.y = ans.y + (float)min;
         printf("%f ", ans.y);
 
     }
     else if(axisOrientationZombie==2);
     else if(axisOrientationZombie==3);
     printf("orientação %d\n", axisOrientationZombie);
+
     return ans;
 }
