@@ -13,7 +13,7 @@ Vector2 position;
 const int spacings = 1;
 
 void initMenu(){
-    font = LoadImage("assets/menu.jpg");
+    font = LoadImage("fonts/jupiter_crash.png");
 
     position.x = 300;
     position.y = 180;
