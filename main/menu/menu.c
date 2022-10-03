@@ -4,8 +4,8 @@
 #include <stdlib.h>
 
 char title[] = "TITULO DO JOGO";
-char msg1[] = "press Enter to start";
-char msg2[] = "Instructions";
+char msg1[] = "Press Enter to start";
+char msg2[] = "Press y for instructions";
 
 Font font;
 Vector2 position;
