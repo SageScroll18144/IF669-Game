@@ -5,6 +5,7 @@
 
 char title[] = "TITULO DO JOGO";
 char msg1[] = "press Enter to start";
+char msg2[] = "Instructions";
 
 Font font;
 Vector2 position;
@@ -25,5 +26,6 @@ void drawMenu(){
 
     DrawTextEx(font, title, position, font.baseSize*2.0f ,(float)spacings, RED);
     DrawText(msg1 , 280, 250, 20, LIGHTGRAY);
+    DrawText(msg2 , 400, 250, 20, LIGHTGRAY);
 }
 
