@@ -253,14 +253,14 @@ Vector2 orientationForColisionZombie(){
 
     return ans;
 }
-Vector2 obstacleDeviation(Vector2 pos_zombie){
-    Vector2 ans = pos_zombie;
+Vector2 obstacleDeviation(){
+    Vector2 ans = zombie.position;
     //lembrar q é invertido
-    int pointer_horizontal_left = pos_zombie.x-1;
-    int pointer_horizontal_right = pos_zombie.x+1;
+    int pointer_horizontal_left = zombie.position.x-1;
+    int pointer_horizontal_right = zombie.position.x+1;
 
-    int pointer_vertical_up = pos_zombie.y-1;
-    int pointer_vertical_down = pos_zombie.y+1;
+    int pointer_vertical_up = zombie.position.y-1;
+    int pointer_vertical_down = zombie.position.y+1;
 
     int cnt_first = 0;
     int cnt_second = 0;
@@ -268,9 +268,9 @@ Vector2 obstacleDeviation(Vector2 pos_zombie){
     printf("%f ", ans.y);
 
     if(axisOrientationZombie==0);
-    else if(axisOrientationZombie==1) {
+    if(axisOrientationZombie==1) {
         while(map[pointer_vertical_up][pointer_horizontal_left]){
-            if(map[pointer_vertical_up][pointer_horizontal_left]<0 || map[pointer_vertical_up][pointer_horizontal_left]>=450){
+            if(map[pointer_vertical_up][pointer_horizontal_left]<0){
                 cnt_first = 1000000101;
                 break;
             }
@@ -292,9 +292,13 @@ Vector2 obstacleDeviation(Vector2 pos_zombie){
         printf("%f ", ans.y);
 
     }
-    else if(axisOrientationZombie==2);
-    else if(axisOrientationZombie==3);
+    if(axisOrientationZombie==2);
+    if(axisOrientationZombie==3);
     printf("orientação %d\n", axisOrientationZombie);
 
     return ans;
+}
+void setZombiePos(Vector2 new_pos){
+    zombie.position.x = new_pos.x;
+    zombie.position.y = new_pos.y;
 }
