@@ -28,6 +28,7 @@ int hasAMovement();
 
 void reboundZombie(Vector2 compensation);
 Vector2 orientationForColisionZombie();
-Vector2 obstacleDeviation(Vector2 pos_zombie);
+Vector2 obstacleDeviation();
+void setZombiePos(Vector2 new_pos);
 
 #endif
