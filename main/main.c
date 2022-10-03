@@ -41,7 +41,7 @@ int main(void){
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         // seta a transição de tela
-        if(IsKeyDown(KEY_E)) flag_screen = 1;
+        if(IsKeyDown(KEY_ENTER)) flag_screen = 1;
 
         if(flag_screen == 1){
             // zombie
