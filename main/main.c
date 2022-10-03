@@ -51,8 +51,9 @@ int main(void){
                 Vector2 compensation = orientationForColisionZombie();
                 
                 reboundZombie(compensation);
-                obstacleDeviation(getCharacterPosition());
-                updateZombieMain((Vector2){400, 300});
+                //obstacleDeviation(getCharacterPosition());
+                setZombiePos(obstacleDeviation());
+                //updateZombieMain((Vector2){400, 300});
                 //obstacleDeviation();
             }else updateZombieMain(getCharacterPosition());
             //setMovementByBacktracking(getCharacterPosition(), bit);
