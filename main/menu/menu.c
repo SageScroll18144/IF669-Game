@@ -6,7 +6,7 @@
 char title[] = "TITULO DO JOGO";
 char msg1[] = "Press Enter to start";
 char msg2[] = "Press y for instructions";
-char msg3[] = "Press x to exit the game";
+char msg3[] = "Press esc to exit the game";
 
 Font font;
 Image imagem;
