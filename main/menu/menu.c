@@ -23,11 +23,13 @@ void drawMenu(){
     DrawRectangle(0, 0, 800, 50, BLACK);
     DrawRectangle(0,450 - 50, 800, 50, BLACK);
     DrawRectangle(800 - 50, 0, 50, 450, BLACK);
-    DrawRectangle(270, 240, 250, 40, BLACK);
+    DrawRectangle(270, 240, 250, 40, GREEN);
+    DrawRectangle(270, 290, 250, 40, GREEN);
+    DrawRectangle(270, 340, 250, 40, GREEN);
 
     DrawTextEx(font, title, position, font.baseSize*2.0f ,(float)spacings, RED);
-    DrawText(msg1 , 280, 250, 20, LIGHTGRAY);
-    DrawText(msg2 , 280, 300, 20, LIGHTGRAY);
-    DrawText(msg3 , 280, 350, 20, LIGHTGRAY);
+    DrawText(msg1 , 280, 250, 20, BLACK);
+    DrawText(msg2 , 280, 300, 20, BLACK);
+    DrawText(msg3 , 280, 350, 20, BLACK);
 }
 
