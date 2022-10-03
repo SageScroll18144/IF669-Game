@@ -13,7 +13,7 @@ Vector2 position;
 const int spacings = 1;
 
 void initMenu(){
-    font = LoadFont("fonts/jupiter_crash.png");
+    font = LoadImage("assets/menu.jpg");
 
     position.x = 300;
     position.y = 180;
@@ -27,7 +27,7 @@ void drawMenu(){
 
     DrawTextEx(font, title, position, font.baseSize*2.0f ,(float)spacings, RED);
     DrawText(msg1 , 280, 250, 20, LIGHTGRAY);
-    DrawText(msg2 , 280, 400, 20, LIGHTGRAY);
-    DrawText(msg3 , 280, 550, 20, LIGHTGRAY);
+    DrawText(msg2 , 280, 300, 20, LIGHTGRAY);
+    DrawText(msg3 , 280, 350, 20, LIGHTGRAY);
 }
 
