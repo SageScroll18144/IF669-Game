@@ -32,7 +32,7 @@ void initZombie(){
 }
 
 //Função de animação
-void goAt(Zombie *zombieObj, Vector2 dest){
+void goAt(Zombie *zombieObj, Vector2 dest, Vector2 player_pos){
 
    float dist_x = player_pos.x - zombie.position.x;
     float dist_y = player_pos.y - zombie.position.y;
