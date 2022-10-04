@@ -12,5 +12,6 @@ void initZombie();
 void drawZombie();
 void updateZombieMain(Vector2 toHere);
 void goAt(Zombie *zombie, Vector2 player_pos, int idx);
+void setHowManyZombies(int qtd);
 
 #endif
