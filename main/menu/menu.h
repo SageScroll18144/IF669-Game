@@ -4,6 +4,8 @@
 #include "raylib.h"
 
 void initMenu();
+void updateMenu();
 void drawMenu();
+int getMenuPos();
 
 #endif

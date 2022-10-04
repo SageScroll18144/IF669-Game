@@ -27,8 +27,12 @@ int main(void){
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
+        if(flag_screen==0){
+            updateMenu();
+        }
+        if (IsKeyPressed(KEY_ENTER) && getMenuPos() == 2) break;
         // seta a transição de tela
-        if(IsKeyDown(KEY_ENTER)) flag_screen = 1;
+        if(IsKeyDown(KEY_ENTER) && getMenuPos()==0) flag_screen = 1;
 
         if(flag_screen == 1){
             // zombie     
