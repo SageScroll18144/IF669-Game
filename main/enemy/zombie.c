@@ -3,53 +3,19 @@
 #include "raylib.h"
 #include "zombie.h"
 
-//Variaveis da perseguição do backtracking
-int l[4];
-int c[4];
-int map[450][800];
-int mark[450][800];
-//Vector2 *path_ans;
-int length_path_ans;
-pair path_ans[360000];
 //Inicialização do zumbi
 Zombie zombie;
 Texture2D zombieTex;
 float animTimeZ = 0;
 int currentFramZ = 0;
-int flag_movement=0;
-
-int axisOrientationZombie;
-
-void loadImageColisionForZ(char *file_name){
-    FILE *file = fopen(file_name, "r");
-    int l[2];
-
-    if(file == NULL) {
-        printf("*ERRO DE ABERTURA*\n");
-        exit(1);
-    }
-    fscanf(file, "%d %d", &l[0], &l[1]);
-
-    if(l[0]!=800 && l[1]!=450){
-        printf("*ERRO NA DIMENSÃO DA IMAGEM*\n");
-        exit(1);
-    }
-    
-    for(int i=0;i<l[1];i++) for(int j=0;j<l[0];j++) fscanf(file, "%d", &map[i][j]);
-    
-    fclose(file);
-
-}
 
 //Função de inicialização
 void initZombie(){
-    //path_ans = NULL;
-    for(int i=0;i<450;i++) for(int j=0;j<450;j++) mark[i][j] = 0;
 
     zombie.position = (Vector2) {300, 200};
     
     zombieTex = LoadTexture("sprites/ZOMBIE_RUN.png");
-    loadImageColisionForZ("bitmaps/mat.txt");  
+    
 
 }
 
@@ -71,20 +37,16 @@ void goAt(Zombie *zombieObj, Vector2 player_pos){
         if (dist_x >= dist_y && dist_x != 0) {
             if (player_pos.x  > zombieObj->position.x) {
                 zombieObj->position.x += 20;
-                axisOrientationZombie=0;
             }
             else{
                 zombieObj->position.x -= 20;
-                axisOrientationZombie=1;
             } 
         } else if(dist_x < dist_y) {
             if (player_pos.y > zombieObj->position.y){
                 zombieObj->position.y += 20;
-                axisOrientationZombie=2; 
             } 
             else{
                 zombieObj->position.y -= 20;
-                axisOrientationZombie=3;
             } 
         }
     }
@@ -107,245 +69,4 @@ void updateZombieMain(Vector2 toHere) {
 
 void drawZombie() {
     DrawTextureRec(zombieTex, zombie.zombieRec, zombie.position, WHITE);
-}
-
-//Funções de perseguição da backtracking
-void append(pair **path, int *length, pair element){
-    pair *tmp = *path;
-    *path = (pair *)realloc(*path, sizeof(pair)*(*length+1));
-
-    if(*path == NULL){
-        printf("erro na alocação\n");
-        free(tmp);
-        exit(1);
-    }
-
-    (*path)[(*length)] = element;
-    (*length)++;
-}
-void remover(pair** path, int *length){
-    if(*length>1){
-        pair *tmp = *path;
-        (*length)--;
-        *path = (pair *) realloc(*path, (*length)*sizeof(pair));
-
-        if(*path == NULL){
-            printf("erro na alocação\n");
-            free(tmp);
-            exit(1);
-        }
-    }else if(*length>0){
-        //printf("HKHFLSHD\n");
-        (*length)--;
-        *path = NULL;
-    }
-}
-
-void backtracking(pair** path, int *length, pair player){
-    mark[(*path)[*length-1].x][(*path)[*length-1].y] = 1;
-    if(player.x == (*path)[*length-1].x && player.y == (*path)[*length-1].y) {
-        printf("path.: ");
-        // for(int k=0;k<(*length);k++){
-        //     printf("(%d, %d) ", (*path)[k].x, (*path)[k].y);
-        // }
-        // printf("\n");
-        length_path_ans = *length;
-        for(int k=0;k<length_path_ans;k++){
-            path_ans[k] = (*path)[k]; 
-        }
-        return;   
-    }
-    for(int k=0;k<4;k++){
-        //printf("klj");
-        int i = (*path)[*length-1].x + (20*l[k]);
-        int j = (*path)[*length-1].y + (20*c[k]);
-
-        if(i<0||j<0||i>=450||j>=800||map[i][j]||mark[i][j]) continue;
-
-        pair next_node;
-        next_node.x = i;
-        next_node.y = j;
-        append(&(*path), length, next_node);
-        //printf("%d, %d\n", (*path)[*length-1].x, (*path)[*length-1].y);
-        backtracking(&(*path), length, player);
-        remover(&(*path), length);
-    }
-}
-
-void whichDirect(Vector2 player_pos){
-    float dist_x = player_pos.x - zombie.position.x;
-    float dist_y = player_pos.y - zombie.position.y;
-    if(dist_x > 0){
-        l[1] = 1;
-        c[1] = 0;
-
-        l[3] = -1;
-        c[3] = 0;
-    }else{
-        l[1] = -1;
-        c[1] = 0;
-
-        l[3] = 1;
-        c[3] = 0;
-    }
-    
-    if(dist_y > 0) {
-        l[0] = 0;
-        c[0] = 1;
-
-        l[2] = 0;
-        c[2] = -1;
-    }else{
-        l[0] = 0;
-        c[0] = -1;
-
-        l[2] = 0;
-        c[2] = 1;
-    }
-}
-void setMap(int a[450][800]){
-    //for(int i=0;i<450;i++) for(int j=0;j<450;j++) map[i][j] = a[i][j];
-}
-void setMovementByBacktracking(Vector2 player_pos_arg, int map_input[450][800]){
-
-    whichDirect(player_pos_arg);
-    setMap(map_input);
-    pair player_pos;
-    pair zombie_pos;
-
-    zombie_pos.x = (int)zombie.position.x;
-    zombie_pos.y = (int)zombie.position.y;
-
-    player_pos.x = (int)player_pos_arg.x;
-    player_pos.y = (int)player_pos_arg.y;
-    
-    pair *path = NULL;
-    int length = 0;
-    append(&path, &length, zombie_pos);
-    printf("(%d, %d)\n", player_pos.x, player_pos.y);
-    printf("(%d, %d)\n", zombie_pos.x, zombie_pos.y);
-    // for(int i=0;i<450;i++) {
-    //     for(int j=0;j<800;j++){
-    //         printf("%d", map[i][j]);
-    //     }
-    //     printf("\n");
-    // }
-    
-    backtracking(&path, &length, player_pos);//certo 
-    free(path);
-    Vector2 tmp;
-    flag_movement=1;
-    for(int i=1;i<6;i++) {
-        
-        tmp.x = (float)path_ans[i].x;
-        tmp.y = (float)path_ans[i].y;
-        printf("(%d, %d) ", path_ans[i].x, path_ans[i].y);
-        printf("(%f, %f)\n", tmp.x, tmp.y);
-        //goAt(&zombie, tmp);
-        updateZombieMain(tmp); 
-    }
-    //goAt(&zombie, (Vector2){0,0});
-    // for(int i=0;i<length_path_ans;i++) {
-    //     free((*path_ans)[i]);
-    // }
-    flag_movement=0;
-    printf("cheguei aq\n");
-    //pop(&path, &length);
-    //while(!length_path_ans) pop(&path_ans, &length_path_ans);
-    //free(path);
-    //free(path_ans);
-    
-}
-Vector2 getZombiePosition(){
-    return zombie.position;
-}
-int hasAMovement(){
-    return flag_movement;
-}
-void reboundZombie(Vector2 compensation){
-    zombie.position.x += compensation.x * 20;
-    zombie.position.y += compensation.y * 20;
-}
-Vector2 orientationForColisionZombie(){
-    Vector2 ans = {0, 0};
-    if(axisOrientationZombie==0) ans.x = -1;
-    else if(axisOrientationZombie==1) ans.x = 1;
-    else if(axisOrientationZombie==2) ans.y = -1;
-    else if(axisOrientationZombie==3) ans.y = 1;
-
-    return ans;
-}
-Vector2 obstacleDeviation(){
-    Vector2 ans;
-    ans.x = zombie.position.x;
-    ans.y = zombie.position.y;
-    printf("ANS: %f %f\n", ans.x, ans.y);
-    //lembrar q é invertido
-    int pointer_horizontal_left = zombie.position.x-1;
-    int pointer_horizontal_right = zombie.position.x+1;
-
-    int pointer_vertical_up = zombie.position.y;
-    int pointer_vertical_down = zombie.position.y;
-
-    int cnt_first = 0;
-    int cnt_second = 0;
-
-    //printf("%f ", ans.y);
-
-    if(axisOrientationZombie==0){
-        while(!map[pointer_vertical_up][pointer_horizontal_right]){
-            if(pointer_vertical_up<0||pointer_horizontal_right<0||pointer_vertical_up>=450||pointer_horizontal_right>=800){
-                cnt_first = 1000000101;
-                break;
-            }
-            cnt_first++;
-            pointer_vertical_up--;
-        }
-
-        while(!map[pointer_vertical_down][pointer_horizontal_right]){
-            if(pointer_vertical_down<0||pointer_horizontal_right<0||pointer_vertical_down>=450||pointer_horizontal_right>=800){
-                cnt_second = 1000000101;
-                break;
-            }
-            cnt_second++;
-            pointer_vertical_down++;
-        }
-        int min = (cnt_first<cnt_second) ? pointer_vertical_up : pointer_vertical_down;
-        ans.y = (float)min;
-        printf("-> %d %d\n", cnt_first, cnt_second);
-    }
-    if(axisOrientationZombie==1) {
-        printf("-> %d %d %d %d\n", cnt_first, cnt_second, map[pointer_vertical_up][pointer_horizontal_left], map[pointer_vertical_down][pointer_horizontal_left]);
-
-        while(!map[pointer_vertical_up][pointer_horizontal_left]){
-            if(pointer_vertical_up<0||pointer_horizontal_left<0||pointer_vertical_up>=450||pointer_horizontal_left>=800){
-                cnt_first = 1000000101;
-                break;
-            }
-            cnt_first++;
-            pointer_vertical_up--;
-        }
-
-        while(!map[pointer_vertical_down][pointer_horizontal_left]){
-            if(pointer_vertical_down<0||pointer_horizontal_left<0||pointer_vertical_down>=450||pointer_horizontal_left>=800){
-                cnt_second = 1000000101;
-                break;
-            }
-            cnt_second++;
-            pointer_vertical_down++;
-        }
-        int min = (cnt_first<cnt_second) ? pointer_vertical_up : pointer_vertical_down;
-        ans.y = (float)min ;
-        printf("-> %d %d %d %d\n", cnt_first, cnt_second, map[pointer_vertical_up][pointer_horizontal_left], map[pointer_vertical_down][pointer_horizontal_left]);
-
-    }
-    if(axisOrientationZombie==2);
-    if(axisOrientationZombie==3);
-    printf("orientação %d\n", axisOrientationZombie);
-
-    return ans;
-}
-void setZombiePos(Vector2 new_pos){
-    zombie.position.x = new_pos.x;
-    zombie.position.y = new_pos.y;
 }
