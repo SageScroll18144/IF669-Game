@@ -30,5 +30,6 @@ void reboundZombie(Vector2 compensation);
 Vector2 orientationForColisionZombie();
 Vector2 obstacleDeviation();
 void setZombiePos(Vector2 new_pos);
+void loadImageColisionForZ(char *file_name);
 
 #endif

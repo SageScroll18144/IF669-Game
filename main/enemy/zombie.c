@@ -20,6 +20,27 @@ int flag_movement=0;
 
 int axisOrientationZombie;
 
+void loadImageColisionForZ(char *file_name){
+    FILE *file = fopen(file_name, "r");
+    int l[2];
+
+    if(file == NULL) {
+        printf("*ERRO DE ABERTURA*\n");
+        exit(1);
+    }
+    fscanf(file, "%d %d", &l[0], &l[1]);
+
+    if(l[0]!=800 && l[1]!=450){
+        printf("*ERRO NA DIMENSÃO DA IMAGEM*\n");
+        exit(1);
+    }
+    
+    for(int i=0;i<l[1];i++) for(int j=0;j<l[0];j++) fscanf(file, "%d", &map[i][j]);
+    
+    fclose(file);
+
+}
+
 //Função de inicialização
 void initZombie(){
     //path_ans = NULL;
@@ -28,6 +49,7 @@ void initZombie(){
     zombie.position = (Vector2) {300, 200};
     
     zombieTex = LoadTexture("sprites/ZOMBIE_RUN.png");
+    loadImageColisionForZ("bitmaps/mat.txt");  
 
 }
 
@@ -182,7 +204,7 @@ void whichDirect(Vector2 player_pos){
     }
 }
 void setMap(int a[450][800]){
-    for(int i=0;i<450;i++) for(int j=0;j<450;j++) map[i][j] = a[i][j];
+    //for(int i=0;i<450;i++) for(int j=0;j<450;j++) map[i][j] = a[i][j];
 }
 void setMovementByBacktracking(Vector2 player_pos_arg, int map_input[450][800]){
 
@@ -254,23 +276,25 @@ Vector2 orientationForColisionZombie(){
     return ans;
 }
 Vector2 obstacleDeviation(){
-    Vector2 ans = zombie.position;
+    Vector2 ans;
+    ans.x = zombie.position.x;
+    ans.y = zombie.position.y;
+    printf("ANS: %f %f\n", ans.x, ans.y);
     //lembrar q é invertido
     int pointer_horizontal_left = zombie.position.x-1;
     int pointer_horizontal_right = zombie.position.x+1;
 
-    int pointer_vertical_up = zombie.position.y-1;
-    int pointer_vertical_down = zombie.position.y+1;
+    int pointer_vertical_up = zombie.position.y;
+    int pointer_vertical_down = zombie.position.y;
 
     int cnt_first = 0;
     int cnt_second = 0;
 
-    printf("%f ", ans.y);
+    //printf("%f ", ans.y);
 
-    if(axisOrientationZombie==0);
-    if(axisOrientationZombie==1) {
-        while(map[pointer_vertical_up][pointer_horizontal_left]){
-            if(map[pointer_vertical_up][pointer_horizontal_left]<0){
+    if(axisOrientationZombie==0){
+        while(!map[pointer_vertical_up][pointer_horizontal_right]){
+            if(pointer_vertical_up<0||pointer_horizontal_right<0||pointer_vertical_up>=450||pointer_horizontal_right>=800){
                 cnt_first = 1000000101;
                 break;
             }
@@ -278,8 +302,8 @@ Vector2 obstacleDeviation(){
             pointer_vertical_up--;
         }
 
-        while(map[pointer_vertical_down][pointer_horizontal_left]){
-            if(map[pointer_vertical_down][pointer_horizontal_left]<0 || map[pointer_vertical_down][pointer_horizontal_left]>=450){
+        while(!map[pointer_vertical_down][pointer_horizontal_right]){
+            if(pointer_vertical_down<0||pointer_horizontal_right<0||pointer_vertical_down>=450||pointer_horizontal_right>=800){
                 cnt_second = 1000000101;
                 break;
             }
@@ -287,8 +311,32 @@ Vector2 obstacleDeviation(){
             pointer_vertical_down++;
         }
         int min = (cnt_first<cnt_second) ? pointer_vertical_up : pointer_vertical_down;
-        ans.y = ans.y + (float)min;
-        printf("%f ", ans.y);
+        ans.y = (float)min;
+        printf("-> %d %d\n", cnt_first, cnt_second);
+    }
+    if(axisOrientationZombie==1) {
+        printf("-> %d %d %d %d\n", cnt_first, cnt_second, map[pointer_vertical_up][pointer_horizontal_left], map[pointer_vertical_down][pointer_horizontal_left]);
+
+        while(!map[pointer_vertical_up][pointer_horizontal_left]){
+            if(pointer_vertical_up<0||pointer_horizontal_left<0||pointer_vertical_up>=450||pointer_horizontal_left>=800){
+                cnt_first = 1000000101;
+                break;
+            }
+            cnt_first++;
+            pointer_vertical_up--;
+        }
+
+        while(!map[pointer_vertical_down][pointer_horizontal_left]){
+            if(pointer_vertical_down<0||pointer_horizontal_left<0||pointer_vertical_down>=450||pointer_horizontal_left>=800){
+                cnt_second = 1000000101;
+                break;
+            }
+            cnt_second++;
+            pointer_vertical_down++;
+        }
+        int min = (cnt_first<cnt_second) ? pointer_vertical_up : pointer_vertical_down;
+        ans.y = (float)min ;
+        printf("-> %d %d %d %d\n", cnt_first, cnt_second, map[pointer_vertical_up][pointer_horizontal_left], map[pointer_vertical_down][pointer_horizontal_left]);
 
     }
     if(axisOrientationZombie==2);
