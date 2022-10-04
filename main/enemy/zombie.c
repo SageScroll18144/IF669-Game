@@ -12,7 +12,7 @@ int currentFramZ = 0;
 //Função de inicialização
 void initZombie(){
 
-    zombie.position = (Vector2) {300, 200};
+    zombie.position = (Vector2) {rand() % 800, rand() % 450};
     
     zombieTex = LoadTexture("sprites/ZOMBIE_RUN.png");
     
