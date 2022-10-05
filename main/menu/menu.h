@@ -7,5 +7,6 @@ void initMenu();
 void updateMenu();
 void drawMenu();
 int getMenuPos();
+void unLoadSounds();
 
 #endif

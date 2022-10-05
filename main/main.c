@@ -13,7 +13,7 @@ int main(void){
     const int screenWidth = 800;
     const int screenHeight = 450;
 
-    InitWindow(screenWidth, screenHeight, "Joguinho");
+    InitWindow(screenWidth, screenHeight, "BatZombie");
     InitAudioDevice();
     
     initMenu();
@@ -31,12 +31,10 @@ int main(void){
             updateMenu();
         }
         if (IsKeyPressed(KEY_ENTER) && getMenuPos() == 2){
-            UnloadSound (selection);
             break;
         }
         // seta a transição de tela
         if(IsKeyDown(KEY_ENTER) && getMenuPos()==0) {
-            UnloadSound (selection);
             flag_screen = 1;
         }
 
@@ -69,6 +67,7 @@ int main(void){
     // De-Initialization
     unloadBodyTextures();
     unloadAudios();
+    unLoadSounds();
     //--------------------------------------------------------------------------------------
     CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------

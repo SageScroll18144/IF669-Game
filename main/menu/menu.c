@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char title[] = "Zumbis S.A";
+char title[] = "Killer all BatZombie";
 char msg1[] = "Play";
 char msg2[] = "Instructions";
 char msg3[] = "Exit";
@@ -33,12 +33,12 @@ void updateMenu(){
     if (IsKeyPressed (KEY_DOWN)) {
         menu_pos++;
         menu_pos %= 3;
-        PlaySound (selection);
+        PlaySound(selection);
     }
     else if (IsKeyPressed (KEY_UP)){
         menu_pos--; 
         if (menu_pos < 0) menu_pos = 2;
-        PlaySound (selection);
+        PlaySound(selection);
     }
     
 }
@@ -94,4 +94,8 @@ void drawMenu(){
 
 int getMenuPos(){
     return menu_pos;
+}
+
+void unLoadSounds(){
+    UnloadSound(selection);
 }
