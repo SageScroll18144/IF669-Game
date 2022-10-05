@@ -8,6 +8,7 @@ char msg1[] = "Play";
 char msg2[] = "Instructions";
 char msg3[] = "Exit";
 
+Sound selection;
 Font font;
 Image imagem;
 Texture2D textura;
@@ -21,6 +22,8 @@ void initMenu(){
     imagem = LoadImage("assets/menu.png"); 
     ImageResize(&imagem, 800, 450);
     textura = LoadTextureFromImage(imagem);
+    selection = LoadSound ("sounds/menu_select.mp3");
+    SetSoundVolume(selection, 1.0f);
    
     position.x = 300;
     position.y = 180;
@@ -30,10 +33,12 @@ void updateMenu(){
     if (IsKeyPressed (KEY_DOWN)) {
         menu_pos++;
         menu_pos %= 3;
+        PlaySound (selection);
     }
     else if (IsKeyPressed (KEY_UP)){
         menu_pos--; 
-        if (menu_pos < 0) menu_pos = 2; 
+        if (menu_pos < 0) menu_pos = 2;
+        PlaySound (selection);
     }
     
 }
