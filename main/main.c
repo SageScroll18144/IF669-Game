@@ -30,9 +30,15 @@ int main(void){
         if(flag_screen==0){
             updateMenu();
         }
-        if (IsKeyPressed(KEY_ENTER) && getMenuPos() == 2) break;
+        if (IsKeyPressed(KEY_ENTER) && getMenuPos() == 2){
+            UnloadSound (selection);
+            break;
+        }
         // seta a transição de tela
-        if(IsKeyDown(KEY_ENTER) && getMenuPos()==0) flag_screen = 1;
+        if(IsKeyDown(KEY_ENTER) && getMenuPos()==0) {
+            UnloadSound (selection);
+            flag_screen = 1;
+        }
 
         if(flag_screen == 1){
             // zombie     
