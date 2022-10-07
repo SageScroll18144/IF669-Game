@@ -67,8 +67,8 @@ void goAt(Enemy *enemy, Vector2 player_pos){
 void updateEnemyMain(Vector2 toHere) {
     Rectangle frameRec;
     for(int i=0;i<how_many;i++){
-        if (currentOrientation == 0) sideOrientation = 1;
-        else if (currentOrientation == 1) sideOrientation = -1;
+        if (enemyOrientation == 0) sideOrientation = 1;
+        else if (enemyOrientation == 1) sideOrientation = -1;
         frameRec = (Rectangle){enemyArr[i].position.x, enemyArr[i].position.y, (float) sideOrientation * enemyArr[i].enemyTex.width / 4, (float) enemyArr[i].enemyTex.height};
         enemyArr[i].enemyRec = frameRec;
     }
