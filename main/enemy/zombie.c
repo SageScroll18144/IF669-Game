@@ -4,17 +4,16 @@
 #include "zombie.h"
 
 //Inicialização do zumbi
-Enemy enemyArr[100];
+Enemy enemyArr[10];
 int how_many; 
-int enemyOrientation = 0, sideOrientation = 1;
 
 float animTimeZ = 0;
 int currentFramZ = 0;
 
 //Função de inicialização
 void initEnemy(){
-    for(int i=0;i<100;i++) enemyArr[i].position = (Vector2) {rand() % 800, rand() % 450};
-    for(int i=0;i<100;i++) enemyArr[i].enemyTex = LoadTexture("sprites/BAT_FLY_SIDES.png");
+    for(int i=0;i<10;i++) enemyArr[i].position = (Vector2) {rand() % 800, rand() % 450};
+    for(int i=0;i<10;i++) enemyArr[i].enemyTex = LoadTexture("sprites/BAT_FLY_SIDES.png");
     how_many = 5;
 
 }
@@ -37,20 +36,16 @@ void goAt(Enemy *enemy, Vector2 player_pos){
         if (dist_x >= dist_y && dist_x != 0) {
             if (player_pos.x  > enemy->position.x) {
                 enemy->position.x += 10;
-                enemyOrientation = 0;
             }
             else{
                 enemy->position.x -= 10;
-                enemyOrientation = 1;
             } 
         } else if(dist_x < dist_y) {
             if (player_pos.y > enemy->position.y){
                 enemy->position.y += 10;
-                enemyOrientation = 2;
             } 
             else{
                 enemy->position.y -= 10;
-                enemyOrientation = 3;
             } 
         }
     }
@@ -67,9 +62,7 @@ void goAt(Enemy *enemy, Vector2 player_pos){
 void updateEnemyMain(Vector2 toHere) {
     Rectangle frameRec;
     for(int i=0;i<how_many;i++){
-        if (enemyOrientation == 0) sideOrientation = 1;
-        else if (enemyOrientation == 1) sideOrientation = -1;
-        frameRec = (Rectangle){enemyArr[i].position.x, enemyArr[i].position.y, (float) sideOrientation * enemyArr[i].enemyTex.width / 4, (float) enemyArr[i].enemyTex.height};
+        frameRec = (Rectangle){enemyArr[i].position.x, enemyArr[i].position.y, (float) enemyArr[i].enemyTex.width / 4, (float) enemyArr[i].enemyTex.height};
         enemyArr[i].enemyRec = frameRec;
     }
 
@@ -82,4 +75,12 @@ void drawEnemy() {
 
 void setHowManyEnemies(int qtd){
     how_many = qtd;
+}
+void colision(){
+    for(int i=0;i<how_many;i++){
+        if (enemyArr[i].position.y<=0) enemyArr[i].position.y += 20;
+        if (enemyArr[i].position.y>= GetScreenHeight())  enemyArr[i].position.y  -= 20;
+        if (enemyArr[i].position.x <=0) enemyArr[i].position.x  += 20;
+        if (enemyArr[i].position.x >= GetScreenWidth())  enemyArr[i].position.x  -= 20;
+    }
 }

@@ -187,13 +187,6 @@ void updatePlayerMain(){
     
 }
 
-void colision(){
-    if (player.position.y<=0) player.position.y += 20;
-    if (player.position.y>= GetScreenHeight())  player.position.y  -= 20;
-    if (player.position.x <=0) player.position.x  += 20;
-    if (player.position.x >= GetScreenWidth())  player.position.x  -= 20;
-
-}
 void drawCharacter(){
     //DrawCircleV(ballPosition, 50, MAROON);
     // for (int i = 0; i < envItemLength; i++) DrawRectangleRec(envItems[i].rect, envItems[i].color);

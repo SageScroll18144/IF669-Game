@@ -49,6 +49,7 @@ int main(void){
                 
                 reboundPlayer(compensation);
             }
+            colision();
         }
         
         // Draw
