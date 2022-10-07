@@ -19,7 +19,7 @@ int main(void){
     initMenu();
     initScene();
     initCharacter();
-    initZombie();
+    initEnemy();
     
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ int main(void){
 
         if(flag_screen == 1){
             // zombie     
-            updateZombieMain(getCharacterPosition());
+            updateEnemyMain(getCharacterPosition());
             
             //movimentação do personagem
             updatePlayerMain();
@@ -79,5 +79,5 @@ int main(void){
 void drawGame(){
     drawScene();
     drawCharacter();
-    drawZombie();
+    drawEnemy();
 }
