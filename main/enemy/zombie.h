@@ -12,7 +12,7 @@ typedef struct {
 void initEnemy();
 void drawEnemy();
 void updateEnemyMain(Vector2 toHere);
-void goAt(Enemy *enemy, Vector2 player_pos, int idx);
+void goAt(Vector2 player_pos, int idx);
 void setHowManyEnemys(int qtd);
 
 #endif
