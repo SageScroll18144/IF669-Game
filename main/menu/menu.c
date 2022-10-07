@@ -37,7 +37,7 @@ void updateMenu(){
         {
             currentAnimFrame++;
             if (currentAnimFrame >= animFrames) currentAnimFrame = 0;
-            nextFrameDataOffset = imagem.width*imagem.height*4*currentAnimFrame;
+            nextFrameDataOffset = (imagem.width)*(imagem.height)*4*currentAnimFrame;
             UpdateTexture(textura, ((unsigned char *)imagem.data) + nextFrameDataOffset);
 
             frameCounter1 = 0;
