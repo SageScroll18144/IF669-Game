@@ -6,7 +6,7 @@
 //Inicialização do zumbi
 Enemy enemyArr[100];
 int how_many; 
-int enemyOrientation = 0, sideOrientation = 1;;
+int enemyOrientation = 0, sideOrientation = 1;
 
 float animTimeZ = 0;
 int currentFramZ = 0;
