@@ -19,7 +19,7 @@ void initEnemy(){
 }
 
 //Função de animação
-void goAt(Enemy *enemy, Vector2 player_pos, int idx){
+void goAt(Enemy *enemy, Vector2 player_pos){
 
    float dist_x = player_pos.x - enemy->position.x;
    float dist_y = player_pos.y - enemy->position.y;
