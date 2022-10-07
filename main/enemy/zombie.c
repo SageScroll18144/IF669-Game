@@ -35,17 +35,17 @@ void goAt(Enemy *enemy, Vector2 player_pos){
 
         if (dist_x >= dist_y && dist_x != 0) {
             if (player_pos.x  > enemy->position.x) {
-                enemy->position.x += 20;
+                enemy->position.x += 10;
             }
             else{
-                enemy->position.x -= 20;
+                enemy->position.x -= 10;
             } 
         } else if(dist_x < dist_y) {
             if (player_pos.y > enemy->position.y){
-                enemy->position.y += 20;
+                enemy->position.y += 10;
             } 
             else{
-                enemy->position.y -= 20;
+                enemy->position.y -= 10;
             } 
         }
     }
