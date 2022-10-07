@@ -6,7 +6,7 @@
 typedef struct {
     Vector2 position;
     Rectangle enemyRec;
-    Texture 2D enemyTex;
+    Texture2D enemyTex;
 } Enemy;
 
 void initEnemy();
