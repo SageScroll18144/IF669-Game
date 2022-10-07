@@ -17,7 +17,7 @@ const int spacings = 1;
 int animFrames = 0;
 unsigned int nextFrameDataOffset = 0;
 int currentAnimFrame = 0;            
-int frameCounter = 0;          
+int frameCounter1 = 0;          
 int menu_pos = 0;
 
 void initMenu(){
@@ -32,15 +32,15 @@ void initMenu(){
 }
 
 void updateMenu(){
-    frameCounter++;
-        if (frameCounter >= 10)
+    frameCounter1++;
+        if (frameCounter1 >= 10)
         {
             currentAnimFrame++;
             if (currentAnimFrame >= animFrames) currentAnimFrame = 0;
             nextFrameDataOffset = imagem.width*imagem.height*4*currentAnimFrame;
             UpdateTexture(textura, ((unsigned char *)imagem.data) + nextFrameDataOffset);
 
-            frameCounter = 0;
+            frameCounter1 = 0;
         }
 
        
