@@ -6,6 +6,7 @@
 //Inicialização do zumbi
 Enemy enemyArr[100];
 int how_many; 
+int enemyOrientation = 0, sideOrientation = 1;;
 
 float animTimeZ = 0;
 int currentFramZ = 0;
@@ -36,16 +37,20 @@ void goAt(Enemy *enemy, Vector2 player_pos){
         if (dist_x >= dist_y && dist_x != 0) {
             if (player_pos.x  > enemy->position.x) {
                 enemy->position.x += 10;
+                enemyOrientation = 0;
             }
             else{
                 enemy->position.x -= 10;
+                enemyOrientation = 1;
             } 
         } else if(dist_x < dist_y) {
             if (player_pos.y > enemy->position.y){
                 enemy->position.y += 10;
+                enemyOrientation = 2;
             } 
             else{
                 enemy->position.y -= 10;
+                enemyOrientation = 3;
             } 
         }
     }
@@ -62,7 +67,9 @@ void goAt(Enemy *enemy, Vector2 player_pos){
 void updateEnemyMain(Vector2 toHere) {
     Rectangle frameRec;
     for(int i=0;i<how_many;i++){
-        frameRec = (Rectangle){enemyArr[i].position.x, enemyArr[i].position.y, (float) enemyArr[i].enemyTex.width / 4, (float) enemyArr[i].enemyTex.height};
+        if (currentOrientation == 0) sideOrientation = 1;
+        else if (currentOrientation == 1) sideOrientation = -1;
+        frameRec = (Rectangle){enemyArr[i].position.x, enemyArr[i].position.y, (float) sideOrientation * enemyArr[i].enemyTex.width / 4, (float) enemyArr[i].enemyTex.height};
         enemyArr[i].enemyRec = frameRec;
     }
 
