@@ -57,52 +57,81 @@ void updateMenu(){
 }
 
 void drawMenu(){
-    if (menu_pos == 0){
+    if (menu_pos == 0)
+    {
         DrawTexture(textura, 0, 0, WHITE);
-        DrawRectangle(0, 0, 50, 450, BLACK);
-        DrawRectangle(0, 0, 800, 50, BLACK);
-        DrawRectangle(0,450 - 50, 800, 50, BLACK);
-        DrawRectangle(800 - 50, 0, 50, 450, BLACK);
-        DrawRectangle(270, 240, 250, 40, YELLOW);
-        DrawRectangle(270, 290, 250, 40, DARKGREEN);
-        DrawRectangle(270, 340, 250, 40, DARKGREEN);
+        DrawRectangle(280, 170, 250, 40, RED);
+        DrawRectangle(280, 240, 250, 40, BLACK);
+        DrawRectangle(280, 310, 250, 40, BLACK);
 
-        DrawTextEx(font, title, position, font.baseSize*2.0f ,(float)spacings, RED);
-        DrawText(msg1 , 280, 250, 20, BLACK);
-        DrawText(msg2 , 280, 300, 20, BLACK);
-        DrawText(msg3 , 280, 350, 20, BLACK);
+        DrawRectangle(280, 170, 8, 40, BLACK);
+        DrawRectangle(522, 170, 8, 40, BLACK);
+        //DrawRectangle(280, 162, 250, 8, BLACK);
+        //DrawRectangle(280, 210, 250, 8, BLACK);
+        DrawRectangle(280, 240, 8, 40, RED);
+        DrawRectangle(522, 240, 8, 40, RED);
+        //DrawRectangle(280, 232, 250, 8, RED);
+        //DrawRectangle(280, 280, 250, 8, RED);
+        DrawRectangle(280, 310, 8, 40, RED);
+        DrawRectangle(522, 310, 8, 40, RED);
+        //DrawRectangle(280, 302, 250, 8, RED);
+        //DrawRectangle(280, 350, 250, 8, RED);
+            
+        DrawTextEx(font, title, position, font.baseSize*3.0f ,(float)spacings, RED);
+        DrawText(msg1 , 375, 180, 20, BLACK);
+        DrawText(msg2 , 347, 250, 20, WHITE);
+        DrawText(msg3 , 385, 320, 20, WHITE);
     }
-    else if (menu_pos == 1){
+    else if (menu_pos == 1)
+    {
         DrawTexture(textura, 0, 0, WHITE);
-        DrawRectangle(0, 0, 50, 450, BLACK);
-        DrawRectangle(0, 0, 800, 50, BLACK);
-        DrawRectangle(0,450 - 50, 800, 50, BLACK);
-        DrawRectangle(800 - 50, 0, 50, 450, BLACK);
-        DrawRectangle(270, 240, 250, 40, DARKGREEN);
-        DrawRectangle(270, 290, 250, 40, YELLOW);
-        DrawRectangle(270, 340, 250, 40, DARKGREEN);
+        DrawRectangle(280, 170, 250, 40, BLACK);
+        DrawRectangle(280, 240, 250, 40, RED);
+        DrawRectangle(280, 310, 250, 40, BLACK);
 
-        DrawTextEx(font, title, position, font.baseSize*2.0f ,(float)spacings, RED);
-        DrawText(msg1 , 280, 250, 20, BLACK);
-        DrawText(msg2 , 280, 300, 20, BLACK);
-        DrawText(msg3 , 280, 350, 20, BLACK);
+        DrawRectangle(280, 170, 8, 40, RED);
+        DrawRectangle(522, 170, 8, 40, RED);
+        // DrawRectangle(280, 162, 250, 8, RED);
+        // DrawRectangle(280, 210, 250, 8, RED);
+        DrawRectangle(280, 240, 8, 40, BLACK);
+        DrawRectangle(522, 240, 8, 40, BLACK);
+        //DrawRectangle(280, 232, 250, 8, BLACK);
+        //DrawRectangle(280, 280, 250, 8, BLACK);
+        DrawRectangle(280, 310, 8, 40, RED);
+        DrawRectangle(522, 310, 8, 40, RED);
+        //DrawRectangle(280, 302, 250, 8, RED);
+        //DrawRectangle(280, 350, 250, 8, RED);
+            
+        DrawTextEx(font, title, position, font.baseSize*3.0f ,(float)spacings, RED);
+        DrawText(msg1 , 375, 180, 20, WHITE);
+        DrawText(msg2 , 347, 250, 20, BLACK);
+        DrawText(msg3 , 385, 320, 20, WHITE);
     }
-    else if (menu_pos == 2){
+    else if (menu_pos == 2)
+    {
         DrawTexture(textura, 0, 0, WHITE);
-        DrawRectangle(0, 0, 50, 450, BLACK);
-        DrawRectangle(0, 0, 800, 50, BLACK);
-        DrawRectangle(0,450 - 50, 800, 50, BLACK);
-        DrawRectangle(800 - 50, 0, 50, 450, BLACK);
-        DrawRectangle(270, 240, 250, 40, DARKGREEN);
-        DrawRectangle(270, 290, 250, 40, DARKGREEN);
-        DrawRectangle(270, 340, 250, 40, YELLOW);
+        DrawRectangle(280, 170, 250, 40, BLACK);
+        DrawRectangle(280, 240, 250, 40, BLACK);
+        DrawRectangle(280, 310, 250, 40, RED);
 
-        DrawTextEx(font, title, position, font.baseSize*2.0f ,(float)spacings, RED);
-        DrawText(msg1 , 280, 250, 20, BLACK);
-        DrawText(msg2 , 280, 300, 20, BLACK);
-        DrawText(msg3 , 280, 350, 20, BLACK);
+        DrawRectangle(280, 170, 8, 40, RED);
+        DrawRectangle(522, 170, 8, 40, RED);
+        //DrawRectangle(280, 162, 250, 8, RED);
+        //DrawRectangle(280, 210, 250, 8, RED);
+        DrawRectangle(280, 240, 8, 40, RED);
+        DrawRectangle(522, 240, 8, 40, RED);
+        //DrawRectangle(280, 232, 250, 8, RED);
+        //DrawRectangle(280, 280, 250, 8, RED);
+        DrawRectangle(280, 310, 8, 40, BLACK);
+        DrawRectangle(522, 310, 8, 40, BLACK);
+        //DrawRectangle(280, 302, 250, 8, BLACK);
+        //DrawRectangle(280, 350, 250, 8, BLACK);
+            
+        DrawTextEx(font, title, position, font.baseSize*3.0f ,(float)spacings, RED);
+        DrawText(msg1 , 375, 180, 20, WHITE);
+        DrawText(msg2 , 347, 250, 20, WHITE);
+        DrawText(msg3 , 385, 320, 20, BLACK);
     }
-
 }
 
 int getMenuPos(){
