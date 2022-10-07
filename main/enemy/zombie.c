@@ -13,7 +13,7 @@ int currentFramZ = 0;
 //Função de inicialização
 void initEnemy(){
     for(int i=0;i<100;i++) enemyArr[i].position = (Vector2) {rand() % 800, rand() % 450};
-    for(int i=0;i<100;i++) enemyArr[i].enemyTex = LoadTexture("sprites/ZOMBIE_RUN.png");
+    for(int i=0;i<100;i++) enemyArr[i].enemyTex = LoadTexture("sprites/BAT_FLY_SIDES.png");
     how_many = 5;
 
 }
@@ -62,7 +62,7 @@ void goAt(Enemy *enemy, Vector2 player_pos){
 void updateEnemyMain(Vector2 toHere) {
     Rectangle frameRec;
     for(int i=0;i<how_many;i++){
-        frameRec = (Rectangle){enemyArr[i].position.x - 55, enemyArr[i].position.y - 20, (float) enemyArr[i].enemyTex.width / 8, (float) enemyArr[i].enemyTex.height};
+        frameRec = (Rectangle){enemyArr[i].position.x, enemyArr[i].position.y, (float) enemyArr[i].enemyTex.width / 4, (float) enemyArr[i].enemyTex.height};
         enemyArr[i].enemyRec = frameRec;
     }
 
