@@ -13,6 +13,6 @@ void initEnemy();
 void drawEnemy();
 void updateEnemyMain(Vector2 toHere);
 void goAt(Enemy enemy, Vector2 player_pos, int idx);
-void setHowManyEnemys(int qtd);
+void setHowManyEnemies(int qtd);
 
 #endif
