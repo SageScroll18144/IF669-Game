@@ -14,22 +14,36 @@ Image imagem;
 Texture2D textura;
 Vector2 position;
 const int spacings = 1;
-
+int animFrames = 0;
+unsigned int nextFrameDataOffset = 0;
+int currentAnimFrame = 0;            
+int frameCounter = 0;          
 int menu_pos = 0;
 
 void initMenu(){
     font = LoadFont("fonts/jupiter_crash.png");
-    imagem = LoadImage("assets/morcegos.gif.crdownload"); 
+    imagem = LoadImageAnim("resources/scarfy_run.gif", &animFrames);
     ImageResize(&imagem, 800, 450);
     textura = LoadTextureFromImage(imagem);
     selection = LoadSound ("sounds/menu_select.mp3");
     SetSoundVolume(selection, 1.0f);
-   
     position.x = 300;
     position.y = 180;
 }
 
 void updateMenu(){
+    frameCounter++;
+        if (frameCounter >= 10)
+        {
+            currentAnimFrame++;
+            if (currentAnimFrame >= animFrames) currentAnimFrame = 0;
+            nextFrameDataOffset = imagem.width*imagem.height*4*currentAnimFrame;
+            UpdateTexture(textura, ((unsigned char *)imagem.data) + nextFrameDataOffset);
+
+            frameCounter = 0;
+        }
+
+       
     if (IsKeyPressed (KEY_DOWN)) {
         menu_pos++;
         menu_pos %= 3;
