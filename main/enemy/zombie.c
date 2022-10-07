@@ -70,7 +70,7 @@ void updateEnemyMain(Vector2 toHere) {
 }
 
 void drawEnemy() {
-    for(int i=0;i<how_many;i++) DrawTextureRec(enemyArr[i].enemyTex, enemyArr[i].zombieRec, enemyArr[i].position, WHITE);
+    for(int i=0;i<how_many;i++) DrawTextureRec(enemyArr[i].enemyTex, enemyArr[i].enemyRec, enemyArr[i].position, WHITE);
 }
 
 void setHowManyEnemies(int qtd){
