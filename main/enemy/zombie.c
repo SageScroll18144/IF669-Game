@@ -4,8 +4,7 @@
 #include "zombie.h"
 
 //Inicialização do zumbi
-Zombie zombie[100];
-Texture2D zombieTex[100];
+Enemy enemyArr[100];
 int how_many; 
 
 float animTimeZ = 0;
@@ -13,17 +12,17 @@ int currentFramZ = 0;
 
 //Função de inicialização
 void initZombie(){
-    for(int i=0;i<100;i++) zombie[i].position = (Vector2) {rand() % 800, rand() % 450};
-    for(int i=0;i<100;i++) zombieTex[i] = LoadTexture("sprites/ZOMBIE_RUN.png");
+    for(int i=0;i<100;i++) enemyArr[i].position = (Vector2) {rand() % 800, rand() % 450};
+    for(int i=0;i<100;i++) enemyArr[i].enemyTex = LoadTexture("sprites/ZOMBIE_RUN.png");
     how_many = 5;
 
 }
 
 //Função de animação
-void goAt(Zombie *zombieObj, Vector2 player_pos, int idx){
+void goAt(Enemy *enemy, Vector2 player_pos, int idx){
 
-   float dist_x = player_pos.x - zombie[idx].position.x;
-    float dist_y = player_pos.y - zombie[idx].position.y;
+   float dist_x = player_pos.x - enemy->position.x;
+   float dist_y = player_pos.y - enemy->position.y;
     
     if(dist_x < 0) dist_x = -dist_x;
     if(dist_y < 0) dist_y = -dist_y;
@@ -35,23 +34,23 @@ void goAt(Zombie *zombieObj, Vector2 player_pos, int idx){
         animTimeZ = 0.0f;
 
         if (dist_x >= dist_y && dist_x != 0) {
-            if (player_pos.x  > zombieObj->position.x) {
-                zombieObj->position.x += 20;
+            if (player_pos.x  > enemy->position.x) {
+                enemy->position.x += 20;
             }
             else{
-                zombieObj->position.x -= 20;
+                enemy->position.x -= 20;
             } 
         } else if(dist_x < dist_y) {
-            if (player_pos.y > zombieObj->position.y){
-                zombieObj->position.y += 20;
+            if (player_pos.y > enemy->position.y){
+                enemy->position.y += 20;
             } 
             else{
-                zombieObj->position.y -= 20;
+                enemy->position.y -= 20;
             } 
         }
     }
-    zombieObj->zombieRec.x = (float) currentFramZ * (float) zombieObj->zombieRec.width;
-    zombieObj->zombieRec.y = (float) currentFramZ * (float) zombieObj->zombieRec.height;
+    enemy->enemyRec.x = (float) currentFramZ * (float) enemy->enemyRec.width;
+    enemy->enemyRec.y = (float) currentFramZ * (float) enemy->enemyRec.height;
 
     if (currentFramZ > 7) {
         currentFramZ = 0;
@@ -60,20 +59,20 @@ void goAt(Zombie *zombieObj, Vector2 player_pos, int idx){
     
 }
 
-void updateZombieMain(Vector2 toHere) {
+void updateEnemyMain(Vector2 toHere) {
     Rectangle frameRec;
     for(int i=0;i<how_many;i++){
-        frameRec = (Rectangle){zombie[i].position.x - 55, zombie[i].position.y - 20, (float) zombieTex[i].width / 8, (float) zombieTex[i].height};
-        zombie[i].zombieRec = frameRec;
+        frameRec = (Rectangle){enemyArr[i].position.x - 55, enemyArr[i].position.y - 20, (float) enemyArr[i].enemyTex.width / 8, (float) enemyArr[i].enemyTex.height};
+        enemyArr[i].enemyRec = frameRec;
     }
 
-    for(int i=0;i<how_many;i++) goAt(&(zombie[i]), toHere, i);
+    for(int i=0;i<how_many;i++) goAt(&(enemyArr[i]), toHere);
 }
 
-void drawZombie() {
-    for(int i=0;i<how_many;i++) DrawTextureRec(zombieTex[i], zombie[i].zombieRec, zombie[i].position, WHITE);
+void drawEnemy() {
+    for(int i=0;i<how_many;i++) DrawTextureRec(enemyArr[i].enemyTex, enemyArr[i].zombieRec, enemyArr[i].position, WHITE);
 }
 
-void setHowManyZombies(int qtd){
+void setHowManyEnemies(int qtd){
     how_many = qtd;
 }
