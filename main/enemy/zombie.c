@@ -11,7 +11,7 @@ float animTimeZ = 0;
 int currentFramZ = 0;
 
 //Função de inicialização
-void initZombie(){
+void initEnemy(){
     for(int i=0;i<100;i++) enemyArr[i].position = (Vector2) {rand() % 800, rand() % 450};
     for(int i=0;i<100;i++) enemyArr[i].enemyTex = LoadTexture("sprites/ZOMBIE_RUN.png");
     how_many = 5;
