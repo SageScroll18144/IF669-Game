@@ -25,14 +25,14 @@ void initMenu(){
     imagem = LoadImageAnim("assets/morcegos.gif", &animFrames);
     textura = LoadTextureFromImage(imagem);
     selection = LoadSound ("sounds/menu_select.mp3");
-    SetSoundVolume(selection, 1.0f);
-    position.x = 300;
-    position.y = 180;
+    SetSoundVolume(selection, 0.5f);
+    position.x = 265;
+    position.y = 100;
 }
 
 void updateMenu(){
     frameCounter1++;
-        if (frameCounter1 >= 5)
+        if (frameCounter1 >= 150)
         {
             currentAnimFrame++;
             if (currentAnimFrame >= animFrames) currentAnimFrame = 0;
