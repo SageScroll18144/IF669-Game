@@ -4,8 +4,8 @@
 #include <stdlib.h>
 
 char title[] = "Kill all BatZombie";
-char msg1[] = "Play";
-char msg2[] = "Instructions";
+char msg1[] = "Start";
+char msg2[] = "How to play";
 char msg3[] = "Exit";
 
 Sound selection;
