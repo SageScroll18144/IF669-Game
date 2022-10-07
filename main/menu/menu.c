@@ -33,7 +33,7 @@ void initMenu(){
 
 void updateMenu(){
     frameCounter1++;
-        if (frameCounter1 >= 2)
+        if (frameCounter1 >= 5)
         {
             currentAnimFrame++;
             if (currentAnimFrame >= animFrames) currentAnimFrame = 0;
@@ -51,7 +51,7 @@ void updateMenu(){
     }
     else if (IsKeyPressed (KEY_UP)){
         menu_pos--; 
-        if (menu_pos < 0) menu_pos = 2;
+        if (menu_pos < 0) menu_postextu = 2;
         PlaySound(selection);
     }
     
