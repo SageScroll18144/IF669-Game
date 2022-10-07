@@ -19,7 +19,7 @@ int menu_pos = 0;
 
 void initMenu(){
     font = LoadFont("fonts/jupiter_crash.png");
-    imagem = LoadImage("assets/menu.png"); 
+    imagem = LoadImage("assets/morcegos.gif.crdownload"); 
     ImageResize(&imagem, 800, 450);
     textura = LoadTextureFromImage(imagem);
     selection = LoadSound ("sounds/menu_select.mp3");
