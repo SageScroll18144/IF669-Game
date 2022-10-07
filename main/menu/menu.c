@@ -50,7 +50,7 @@ void updateMenu(){
     }
     else if (IsKeyPressed (KEY_UP)){
         menu_pos--; 
-        if (menu_pos < 0) menu_postextu = 2;
+        if (menu_pos < 0) menu_pos = 2;
         PlaySound(selection);
     }
     
