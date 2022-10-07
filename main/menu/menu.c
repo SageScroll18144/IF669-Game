@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char title[] = "Killer all BatZombie";
+char title[] = "Kill all BatZombie";
 char msg1[] = "Play";
 char msg2[] = "Instructions";
 char msg3[] = "Exit";
