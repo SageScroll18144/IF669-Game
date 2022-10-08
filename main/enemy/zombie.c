@@ -14,7 +14,7 @@ int axisOrientationZ;
 void initEnemy(){
     for(int i=0;i<10;i++) enemyArr[i].position = (Vector2) {rand() % 800, rand() % 450};
     for(int i=0;i<10;i++) enemyArr[i].enemyTex = LoadTexture("sprites/BAT_FLY_SIDES.png");
-    how_many = 5;
+    how_many = 1;
 
 }
 
@@ -88,11 +88,11 @@ void colision(){
         if (enemyArr[i].position.x >= GetScreenWidth())  enemyArr[i].position.x  -= 20;
     }
 }
-void receiveCharacterAttack(int idx){
-    if(axisOrientationZ == 0) enemyArr[idx].position.x -= 10; 
-    else if(axisOrientationZ == 1) enemyArr[idx].position.x += 10;
-    else if(axisOrientationZ == 2) enemyArr[idx].position.y -= 10;
-    else if(axisOrientationZ == 3) enemyArr[idx].position.y += 10;
+void receiveCharacterAttack(int idx, int axis){
+    if(axis == 0) enemyArr[idx].position.x -= 300; 
+    else if(axis == 1) enemyArr[idx].position.x += 300;
+    else if(axis == 2) enemyArr[idx].position.y -= 300;
+    else if(axis == 3) enemyArr[idx].position.y += 300;
 }
 int getHowMany(){
     return how_many;

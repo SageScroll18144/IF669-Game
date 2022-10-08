@@ -54,9 +54,10 @@ int main(void){
             colision();
 
             for(int i=0;i<getHowMany();i++){
-                if(objectColision(getCharacterPosition(), getEnemyPos(i), 30)){
+                if(objectColision(getCharacterPosition(), getEnemyPos(i), 10)){
                     if(itsAttacking()){
-                        receiveCharacterAttack(i);
+                        printf("-> %d\n", getCharacterOrientation());
+                        receiveCharacterAttack(i, 0);
                     }else{
                         //receiveEnemyAttack();
                     }
@@ -96,6 +97,6 @@ void drawGame(){
 }
 int objectColision(Vector2 a, Vector2 b, int min){
     //printf("%f\n", a.x*b.x + a.y*b.y );
-    return abs(a.x-b.x)<=min || abs(a.y-b.y)<=min;
+    return abs((int)a.x-(int)b.x)<=min && abs((int)a.y-(int)b.y)<=min;
 
 }
