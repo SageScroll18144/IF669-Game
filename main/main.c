@@ -56,8 +56,13 @@ int main(void){
             for(int i=0;i<getHowMany();i++){
                 if(objectColision(getCharacterPosition(), getEnemyPos(i), 10)){
                     if(itsAttacking()){
-                        printf("-> %d\n", getCharacterOrientation());
-                        receiveCharacterAttack(i, 0);
+                        Vector2 ret = getCharacterOrientation();
+                        //printf("-> %d %d\n", (int)ret.x, (int)ret.y);
+                        if((int)ret.x==0&&(int)ret.y==0)receiveCharacterAttack(i, 0);
+                        else if((int)ret.x==0&&(int)ret.y==1)receiveCharacterAttack(i, 1);
+                        else if((int)ret.x==4)receiveCharacterAttack(i, 2);
+                        else if((int)ret.x==5)receiveCharacterAttack(i, 3);
+
                     }else{
                         //receiveEnemyAttack();
                     }

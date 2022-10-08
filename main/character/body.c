@@ -270,14 +270,10 @@ int itsAttacking(){
     return isAttacking;
 }
 
-int getCharacterOrientation(){
-    int ans;
-    if(axisOrientation == 3){
-        if(currentOrientation == 1) ans = 0;
-        else ans = 1;
-    }
-    else if(axisOrientation == 1) ans = 2;
-    else if(axisOrientation == 2) ans = 3;
+Vector2 getCharacterOrientation(){
+    Vector2 ans;
+    ans.x = (float)axisOrientation;
+    ans.y = (float)currentOrientation;
 
-    return ans;
+    return ans; 
 }

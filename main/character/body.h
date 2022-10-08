@@ -30,6 +30,6 @@ void reboundPlayer(Vector2 rebound_cononic);
 void unloadAudios();
 void receiveEnemyAttack();
 int itsAttacking();
-int getCharacterOrientation();
+Vector2 getCharacterOrientation();
 
 #endif
