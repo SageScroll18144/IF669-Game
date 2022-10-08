@@ -4,8 +4,10 @@
 #include "enemy/zombie.h"
 #include "menu/menu.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void drawGame();
+int objectColision(Vector2 a, Vector2 b, int min);
 
 int main(void){
     // Initialization
@@ -50,6 +52,16 @@ int main(void){
                 reboundPlayer(compensation);
             }
             colision();
+
+            for(int i=0;i<getHowMany();i++){
+                if(objectColision(getCharacterPosition(), getEnemyPos(i), 30)){
+                    if(itsAttacking()){
+                        receiveCharacterAttack(i);
+                    }else{
+                        //receiveEnemyAttack();
+                    }
+                }
+            }
         }
         
         // Draw
@@ -81,4 +93,9 @@ void drawGame(){
     drawScene();
     drawCharacter();
     drawEnemy();
+}
+int objectColision(Vector2 a, Vector2 b, int min){
+    //printf("%f\n", a.x*b.x + a.y*b.y );
+    return abs(a.x-b.x)<=min || abs(a.y-b.y)<=min;
+
 }

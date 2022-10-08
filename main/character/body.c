@@ -258,3 +258,14 @@ void unloadAudios(){
     UnloadSound(attack_sound);
     CloseAudioDevice(); 
 }
+void receiveEnemyAttack(){
+    if(axisOrientation == 3){
+        if(currentOrientation == 1) player.position.x -= 20;
+        else player.position.x -= 20;
+    }
+    else if(axisOrientation == 1) player.position.y += 20;
+    else if(axisOrientation == 2) player.position.y -= 20;
+}
+int itsAttacking(){
+    return isAttacking;
+}

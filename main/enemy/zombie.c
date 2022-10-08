@@ -9,7 +9,7 @@ int how_many;
 
 float animTimeZ = 0;
 int currentFramZ = 0;
-
+int axisOrientationZ;
 //Função de inicialização
 void initEnemy(){
     for(int i=0;i<10;i++) enemyArr[i].position = (Vector2) {rand() % 800, rand() % 450};
@@ -35,16 +35,20 @@ void goAt(Enemy *enemy, Vector2 player_pos){
 
         if (dist_x >= dist_y && dist_x != 0) {
             if (player_pos.x  > enemy->position.x) {
+                axisOrientationZ=0;
                 enemy->position.x += 10;
             }
             else{
+                axisOrientationZ=1;
                 enemy->position.x -= 10;
             } 
         } else if(dist_x < dist_y) {
             if (player_pos.y > enemy->position.y){
+                axisOrientationZ=2;
                 enemy->position.y += 10;
             } 
             else{
+                axisOrientationZ=3;
                 enemy->position.y -= 10;
             } 
         }
@@ -83,4 +87,16 @@ void colision(){
         if (enemyArr[i].position.x <=0) enemyArr[i].position.x  += 20;
         if (enemyArr[i].position.x >= GetScreenWidth())  enemyArr[i].position.x  -= 20;
     }
+}
+void receiveCharacterAttack(int idx){
+    if(axisOrientationZ == 0) enemyArr[idx].position.x -= 10; 
+    else if(axisOrientationZ == 1) enemyArr[idx].position.x += 10;
+    else if(axisOrientationZ == 2) enemyArr[idx].position.y -= 10;
+    else if(axisOrientationZ == 3) enemyArr[idx].position.y += 10;
+}
+int getHowMany(){
+    return how_many;
+}
+Vector2 getEnemyPos(int idx){
+    return enemyArr[idx].position;
 }
