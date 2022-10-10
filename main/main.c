@@ -54,7 +54,7 @@ int main(void){
             colision();
 
             for(int i=0;i<getHowMany();i++){
-                if(objectColision(getCharacterPosition(), getEnemyPos(i), 10)){
+                if(objectColision(getCharacterPosition(), getEnemyPos(i), 20)){
                     if(itsAttacking()){
                         
                         Vector2 ret = getCharacterOrientation();
