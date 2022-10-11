@@ -5,6 +5,7 @@
 #include "menu/menu.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "animations/transition.h"
 
 void drawGame();
 int objectColision(Vector2 a, Vector2 b, int min);
@@ -40,7 +41,7 @@ int main(void){
             flag_screen = 1;
         }
 
-        if(flag_screen == 1){
+        if(flag_screen == 2){
             // zombie     
             updateEnemyMain(getCharacterPosition());
             
@@ -77,7 +78,12 @@ int main(void){
             ClearBackground(RAYWHITE);
             
             if(flag_screen == 0) drawMenu();
-            if(flag_screen == 1) drawGame();
+            if(flag_screen == 1){
+                drawTransition();
+                BeginDrawing();
+                flag_screen = 2;
+            }
+            if(flag_screen == 2) drawGame();
 
             
         EndDrawing();
