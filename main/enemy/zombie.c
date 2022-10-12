@@ -147,8 +147,9 @@ void killEnemy(int idx){
     if(enemy_lifes[idx]<=0){
         enemyArr[idx].position.x=99999;
         enemyArr[idx].position.y=99999;
+        how_many_already_die++;
     }
-    how_many_already_die++;
+    
 }
 void setCharacterHitKill(int value){
     hit_kill = value;
