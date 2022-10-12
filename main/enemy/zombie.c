@@ -101,7 +101,7 @@ void drawEnemy() {
         case 2:
             DrawTextureRec(enemyArr[i].enemyDownTex, enemyArr[i].enemyRec, enemyArr[i].position, WHITE);
             break;
-            
+
         case 3:
             DrawTextureRec(enemyArr[i].enemyUpTex, enemyArr[i].enemyRec, enemyArr[i].position, WHITE);
             break;
