@@ -20,5 +20,6 @@ int getHowMany();
 Vector2 getEnemyPos(int idx);
 void receiveDamage(int idx);
 void killEnemy(int idx);
+void setCharacterHitKill(int value);
 
 #endif

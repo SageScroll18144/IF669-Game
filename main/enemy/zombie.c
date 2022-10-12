@@ -7,6 +7,7 @@
 Enemy enemyArr[10];
 int how_many; 
 int enemy_lifes[10];
+int hit_kill;
 
 float animTimeZ = 0;
 int currentFramZ = 0;
@@ -17,7 +18,9 @@ void initEnemy(){
     for(int i=0;i<10;i++) enemyArr[i].enemyTex = LoadTexture("sprites/BAT_FLY_SIDES.png");
     for(int i=0;i<10;i++) enemy_lifes[i] = 100;
 
-    how_many = 1;
+    hit_kill = 50;
+
+    how_many = 5;
 
 }
 
@@ -104,11 +107,14 @@ Vector2 getEnemyPos(int idx){
     return enemyArr[idx].position;
 }
 void receiveDamage(int idx){
-    enemy_lifes[idx] -= 50;
+    enemy_lifes[idx] -= hit_kill;
 }
 void killEnemy(int idx){
     if(enemy_lifes[idx]<=0){
         enemyArr[idx].position.x=99999;
         enemyArr[idx].position.y=99999;
     }
+}
+void setCharacterHitKill(int value){
+    hit_kill = value;
 }
