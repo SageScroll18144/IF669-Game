@@ -4,6 +4,7 @@
 Camera camera = { 0 };
 Vector3 acm;//inimigo
 int sen;
+Model model = {0};
 
 void init3DScene(){
     camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };
@@ -13,6 +14,8 @@ void init3DScene(){
     camera.projection = CAMERA_PERSPECTIVE;
 
     SetCameraMode(camera, CAMERA_FIRST_PERSON); // Set a first person camera mode
+
+    model = LoadModel("resources/models/peter_griffin.obj");  
 
     acm = (Vector3){ 0.0f, 3.0f, 0.0f };
     sen = 1;
@@ -50,7 +53,8 @@ void draw3DScene(){
         DrawCube((Vector3){ 16.0f, 2.5f, 0.0f }, 1.0f, 5.0f, 32.0f, BLACK);      // Draw a green wall
         DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
         DrawCube((Vector3){ 0.0f, 2.5f, -16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
-        DrawCube(acm, 5.0f, 5.0f, 5.0f, GOLD);
+        //DrawCube(acm, 5.0f, 5.0f, 5.0f, GOLD);
+        DrawModel(model, acm, 0.2f, WHITE);
         
     EndMode3D();
 
@@ -60,4 +64,7 @@ void draw3DScene(){
     DrawText("First person camera default controls:", 20, 20, 10, BLACK);
     DrawText("- Move with keys: W, A, S, D", 40, 40, 10, DARKGRAY);
     DrawText("- Mouse move to look around", 40, 60, 10, DARKGRAY);
+}
+void unLoadModels(){
+    UnloadModel(model);  
 }

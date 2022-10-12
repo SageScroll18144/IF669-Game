@@ -105,6 +105,7 @@ int main(void){
     unloadAudios();
     unLoadSounds();
     unLoadSoundTransition();
+    unLoadModels();
     //--------------------------------------------------------------------------------------
     CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
