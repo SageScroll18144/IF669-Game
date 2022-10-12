@@ -36,13 +36,8 @@ int main(void)
         // Update
         //----------------------------------------------------------------------------------
         UpdateCamera(&camera);
-        
-        //----------------------------------------------------------------------------------
-        for(int i=0;i<4;i++) {
-            if(euclidianDistance(wall_pos[i], camera.position, 5)){
-                //printf("colidiu\n");
-            }// else// printf("nao nao\n");  
-        }
+
+        //colisao
         if((camera.position.x>=15)) {
             camera.position.x -= 0.05f;
             camera.target.x -= 0.05f;
