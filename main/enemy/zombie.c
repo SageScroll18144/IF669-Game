@@ -6,14 +6,27 @@
 //Inicialização do zumbi
 Enemy enemyArr[10];
 int how_many; 
+int enemy_lifes[10];
+int hit_kill;
 
 float animTimeZ = 0;
 int currentFramZ = 0;
-int axisOrientationZ;
+int sideOrientation = 1;
 //Função de inicialização
 void initEnemy(){
-    for(int i=0;i<10;i++) enemyArr[i].position = (Vector2) {rand() % 800, rand() % 450};
-    for(int i=0;i<10;i++) enemyArr[i].enemyTex = LoadTexture("sprites/BAT_FLY_SIDES.png");
+    for(int i=0;i<10;i++) {
+        enemyArr[i].axisOrientation = 0;
+        enemyArr[i].position = (Vector2) {rand() % 800, rand() % 450};
+
+        enemyArr[i].enemyTex = LoadTexture("sprites/BAT_FLY_SIDES.png");
+        enemyArr[i].enemyUpTex = LoadTexture("sprites/BAT_FLY_UP.png");
+        enemyArr[i].enemyDownTex = LoadTexture("sprites/BAT_FLY_DOWN.png");
+
+        enemy_lifes[i] = 100;
+    }
+
+    hit_kill = 50;
+
     how_many = 1;
 
 }
@@ -35,20 +48,20 @@ void goAt(Enemy *enemy, Vector2 player_pos){
 
         if (dist_x >= dist_y && dist_x != 0) {
             if (player_pos.x  > enemy->position.x) {
-                axisOrientationZ=0;
+                enemy->axisOrientation = 0;
                 enemy->position.x += 10;
             }
             else{
-                axisOrientationZ=1;
+                enemy->axisOrientation = 1;
                 enemy->position.x -= 10;
             } 
         } else if(dist_x < dist_y) {
             if (player_pos.y > enemy->position.y){
-                axisOrientationZ=2;
+                enemy->axisOrientation = 2;
                 enemy->position.y += 10;
             } 
             else{
-                axisOrientationZ=3;
+                enemy->axisOrientation = 3;
                 enemy->position.y -= 10;
             } 
         }
@@ -66,7 +79,10 @@ void goAt(Enemy *enemy, Vector2 player_pos){
 void updateEnemyMain(Vector2 toHere) {
     Rectangle frameRec;
     for(int i=0;i<how_many;i++){
-        frameRec = (Rectangle){enemyArr[i].position.x, enemyArr[i].position.y, (float) enemyArr[i].enemyTex.width / 4, (float) enemyArr[i].enemyTex.height};
+        if (enemyArr[i].axisOrientation == 0) sideOrientation = 1;
+        else if (enemyArr[i].axisOrientation == 1) sideOrientation = -1;
+
+        frameRec = (Rectangle){enemyArr[i].position.x, enemyArr[i].position.y, (float) sideOrientation * enemyArr[i].enemyTex.width / 4, (float) enemyArr[i].enemyTex.height};
         enemyArr[i].enemyRec = frameRec;
     }
 
@@ -74,7 +90,29 @@ void updateEnemyMain(Vector2 toHere) {
 }
 
 void drawEnemy() {
-    for(int i=0;i<how_many;i++) DrawTextureRec(enemyArr[i].enemyTex, enemyArr[i].enemyRec, enemyArr[i].position, WHITE);
+
+    for (int i = 0; i < how_many; i++) {
+        switch (enemyArr[i].axisOrientation) {
+        case 0:
+        case 1:
+            DrawTextureRec(enemyArr[i].enemyTex, enemyArr[i].enemyRec, enemyArr[i].position, WHITE);
+            break;
+        
+        case 2:
+            DrawTextureRec(enemyArr[i].enemyDownTex, enemyArr[i].enemyRec, enemyArr[i].position, WHITE);
+            break;
+            
+        case 3:
+            DrawTextureRec(enemyArr[i].enemyUpTex, enemyArr[i].enemyRec, enemyArr[i].position, WHITE);
+            break;
+
+        default:
+            break;
+        }
+    }
+    
+
+    
 }
 
 void setHowManyEnemies(int qtd){
@@ -99,4 +137,16 @@ int getHowMany(){
 }
 Vector2 getEnemyPos(int idx){
     return enemyArr[idx].position;
+}
+void receiveCharacterDamage(int idx){
+    enemy_lifes[idx] -= hit_kill;
+}
+void killEnemy(int idx){
+    if(enemy_lifes[idx]<=0){
+        enemyArr[idx].position.x=99999;
+        enemyArr[idx].position.y=99999;
+    }
+}
+void setCharacterHitKill(int value){
+    hit_kill = value;
 }

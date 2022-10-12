@@ -54,8 +54,9 @@ int main(void){
             }
             colision();
 
+            //ataque
             for(int i=0;i<getHowMany();i++){
-                if(objectColision(getCharacterPosition(), getEnemyPos(i), 20)){
+                if(objectColision(getCharacterPosition(), getEnemyPos(i), 30)){
                     if(itsAttacking()){
                         
                         Vector2 ret = getCharacterOrientation();
@@ -65,8 +66,13 @@ int main(void){
                         else if((int)ret.x==4)receiveCharacterAttack(i, 2);
                         else if((int)ret.x==5)receiveCharacterAttack(i, 3);
 
+                        receiveCharacterDamage(i);
+                        killEnemy(i);
+
                     }else{
                         receiveEnemyAttack();
+                        receiveEnemyDamage();
+                        if(itsDead()) flag_screen = 3;
                     }
                 }
             }
@@ -84,6 +90,7 @@ int main(void){
                 flag_screen = 2;
             }
             if(flag_screen == 2) drawGame();
+            if(flag_screen == 3) printf("TELA DE MORTE");
 
             
         EndDrawing();

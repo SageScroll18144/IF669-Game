@@ -31,5 +31,7 @@ void unloadAudios();
 void receiveEnemyAttack();
 int itsAttacking();
 Vector2 getCharacterOrientation();
+void receiveEnemyDamage();
+int itsDead();
 
 #endif

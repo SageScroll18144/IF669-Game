@@ -4,9 +4,10 @@
 #include "raylib.h"
 
 typedef struct {
+    int axisOrientation;
     Vector2 position;
     Rectangle enemyRec;
-    Texture2D enemyTex;
+    Texture2D enemyTex, enemyUpTex, enemyDownTex;
 } Enemy;
 
 void initEnemy();
@@ -18,5 +19,8 @@ void colision();
 void receiveCharacterAttack(int idx, int axis);
 int getHowMany();
 Vector2 getEnemyPos(int idx);
+void receiveCharacterDamage(int idx);
+void killEnemy(int idx);
+void setCharacterHitKill(int value);
 
 #endif
