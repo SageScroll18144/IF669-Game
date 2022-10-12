@@ -1,6 +1,10 @@
 #include "raylib.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 #define MAX_COLUMNS 20
+
+int euclidianDistance(Vector3 a, Vector3 b, float param);
 
 //------------------------------------------------------------------------------------
 // Program main entry point
@@ -25,41 +29,39 @@ int main(void)
     SetCameraMode(camera, CAMERA_FIRST_PERSON); // Set a first person camera mode
 
     SetTargetFPS(60);                           // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
+    
+    Vector3 wall_pos[4] = {(Vector3){ -16.0f, 2.5f, 0.0f }, (Vector3){ 16.0f, 2.5f, 0.0f }, (Vector3){ 0.0f, 2.5f, 16.0f }, (Vector3){ 0.0f, 2.5f, -16.0f }};
 
     // Main game loop
     while (!WindowShouldClose())                // Detect window close button or ESC key
     {
         // Update
         //----------------------------------------------------------------------------------
-        //UpdateCamera(&camera);
-        if(IsKeyDown(KEY_UP)) {
-            camera.position.z--;
-            camera.target.z--;
-        }
-        if(IsKeyDown(KEY_DOWN)){
-            camera.position.z++;
-            camera.target.z++;
-        }
-        if(IsKeyDown(KEY_LEFT)) {
-            camera.position.x--;
-            camera.target.x--;
-        }
-        if(IsKeyDown(KEY_RIGHT)){
-            camera.position.x++;
-            camera.target.x++;
-        } 
-         
-        if(IsKeyDown(KEY_W)){
-           // camera.up.z++;
-            //camera.up.z++;
-        } 
-        if(IsKeyDown(KEY_S)){
-            //camera.up.z--;
-            //camera.up.z--;
-        } 
+        UpdateCamera(&camera);
+        
         //----------------------------------------------------------------------------------
-
+        for(int i=0;i<4;i++) {
+            if(euclidianDistance(wall_pos[i], camera.position, 5)){
+                //printf("colidiu\n");
+            }// else// printf("nao nao\n");  
+        }
+        if((camera.position.x>=15)) {
+            camera.position.x -= 0.05f;
+            camera.target.x -= 0.05f;
+        }
+        if((camera.position.x<=-15)) {
+            camera.position.x += 0.05f;
+            camera.target.x += 0.05f;
+        }
+        if((camera.position.z>=15)) {
+            camera.position.z -= 0.05f;
+            camera.target.z -= 0.05f;
+        }
+        if((camera.position.z<=-15)) {
+            camera.position.z += 0.05f;
+            camera.target.z += 0.05f;
+        }
+        printf("(%.2f,%.2f,%.2f)\n", camera.position.x, camera.position.y, camera.position.z);
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
@@ -94,4 +96,8 @@ int main(void)
     //--------------------------------------------------------------------------------------
 
     return 0;
+}
+
+int euclidianDistance(Vector3 a, Vector3 b, float param){
+    return ((a.x-b.x<=0)+(a.y-b.y<=0)+(a.z-b.z<=0)) >= 2;
 }
