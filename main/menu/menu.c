@@ -140,4 +140,5 @@ int getMenuPos(){
 
 void unLoadSounds(){
     UnloadSound(selection);
+    UnloadSound(transition);
 }
