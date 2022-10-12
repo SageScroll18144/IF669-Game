@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+Font font_counter;
 Texture2D backTex;
 int bitmap[450][800];
 
@@ -29,14 +30,20 @@ void loadImageColision(char *file_name){
 
 void initScene(){
     backTex = LoadTexture("assets/map.png");
-    loadImageColision("bitmaps/mat.txt");   
+    loadImageColision("bitmaps/mat.txt");  
+    font_counter = LoadFont("fonts/jupiter_crash.png"); 
 }
-void drawScene(){
+void drawScene(int cnt){
     Rectangle recSrc = {0, 0, backTex.width, backTex.height};
     Rectangle recDest = {0, 0, 800, 450};
     Vector2 vecOrigin = {0, 0};
 
     DrawTexturePro(backTex, recSrc, recDest, vecOrigin, 0, WHITE);
+
+    char strcnt[50];
+    sprintf(strcnt, "x%d", cnt);
+
+    DrawTextEx(font_counter, strcnt, (Vector2){GetScreenWidth()/2,10}, font_counter.baseSize*2.0f , 1.0, YELLOW);
 }
 void closeScene(){
     UnloadTexture(backTex);

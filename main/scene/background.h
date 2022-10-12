@@ -5,7 +5,7 @@
 
 void loadImageColision(char *file_name);
 void initScene();
-void drawScene();
+void drawScene(int cnt);
 void closeScene();
 int hasAColision(Vector2 object);
 int** getBitmap();

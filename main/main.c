@@ -114,7 +114,7 @@ int main(void){
 }
 
 void drawGame(){
-    drawScene();
+    drawScene(getHowManyAlreadyDie());
     drawCharacter();
     drawHealthBar();
     drawEnemy();
