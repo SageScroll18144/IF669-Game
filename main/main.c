@@ -25,6 +25,7 @@ int main(void){
     initCharacter();
     initEnemy();
     initTransition();
+    init3DScene();
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -79,7 +80,7 @@ int main(void){
                 }
             }
         }
-        
+        if(flag_screen == 5) update3DScene();
         // Draw
         BeginDrawing();
 
@@ -93,7 +94,7 @@ int main(void){
             }
             if(flag_screen == 2) drawGame();
             if(flag_screen == 3) printf("TELA DE MORTE");
-
+            if(flag_screen == 5) draw3DScene();
             
         EndDrawing();
         //----------------------------------------------------------------------------------
