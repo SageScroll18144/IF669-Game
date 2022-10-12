@@ -24,7 +24,8 @@ int main(void){
     initScene();
     initCharacter();
     initEnemy();
-    
+    initTransition();
+
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
     int flag_screen = 0;
@@ -102,6 +103,7 @@ int main(void){
     unloadBodyTextures();
     unloadAudios();
     unLoadSounds();
+    unLoadSoundTransition();
     //--------------------------------------------------------------------------------------
     CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------

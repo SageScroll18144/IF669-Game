@@ -3,6 +3,8 @@
 
 #include "raylib.h"
 
+void initTransition();
 void drawTransition();
+void unLoadSoundTransition();
 
 #endif

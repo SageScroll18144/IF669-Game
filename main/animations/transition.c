@@ -6,11 +6,15 @@
 
 float raio = 1;
 int contador = 1;
-// Sound transition = LoadSound("sounds/batsFlying.mp3");
-// SetSoundVolume(transition, 0.7f);
+Sound transition;
+
+void initTransition(){
+    transition = LoadSound("sounds/batsFlying.mp3");
+    SetSoundVolume(transition, 0.7f);
+}
 
 void drawTransition(){
-    //PlaySound (transition);
+    PlaySound (transition);
     while(raio < 1000){
         BeginDrawing();
         ClearBackground(WHITE);
@@ -21,4 +25,8 @@ void drawTransition(){
 
     }
     while(contador < 100) {DrawText("SURVIVE!", 350, 220, 20, DARKGRAY);contador = contador + 10;}
+}
+
+void unLoadSoundTransition(){
+    UnloadSound(transition);
 }
