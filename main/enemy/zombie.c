@@ -9,6 +9,8 @@ int how_many;
 int enemy_lifes[10];
 int hit_kill;
 
+int how_many_already_die = 0;
+
 float animTimeZ = 0;
 int currentFramZ = 0;
 int sideOrientation = 1;
@@ -146,7 +148,11 @@ void killEnemy(int idx){
         enemyArr[idx].position.x=99999;
         enemyArr[idx].position.y=99999;
     }
+    how_many_already_die++;
 }
 void setCharacterHitKill(int value){
     hit_kill = value;
+}
+int getHowManyAlreadyDie(){
+    return how_many_already_die;
 }

@@ -22,5 +22,6 @@ Vector2 getEnemyPos(int idx);
 void receiveCharacterDamage(int idx);
 void killEnemy(int idx);
 void setCharacterHitKill(int value);
+int getHowManyAlreadyDie();
 
 #endif
