@@ -6,8 +6,11 @@
 
 float raio = 1;
 int contador = 1;
+Sound transition = LoadSound ("sounds/batsFlying.mp3");
+SetSoundVolume(transition, 0.7f);
 
 void drawTransition(){
+    PlaySound (transition);
     while(raio < 1000){
         BeginDrawing();
         ClearBackground(WHITE);
