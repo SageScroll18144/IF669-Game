@@ -6,6 +6,7 @@
 //Inicialização do zumbi
 Enemy enemyArr[10];
 int how_many; 
+int enemy_lifes[10];
 
 float animTimeZ = 0;
 int currentFramZ = 0;
@@ -14,6 +15,8 @@ int axisOrientationZ;
 void initEnemy(){
     for(int i=0;i<10;i++) enemyArr[i].position = (Vector2) {rand() % 800, rand() % 450};
     for(int i=0;i<10;i++) enemyArr[i].enemyTex = LoadTexture("sprites/BAT_FLY_SIDES.png");
+    for(int i=0;i<10;i++) enemy_lifes[i] = 100;
+
     how_many = 1;
 
 }
@@ -99,4 +102,13 @@ int getHowMany(){
 }
 Vector2 getEnemyPos(int idx){
     return enemyArr[idx].position;
+}
+void receiveDamage(int idx){
+    enemy_lifes[idx] -= 50;
+}
+void killEnemy(int idx){
+    if(enemy_lifes[idx]<=0){
+        enemyArr[idx].position.x=99999;
+        enemyArr[idx].position.y=99999;
+    }
 }
