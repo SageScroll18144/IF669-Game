@@ -7,7 +7,7 @@
 typedef struct {
     Vector2 position;
     Rectangle playerRec;
-    float speed;
+    int healthPoints, immunityIndex;
 } Player;
 
 typedef struct {
@@ -20,6 +20,7 @@ void initCharacter();
 void checkMovement();
 //void colision();
 void drawCharacter();
+void drawHealthBar();
 void updatePlayerMain();
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime);
 void drawAttack(Player *player);

@@ -116,6 +116,7 @@ int main(void){
 void drawGame(){
     drawScene();
     drawCharacter();
+    drawHealthBar();
     drawEnemy();
 }
 int objectColision(Vector2 a, Vector2 b, int min){

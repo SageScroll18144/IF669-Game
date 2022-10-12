@@ -4,8 +4,9 @@
 #include <stdbool.h>
 #include "stdio.h"
 
-Player player = {0};
+Player player;
 Texture2D charaTex, charaTexUp, charaTexDown, charaTexIdle, charaTexIdleUp, charaTexIdleDown, charaTexAtkSide, charaTexAtkUp, charaTexAtkDown;
+Texture2D healthBarTex, healthBarTex2, healthBarTex3, healthBarTex4, healthBarTex5, healthBarTex6;
 //Rectangle frameRec;
 int currentFrame = 1, currentOrientation = 1, orientation = 1, axisOrientation = 0;
 int frameCounter = 0, isAttacking = 0, atkCnt = 0;
@@ -21,7 +22,8 @@ int life;
 void initCharacter(){
     //player = {0};
     player.position = (Vector2) {400, 280};
-    player.speed = 0;
+    player.healthPoints = 6;
+    player.immunityIndex = 0;
 
     charaTex = LoadTexture("sprites/RUN_SIDES.png");
     charaTexUp = LoadTexture("sprites/RUN_UP.png");
@@ -34,6 +36,13 @@ void initCharacter(){
     charaTexAtkSide = LoadTexture("sprites/ATTACK_SIDES.png");
     charaTexAtkUp = LoadTexture("sprites/ATTACK_UP.png");
     charaTexAtkDown = LoadTexture("sprites/ATTACK_DOWN.png");
+
+    healthBarTex = LoadTexture("sprites/health_bar/b1.png");
+    healthBarTex2 = LoadTexture("sprites/health_bar/b2.png");
+    healthBarTex3 = LoadTexture("sprites/health_bar/b3.png");
+    healthBarTex4 = LoadTexture("sprites/health_bar/b4.png");
+    healthBarTex5 = LoadTexture("sprites/health_bar/b5.png");
+    healthBarTex6 = LoadTexture("sprites/health_bar/b6.png");
 
     walk = LoadSound("sounds/walking_sound4.mp3");
     SetSoundVolume(walk, 1.0f);
@@ -224,6 +233,34 @@ void drawCharacter(){
 
 }
 
+void drawHealthBar() {
+    Vector2 barPos = {0, 0};
+    Rectangle barRec = {barPos.x, barPos.y, (float) healthBarTex.width, (float) healthBarTex.height};
+    switch (player.healthPoints) {
+    case 6:
+        DrawTextureRec(healthBarTex, barRec, barPos, WHITE);
+        break;
+    case 5:
+        DrawTextureRec(healthBarTex2, barRec, barPos, WHITE);
+        break;
+    case 4:
+        DrawTextureRec(healthBarTex3, barRec, barPos, WHITE);
+        break;
+    case 3:
+        DrawTextureRec(healthBarTex4, barRec, barPos, WHITE);
+        break;
+    case 2:
+        DrawTextureRec(healthBarTex5, barRec, barPos, WHITE);
+        break;
+    case 1:
+        DrawTextureRec(healthBarTex6, barRec, barPos, WHITE);
+        break;
+    default:
+        break;
+    }
+    
+}
+
 void unloadBodyTextures() {
     UnloadTexture(charaTex);
     UnloadTexture(charaTexDown);
@@ -251,15 +288,18 @@ Vector2 orientationForColision(){
 
     return ans;
 }
+
 void reboundPlayer(Vector2 rebound_cononic){
     player.position.x += rebound_cononic.x * 20;
     player.position.y += rebound_cononic.y * 20;
 }
+
 void unloadAudios(){
     UnloadSound(walk);
     UnloadSound(attack_sound);
     CloseAudioDevice(); 
 }
+
 void receiveEnemyAttack(){
     // if(axisOrientation == 3){
     //     if(currentOrientation == 1) player.position.x -= 20;
@@ -267,10 +307,15 @@ void receiveEnemyAttack(){
     // }
     // else if(axisOrientation == 1) player.position.y += 20;
     // else if(axisOrientation == 2) player.position.y -= 20;
-    if(axisOrientation==0&&currentOrientation==0) player.position.x += 30;
-    if(axisOrientation==0&&currentOrientation==1) player.position.x -= 30;
-    else if(axisOrientation==4) player.position.y += 30;
-    else if(axisOrientation==5) player.position.y -= 30;
+    player.immunityIndex++;
+    if (player.immunityIndex > 10) {
+        if(axisOrientation==0&&currentOrientation==0) player.position.x += 30;
+        if(axisOrientation==0&&currentOrientation==1) player.position.x -= 30;
+        else if(axisOrientation==4) player.position.y += 30;
+        else if(axisOrientation==5) player.position.y -= 30;
+
+        player.immunityIndex = 0;
+    }
  
 }
 int itsAttacking(){
@@ -285,8 +330,14 @@ Vector2 getCharacterOrientation(){
     return ans; 
 }
 void receiveEnemyDamage(){
-    life -= 10;
+    player.immunityIndex++;
+
+    if (player.immunityIndex > 10) {
+        player.healthPoints -= 1;
+        player.immunityIndex = 0;
+    }
+    
 }
 int itsDead(){
-    return life <= 0; 
+    return player.healthPoints <= 0; 
 }
