@@ -285,7 +285,7 @@ Vector2 getCharacterOrientation(){
     return ans; 
 }
 void receiveEnemyDamage(){
-    life -= 20;
+    life -= 10;
 }
 int itsDead(){
     return life <= 0; 
