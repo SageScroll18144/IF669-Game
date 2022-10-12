@@ -32,6 +32,8 @@ int main(void)
     
     Vector3 wall_pos[4] = {(Vector3){ -16.0f, 2.5f, 0.0f }, (Vector3){ 16.0f, 2.5f, 0.0f }, (Vector3){ 0.0f, 2.5f, 16.0f }, (Vector3){ 0.0f, 2.5f, -16.0f }};
 
+    Vector3 acm = { 0.0f, 3.0f, 0.0f };
+    int sen = 1;
     // Main game loop
     while (!WindowShouldClose())                // Detect window close button or ESC key
     {
@@ -62,6 +64,10 @@ int main(void)
             camera.target.z += 0.05f;
         }
         printf("(%.2f,%.2f,%.2f)\n", camera.position.x, camera.position.y, camera.position.z);
+
+        if(acm.x>=10) sen = -1;
+        else if(acm.x<=-10) sen = 1; 
+        acm.x+=(0.5f*sen);
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
@@ -71,11 +77,11 @@ int main(void)
             BeginMode3D(camera);
 
                 DrawPlane((Vector3){ 0.0f, 0.0f, 0.0f }, (Vector2){ 32.0f, 32.0f }, LIGHTGRAY); // Draw ground
-                DrawCube((Vector3){ -16.0f, 2.5f, 0.0f }, 1.0f, 5.0f, 32.0f, BLUE);     // Draw a blue wall
-                DrawCube((Vector3){ 16.0f, 2.5f, 0.0f }, 1.0f, 5.0f, 32.0f, LIME);      // Draw a green wall
-                DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, GOLD);      // Draw a yellow wall
-                DrawCube((Vector3){ 0.0f, 2.5f, -16.0f }, 32.0f, 5.0f, 1.0f, GOLD);      // Draw a yellow wall
-
+                DrawCube((Vector3){ -16.0f, 2.5f, 0.0f }, 1.0f, 5.0f, 32.0f, BLACK);     // Draw a blue wall
+                DrawCube((Vector3){ 16.0f, 2.5f, 0.0f }, 1.0f, 5.0f, 32.0f, BLACK);      // Draw a green wall
+                DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
+                DrawCube((Vector3){ 0.0f, 2.5f, -16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
+                DrawCube(acm, 5.0f, 5.0f, 5.0f, GOLD);
                 
             EndMode3D();
 
