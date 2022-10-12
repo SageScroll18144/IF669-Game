@@ -66,11 +66,13 @@ int main(void){
                         else if((int)ret.x==4)receiveCharacterAttack(i, 2);
                         else if((int)ret.x==5)receiveCharacterAttack(i, 3);
 
-                        receiveDamage(i);
+                        receiveCharacterDamage(i);
                         killEnemy(i);
 
                     }else{
                         receiveEnemyAttack();
+                        receiveEnemyDamage();
+                        if(itsDead()) flag_screen = 3;
                     }
                 }
             }
@@ -88,6 +90,7 @@ int main(void){
                 flag_screen = 2;
             }
             if(flag_screen == 2) drawGame();
+            if(flag_screen == 3) printf("TELA DE MORTE");
 
             
         EndDrawing();

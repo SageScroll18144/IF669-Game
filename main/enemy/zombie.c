@@ -106,7 +106,7 @@ int getHowMany(){
 Vector2 getEnemyPos(int idx){
     return enemyArr[idx].position;
 }
-void receiveDamage(int idx){
+void receiveCharacterDamage(int idx){
     enemy_lifes[idx] -= hit_kill;
 }
 void killEnemy(int idx){

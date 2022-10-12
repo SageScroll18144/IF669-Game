@@ -18,7 +18,7 @@ void colision();
 void receiveCharacterAttack(int idx, int axis);
 int getHowMany();
 Vector2 getEnemyPos(int idx);
-void receiveDamage(int idx);
+void receiveCharacterDamage(int idx);
 void killEnemy(int idx);
 void setCharacterHitKill(int value);
 

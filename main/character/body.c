@@ -16,6 +16,8 @@ int currentFram = 0;
 Sound walk;
 Sound attack_sound;
 
+int life;
+
 void initCharacter(){
     //player = {0};
     player.position = (Vector2) {400, 280};
@@ -39,7 +41,7 @@ void initCharacter(){
     attack_sound = LoadSound("sounds/sword.wav");
     SetSoundVolume(attack_sound, 0.5f);
 
-    
+    life = 100;
 }
 
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime) {
@@ -281,4 +283,10 @@ Vector2 getCharacterOrientation(){
     ans.y = (float)currentOrientation;
 
     return ans; 
+}
+void receiveEnemyDamage(){
+    life -= 20;
+}
+int itsDead(){
+    return life <= 0; 
 }
