@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "animations/transition.h"
+#include "scene/threeD_plan.h"
 
 void drawGame();
 int objectColision(Vector2 a, Vector2 b, int min);

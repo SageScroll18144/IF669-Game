@@ -14,7 +14,7 @@ void init3DScene(){
 
     SetCameraMode(camera, CAMERA_FIRST_PERSON); // Set a first person camera mode
 
-    acm = { 0.0f, 3.0f, 0.0f };
+    acm = (Vector3){ 0.0f, 3.0f, 0.0f };
     sen = 1;
 }
 
