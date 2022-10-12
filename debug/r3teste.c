@@ -4,8 +4,6 @@
 
 #define MAX_COLUMNS 20
 
-int euclidianDistance(Vector3 a, Vector3 b, float param);
-
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
@@ -30,8 +28,6 @@ int main(void)
 
     SetTargetFPS(60);                           // Set our game to run at 60 frames-per-second
     
-    Vector3 wall_pos[4] = {(Vector3){ -16.0f, 2.5f, 0.0f }, (Vector3){ 16.0f, 2.5f, 0.0f }, (Vector3){ 0.0f, 2.5f, 16.0f }, (Vector3){ 0.0f, 2.5f, -16.0f }};
-
     Vector3 acm = { 0.0f, 3.0f, 0.0f };
     int sen = 1;
     // Main game loop
@@ -102,8 +98,4 @@ int main(void)
     //--------------------------------------------------------------------------------------
 
     return 0;
-}
-
-int euclidianDistance(Vector3 a, Vector3 b, float param){
-    return ((a.x-b.x<=0)+(a.y-b.y<=0)+(a.z-b.z<=0)) >= 2;
 }
