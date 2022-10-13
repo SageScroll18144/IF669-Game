@@ -43,7 +43,7 @@ int main(void){
         }
         // seta a transição de tela
         if(IsKeyDown(KEY_ENTER) && getMenuPos()==0) {
-            flag_screen = 5;
+            flag_screen = 2;
         }
         
         if (IsKeyPressed(KEY_ENTER) && getMenuPos() == 1){
@@ -103,7 +103,7 @@ int main(void){
             if(flag_screen == 3) printf("TELA DE MORTE");
             if(flag_screen == 5) draw3DScene();
             if(flag_screen == 6) {
-               drawInstructions();
+                drawInstructions();
                 if(IsKeyPressed(KEY_ENTER)) flag_screen = 0;
             }
             

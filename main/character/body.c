@@ -193,7 +193,6 @@ void updatePlayerMain(){
     
     updatePlayer(&player, &currentFrame, &frameCounter, &currentOrientation, &axisOrientation, deltaTime);
 
-    
 }
 
 void drawCharacter(){
@@ -230,11 +229,7 @@ void drawCharacter(){
             }
 
         }
-
     }
-
-    
-
 }
 
 void drawHealthBar() {

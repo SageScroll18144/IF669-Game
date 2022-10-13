@@ -4,7 +4,7 @@
 #include "raylib.h"
 
 typedef struct {
-    int axisOrientation;
+    int axisOrientation, healthPoints;
     Vector2 position;
     Rectangle enemyRec;
     Texture2D enemyTex, enemyUpTex, enemyDownTex;

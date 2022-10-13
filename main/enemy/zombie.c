@@ -6,7 +6,6 @@
 //Inicialização do zumbi
 Enemy enemyArr[10];
 int how_many; 
-int enemy_lifes[10];
 int hit_kill;
 
 int how_many_already_die = 0;
@@ -24,7 +23,7 @@ void initEnemy(){
         enemyArr[i].enemyUpTex = LoadTexture("sprites/BAT_FLY_UP.png");
         enemyArr[i].enemyDownTex = LoadTexture("sprites/BAT_FLY_DOWN.png");
 
-        enemy_lifes[i] = 100;
+        enemyArr[i].healthPoints = 100;
     }
 
     hit_kill = 50;
@@ -111,10 +110,7 @@ void drawEnemy() {
         default:
             break;
         }
-    }
-    
-
-    
+    }  
 }
 
 void setHowManyEnemies(int qtd){
@@ -141,10 +137,10 @@ Vector2 getEnemyPos(int idx){
     return enemyArr[idx].position;
 }
 void receiveCharacterDamage(int idx){
-    enemy_lifes[idx] -= hit_kill;
+    enemyArr[idx].healthPoints -= hit_kill;
 }
 void killEnemy(int idx){
-    if(enemy_lifes[idx]<=0){
+    if(enemyArr[idx].healthPoints <= 0){
         enemyArr[idx].position.x=99999;
         enemyArr[idx].position.y=99999;
         how_many_already_die++;
