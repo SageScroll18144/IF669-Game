@@ -14,5 +14,5 @@ void initInstructions(){
 }
 
 void drawInstructions(){
-        DrawTexture(texture, 0, 0, WHITE);
-   }
+    DrawTexture(texture, 0, 0, WHITE);
+}
