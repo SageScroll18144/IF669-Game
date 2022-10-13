@@ -41,6 +41,21 @@ void update3DScene(){
         camera.target.z += 0.05f;
     }
 
+    if((acm.x>=12)) {
+        acm.x -= 0.05f;
+    }
+    if((acm.x<=-12)) {
+        acm.x += 0.05f;
+    }
+    if((acm.z>=12)) {
+        acm.z -= 0.05f;
+        
+    }
+    if((camera.position.z<=-12)) {
+        acm.z += 0.05f;
+    
+    }
+
     // if(acm.x>=10) sen = -1;
     // else if(acm.x<=-10) sen = 1; 
     // acm.x+=(0.5f*sen);
