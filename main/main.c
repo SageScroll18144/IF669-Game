@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "animations/transition.h"
 #include "scene/threeD_plan.h"
+#include "animations/deathscreen.h"
 
 void drawGame();
 int objectColision(Vector2 a, Vector2 b, int min);
@@ -28,6 +29,7 @@ int main(void){
     initEnemy();
     initTransition();
     init3DScene();
+    initDeathScreen();
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -101,7 +103,7 @@ int main(void){
                 flag_screen = 2;
             }
             if(flag_screen == 2) drawGame();
-            if(flag_screen == 3) printf("TELA DE MORTE");
+            if(flag_screen == 3) DrawDeathScreen ();
             if(flag_screen == 5) draw3DScene();
             if(flag_screen == 6) {
                 
@@ -118,6 +120,7 @@ int main(void){
     unloadAudios();
     unLoadSounds();
     unLoadSoundTransition();
+    unLoadSoundDS();
     unLoadModels();
     //--------------------------------------------------------------------------------------
     CloseWindow();        // Close window and OpenGL context
