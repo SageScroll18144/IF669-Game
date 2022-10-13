@@ -98,7 +98,7 @@ void draw3DScene(){
         //DrawCircle3D((Vector3){ 0.0f, 2.0f, 0.0f }, earthOrbitRadius, (Vector3){ 1, 0, 0 }, 90.0f, Fade(RED, 0.5f));
         if(IsKeyPressed(KEY_P)){
             flagBullet = 1;   
-            bullet = camera.position; 
+            bullet = camera.target; 
         }
         if (flagBullet) shotABullet();
     EndMode3D();
@@ -162,12 +162,12 @@ void shotABullet(){
     else sen_z = -1;
 
     
-        DrawSphere(bullet, 2.0f, BLUE); 
+    DrawSphere(bullet, 2.0f, BLUE); 
 
-        if(bullet.x <= K * camera.position.x) bullet.x += (float)sen_x * 0.5f;
-        if(bullet.z <= K * camera.position.z) bullet.z += (float)sen_z * 0.5f;
-        
-        if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 10;
+    if(bullet.x <= K * camera.target.x) bullet.x += (float)sen_x * 0.5f;
+    if(bullet.z <= K * camera.target.z) bullet.z += (float)sen_z * 0.5f;
+    
+    if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 10;
 
-        if(bullet.x > K * camera.position.x && bullet.z > K * camera.position.z) flagBullet = 0;
-    }
+    if(bullet.x > K * camera.target.x && bullet.z > K * camera.target.z) flagBullet = 0;
+}
