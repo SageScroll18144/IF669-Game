@@ -95,7 +95,7 @@ void draw3DScene(){
         //DrawCube(acm, 5.0f, 5.0f, 5.0f, GOLD);
         DrawModel(model, acm, 3.0f, RED);
         //DrawCircle3D((Vector3){ 0.0f, 2.0f, 0.0f }, earthOrbitRadius, (Vector3){ 1, 0, 0 }, 90.0f, Fade(RED, 0.5f));
-        if(IsKeyPressed(KEY_P)){
+        if(IsKeyDown(KEY_P)){
             shotABullet();     
         }
     EndMode3D();
