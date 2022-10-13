@@ -103,7 +103,7 @@ int main(void){
             }
             if(flag_screen == 2) drawGame();
             if(flag_screen == 3){
-                BeginShaderMode(shaders);
+                blackAndWhite();
                 drawGame();
                 EndShaderMode();
                 drawDeathScreen();

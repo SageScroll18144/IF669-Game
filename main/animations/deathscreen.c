@@ -70,3 +70,6 @@ void drawDeathScreen (){
 void unLoadSoundDS (){
     UnloadSound(death);
 }
+void blackAndWhite(){
+    BeginShaderMode(shaders);
+}
