@@ -108,7 +108,7 @@ int main(void){
                 drawGame();
                 EndShaderMode();
                 drawDeathScreen();
-                if(IsKeyPressed(KEY_ENTER)) flag_screen = 0;
+                if(IsKeyPressed(KEY_F)) flag_screen = 0;
             }
             if(flag_screen == 5) draw3DScene();
             if(flag_screen == 6) {
