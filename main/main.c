@@ -3,6 +3,7 @@
 #include "scene/background.h"
 #include "enemy/zombie.h"
 #include "menu/menu.h"
+#include "menu/instructions.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "animations/transition.h"

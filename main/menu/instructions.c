@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Image imagem;
+Image image;
 Texture2D texture;
 
 void initInstructions(){
