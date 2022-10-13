@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "threeD_plan.h"
+#include <stdio.h>
 
 Camera camera = { 0 };
 Vector3 acm;//inimigo
@@ -63,6 +64,9 @@ void update3DScene(){
     else if(acm.x < camera.position.x + 3.0f) acm.x += 0.01f;
     if(acm.z > camera.position.z  + 3.0f) acm.z -= 0.01f;
     else if(acm.z < camera.position.z  + 3.0f) acm.z += 0.01f;
+
+    if(mod(acm.z - camera.position.z)  <= 3.01f && mod(acm.x - camera.position.x)  <= 3.01f) printf("ATACOU\n");
+    else printf("NAO\n");
 }
 void draw3DScene(){
     BeginMode3D(camera);
@@ -87,3 +91,7 @@ void draw3DScene(){
 void unLoadModels(){
     UnloadModel(model);  
 }
+float mod(float a){
+    if(a<0) return -a;
+    return a;
+} 
