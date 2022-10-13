@@ -21,6 +21,7 @@ int main(void){
     InitAudioDevice();
     
     initMenu();
+    initInstructions();
     initScene();
     initCharacter();
     initEnemy();
@@ -45,8 +46,9 @@ int main(void){
         }
         
         if (IsKeyPressed(KEY_ENTER) && getMenuPos() == 1){
-            //instructions();
-        }
+             flag_screen = 6;
+            
+           }
 
         if(flag_screen == 2){
             // zombie     
@@ -99,6 +101,10 @@ int main(void){
             if(flag_screen == 2) drawGame();
             if(flag_screen == 3) printf("TELA DE MORTE");
             if(flag_screen == 5) draw3DScene();
+            if(flag_screen == 6) {
+               drawInstructions();
+                if(IsKeyPressed(KEY_ENTER)) flag_screen = 0;
+            }
             
         EndDrawing();
         //----------------------------------------------------------------------------------
