@@ -1,17 +1,18 @@
 #include "raylib.h"
+#include "instructions.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-Font fonte;
-Image image;
+Font font;
+Image imagem;
 Texture2D texture;
 
-void instructions() {
-  while(!IsKeyPressed(KEY_ENTER)) {
-     fonte = LoadFont("fonts/jupiter_crash.png");
-     DrawTexture(textura, 0, 0, WHITE);
-     image = LoadImage("assets/Instructions.png");
-     texture = LoadTextureFromImage(imagem);
+void initInstructions(){
+    fonte = LoadFont("fonts/jupiter_crash.png");
+    image = LoadImage("assets/Instructions.png");
+    texture = LoadTextureFromImage(image);
 }
-CloseWindow();
-  }
+
+void drawInstructions(){
+        DrawTexture(texture, 0, 0, WHITE);
+   }
