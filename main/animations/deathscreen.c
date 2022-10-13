@@ -18,7 +18,7 @@ void initDeathScreen(){
     death = LoadSound ("sounds/death_sound_effect.mp3");
     SetSoundVolume(death, 0.7f);
     shaders = LoadShader(0, TextFormat("fonts/grayscale.fs", 330)); 
-    position0 = {400, 225};
+    position0 = (Vector2){400, 225};
     circle0 = 0; 
     contador0 = 0;
     animFrames0 = 0;
@@ -32,7 +32,7 @@ void initDeathScreen(){
     jaTocou = 0;      
 }
 
-void DrawDeathScreen (){
+void drawDeathScreen (){
     if (jaTocou == 0) {
         PlaySound (death);
         jaTocou = 1;
@@ -51,8 +51,8 @@ void DrawDeathScreen (){
 
         frameCounter10 = 0;
     }
-    BeginDrawing();
-        EndShaderMode();
+    //BeginDrawing();
+        //EndShaderMode();
         DrawCircle(position0.x, position0.y, circle0, BLACK);
         if(contador0 > 2700){
             DrawText("SE FODEU", 298, 210, 40, RED);
@@ -64,7 +64,7 @@ void DrawDeathScreen (){
         }
         if (contador0 > 7000) DrawText ("Press ENTER to back to menu", 20, 420, 20, RED);
         contador0++;
-    EndDrawing();
+    //EndDrawing();
 }
 
 void unLoadSoundDS (){
