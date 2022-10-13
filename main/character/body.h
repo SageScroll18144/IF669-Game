@@ -4,6 +4,8 @@
 #include "raylib.h"
 #define PLAYER_HOR_SPD 500.0f
 
+extern Texture2D healthBarTex, healthBarTex2, healthBarTex3, healthBarTex4, healthBarTex5, healthBarTex6;
+
 typedef struct {
     Vector2 position;
     Rectangle playerRec;

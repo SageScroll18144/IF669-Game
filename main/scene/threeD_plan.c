@@ -1,13 +1,12 @@
 #include "raylib.h"
 #include "threeD_plan.h"
+#include "../character/body.h"
 #include <stdio.h>
 
 Camera camera = { 0 };
 Vector3 acm;//inimigo
-int sen;
+int sen, healthPoints = 6;
 Model model;
-
-Texture2D barTex;
 
 void init3DScene(){
     camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };
@@ -19,8 +18,6 @@ void init3DScene(){
     SetCameraMode(camera, CAMERA_FIRST_PERSON); // Set a first person camera mode
 
     model = LoadModel("resources/models/peter_griffin.obj");  
-
-    barTex = LoadTexture("sprites/health_bar/HEALTH_BAR.png");
 
     acm = (Vector3){ 0.0f, 3.0f, 0.0f };
     sen = 1;
@@ -74,6 +71,9 @@ void update3DScene(){
         else acm.z-=2.0f;
         if(acm.x>camera.position.x) acm.x+=2.0f;
         else acm.x-=2.0f;
+
+        healthPoints--;
+
         printf("ATACOU\n");
     } 
     else printf("NAO\n");
@@ -102,8 +102,30 @@ void draw3DScene(){
 
 void drawHpBar() {
     Vector2 barPos = {0, 0};
-    Rectangle barRec = {barPos.x, barPos.y, (float) barTex.width, (float) barTex.height / 6};
-    DrawTextureRec(barTex, barRec, barPos, WHITE);
+    Rectangle barRec = {barPos.x, barPos.y, (float) healthBarTex.width, (float) healthBarTex.height};
+    
+    switch (healthPoints) {
+    case 6:
+        DrawTextureRec(healthBarTex, barRec, barPos, WHITE);
+        break;
+    case 5:
+        DrawTextureRec(healthBarTex2, barRec, barPos, WHITE);
+        break;
+    case 4:
+        DrawTextureRec(healthBarTex3, barRec, barPos, WHITE);
+        break;
+    case 3:
+        DrawTextureRec(healthBarTex4, barRec, barPos, WHITE);
+        break;
+    case 2:
+        DrawTextureRec(healthBarTex5, barRec, barPos, WHITE);
+        break;
+    case 1:
+        DrawTextureRec(healthBarTex6, barRec, barPos, WHITE);
+        break;
+    default:
+        break;
+    }
 }
 
 void unLoadModels(){
