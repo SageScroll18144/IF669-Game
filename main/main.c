@@ -3,7 +3,22 @@
 #include "scene/background.h"
 #include "enemy/zombie.h"
 #include "menu/menu.h"
-#include "menu/instructions.h"
+#include "menu/instructions.h"if(flag_screen == 0) drawMenu();
+            if(flag_screen == 1){
+                drawTransition();
+                BeginDrawing();
+                flag_screen = 2;
+            }
+            if(flag_screen == 2) drawGame();
+            if(flag_screen == 3){
+                blackAndWhite();
+                drawGame();
+                EndShaderMode();
+                drawDeathScreen();
+            }
+            if(flag_screen == 5) draw3DScene();
+            if(flag_screen == 6) {
+                
 #include <stdio.h>
 #include <stdlib.h>
 #include "animations/transition.h"
@@ -23,7 +38,22 @@ int main(void){
     InitAudioDevice();
     
     initMenu();
-    initInstructions();
+    initInstructions();if(flag_screen == 0) drawMenu();
+            if(flag_screen == 1){
+                drawTransition();
+                BeginDrawing();
+                flag_screen = 2;
+            }
+            if(flag_screen == 2) drawGame();
+            if(flag_screen == 3){
+                blackAndWhite();
+                drawGame();
+                EndShaderMode();
+                drawDeathScreen();
+            }
+            if(flag_screen == 5) draw3DScene();
+            if(flag_screen == 6) {
+                
     initScene();
     initCharacter();
     initEnemy();
@@ -79,7 +109,22 @@ int main(void){
                         else if((int)ret.x==5)receiveCharacterAttack(i, 3);
 
                         receiveCharacterDamage(i);
-                        killEnemy(i);
+                        killEnemy(i);if(flag_screen == 0) drawMenu();
+            if(flag_screen == 1){
+                drawTransition();
+                BeginDrawing();
+                flag_screen = 2;
+            }
+            if(flag_screen == 2) drawGame();
+            if(flag_screen == 3){
+                blackAndWhite();
+                drawGame();
+                EndShaderMode();
+                drawDeathScreen();
+            }
+            if(flag_screen == 5) draw3DScene();
+            if(flag_screen == 6) {
+                
 
                     } else if (!itsDead()) {
                         receiveEnemyAttack();
@@ -107,6 +152,7 @@ int main(void){
                 drawGame();
                 EndShaderMode();
                 drawDeathScreen();
+                if(IsKeyPressed(KEY_ENTER)) flag_screen = 0;
             }
             if(flag_screen == 5) draw3DScene();
             if(flag_screen == 6) {
