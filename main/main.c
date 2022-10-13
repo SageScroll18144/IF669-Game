@@ -41,7 +41,7 @@ int main(void){
         }
         // seta a transição de tela
         if(IsKeyDown(KEY_ENTER) && getMenuPos()==0) {
-            flag_screen = 5;
+            flag_screen = 2;
         }
         
         if (IsKeyPressed(KEY_ENTER) && getMenuPos() == 1){
@@ -53,7 +53,7 @@ int main(void){
             updateEnemyMain(getCharacterPosition());
             
             //movimentação do personagem
-            updatePlayerMain();
+            if (!itsDead()) updatePlayerMain();
             if(hasAColision(getCharacterPosition())){
                 Vector2 compensation = orientationForColision();
                 
@@ -76,10 +76,10 @@ int main(void){
                         receiveCharacterDamage(i);
                         killEnemy(i);
 
-                    }else{
+                    }else if (!itsDead()) {
                         receiveEnemyAttack();
                         receiveEnemyDamage();
-                        if(itsDead()) flag_screen = 3;
+                        // if(itsDead()) flag_screen = 3;
                     }
                 }
             }
