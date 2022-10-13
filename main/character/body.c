@@ -205,6 +205,7 @@ void drawCharacter(){
 
         if (itsDead()) {
             DrawTextureRec(charaTexDead, player.playerRec, player.position, RED);
+            BeginShaderMode(shaders);
         } else {
 
             switch (axisOrientation) {
