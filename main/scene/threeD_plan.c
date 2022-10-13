@@ -95,6 +95,8 @@ void draw3DScene(){
         DrawCube((Vector3){ 0.0f, 2.5f, -16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
         //DrawCube(acm, 5.0f, 5.0f, 5.0f, GOLD);
         DrawModel(model, acm, 3.0f, RED);
+        //DrawCircle3D((Vector3){ 0.0f, 2.0f, 0.0f }, earthOrbitRadius, (Vector3){ 1, 0, 0 }, 90.0f, Fade(RED, 0.5f));
+        DrawSphere(bullet, 2.0f, BLUE);      
         
     EndMode3D();
 
@@ -146,8 +148,8 @@ float mod(float a){
     if(a<0) return -a;
     return a;
 }
-void shotABullet(Vector3 begin){
-    bullet = begin;
+void shotABullet(){
+    bullet = camera.position;
     int sen_x, sen_z, flag_bullet = 1;
     
     if(bullet.x >= 0) sen_x = 1;
