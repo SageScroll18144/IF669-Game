@@ -40,7 +40,7 @@ void drawDeathScreen (){
 
     frameCounter10++;
 
-    if (frameCounter10 >= 50){
+    if (frameCounter10 >= 4){
         currentAnimFrame0++;
 
         if (currentAnimFrame0 >= animFrames0) currentAnimFrame0 = 0;
@@ -54,7 +54,7 @@ void drawDeathScreen (){
     //BeginDrawing();
         //EndShaderMode();
         DrawCircle(position0.x, position0.y, circle0, BLACK);
-        if(contador0 > 500){
+        if(contador0 > 900){
             DrawText("SE FODEU", 298, 210, 40, RED);
             DrawTexture (battext, 210, 180, WHITE);
             DrawTexture (battext2, 510, 180, WHITE);
@@ -62,7 +62,7 @@ void drawDeathScreen (){
         if(contador0%2 == 0 && circle0 < 200){
             circle0++;
         }
-        if (contador0 > 1500) DrawText ("Press ENTER to back to menu", 20, 420, 20, RED);
+        if (contador0 > 1500) DrawText ("Press F to pay respect", 20, 420, 20, RED);
         contador0 += 7;
     //EndDrawing();
 }
