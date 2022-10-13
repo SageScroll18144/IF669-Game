@@ -41,9 +41,13 @@ void update3DScene(){
         camera.target.z += 0.05f;
     }
 
-    if(acm.x>=10) sen = -1;
-    else if(acm.x<=-10) sen = 1; 
-    acm.x+=(0.5f*sen);
+    // if(acm.x>=10) sen = -1;
+    // else if(acm.x<=-10) sen = 1; 
+    // acm.x+=(0.5f*sen);
+    if(acm.x > camera.position.x + 3.0f) acm.x -= 0.01f;
+    else if(acm.x < camera.position.x + 3.0f) acm.x += 0.01f;
+    if(acm.z > camera.position.z  + 3.0f) acm.z -= 0.01f;
+    else if(acm.z < camera.position.z  + 3.0f) acm.z += 0.01f;
 }
 void draw3DScene(){
     BeginMode3D(camera);
@@ -54,7 +58,7 @@ void draw3DScene(){
         DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
         DrawCube((Vector3){ 0.0f, 2.5f, -16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
         //DrawCube(acm, 5.0f, 5.0f, 5.0f, GOLD);
-        DrawModel(model, acm, 5.0f, GRAY);
+        DrawModel(model, acm, 3.0f, GRAY);
         
     EndMode3D();
 
