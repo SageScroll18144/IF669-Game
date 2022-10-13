@@ -90,14 +90,8 @@ void draw3DScene(){
         DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
         DrawCube((Vector3){ 0.0f, 2.5f, -16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
         //DrawCube(acm, 5.0f, 5.0f, 5.0f, GOLD);
-<<<<<<< HEAD
-        // DrawModel(model, acm, 3.0f, GRAY);
-        drawBullet();
-
-=======
         DrawModel(model, acm, 3.0f, RED);
         
->>>>>>> dbdb9faa18d0bd0de0a5c9409f561ae670197a1d
     EndMode3D();
 
     DrawRectangle( 10, 10, 220, 70, Fade(SKYBLUE, 0.5f));

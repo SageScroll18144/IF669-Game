@@ -18,7 +18,7 @@ void initDeathScreen(){
     death = LoadSound ("sounds/death_sound_effect.mp3");
     SetSoundVolume(death, 0.7f);
     shaders = LoadShader(0, TextFormat("fonts/grayscale.fs", 330)); 
-    position0 = {400, 225};
+    position0 = (Vector2) {400, 225};
     circle0 = 0; 
     contador0 = 0;
     animFrames0 = 0;
