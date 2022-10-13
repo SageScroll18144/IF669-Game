@@ -10,6 +10,7 @@
 #include "scene/threeD_plan.h"
 #include "animations/deathscreen.h"
 
+
 void drawGame();
 int objectColision(Vector2 a, Vector2 b, int min);
 
@@ -45,11 +46,10 @@ int main(void){
         }
         // seta a transição de tela
         if(IsKeyDown(KEY_ENTER) && getMenuPos()==0) {
-            flag_screen = 5;
+            flag_screen = 1;
         }
         
         if (IsKeyPressed(KEY_ENTER) && getMenuPos() == 1){
-            //while(IsKeyPressed(KEY_ENTER));
              flag_screen = 6;
             
            }
@@ -85,7 +85,7 @@ int main(void){
                     } else if (!itsDead()) {
                         receiveEnemyAttack();
                         receiveEnemyDamage();
-                        // if(itsDead()) flag_screen = 3;
+                        if(itsDead()) flag_screen = 3;
                     }
                 }
             }
@@ -103,7 +103,13 @@ int main(void){
                 flag_screen = 2;
             }
             if(flag_screen == 2) drawGame();
-            if(flag_screen == 3) DrawDeathScreen ();
+            if(flag_screen == 3){
+                blackAndWhite();
+                drawGame();
+                EndShaderMode();
+                drawDeathScreen();
+                if(IsKeyPressed(KEY_ENTER)) flag_screen = 0;
+            }
             if(flag_screen == 5) draw3DScene();
             if(flag_screen == 6) {
                 

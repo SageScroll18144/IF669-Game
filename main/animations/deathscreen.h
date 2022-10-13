@@ -6,5 +6,6 @@
 void initDeathScreen();
 void drawDeathScreen();
 void unLoadSoundDS();
+void blackAndWhite();
 
 #endif

@@ -5,8 +5,12 @@
 
 Camera camera = { 0 };
 Vector3 acm;//inimigo
+int acm_life = 100;
 int sen, healthPoints = 6;
 Model model;
+
+Vector3 bullet;
+const int K = 50;
 
 void init3DScene(){
     camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };
@@ -141,4 +145,23 @@ void unLoadModels(){
 float mod(float a){
     if(a<0) return -a;
     return a;
-} 
+}
+void shotABullet(Vector3 begin){
+    bullet = begin;
+    int sen_x, sen_z, flag_bullet = 1;
+    
+    if(bullet.x >= 0) sen_x = 1;
+    else sen_x = -1;
+    if(bullet.z >= 0) sen_z = 1;
+    else sen_z = -1;
+
+    while(flag_bullet){
+        
+        if(bullet.x <= K * begin.x) bullet.x += (float)sen_x * 0.5f;
+        if(bullet.z <= K * begin.z) bullet.z += (float)sen_z * 0.5f;
+        
+        if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 10;
+
+        if(bullet.x > K * begin.x && bullet.z > K * begin.z) flag_bullet = 0;
+    }
+}

@@ -205,7 +205,7 @@ void drawCharacter(){
 
         if (itsDead()) {
             DrawTextureRec(charaTexDead, player.playerRec, player.position, RED);
-            BeginShaderMode(shaders);
+           
         } else {
 
             switch (axisOrientation) {
@@ -270,8 +270,6 @@ void unloadBodyTextures() {
     UnloadTexture(charaTexDown);
     UnloadTexture(charaTexAtkSide);
     UnloadTexture(charaTexAtkUp);
-    UnloadTexture(battext);
-    UnloadTexture(battext2);
 }
 
 Vector2 getCharacterPosition(){
