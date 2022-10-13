@@ -40,7 +40,7 @@ void drawDeathScreen (){
 
     frameCounter10++;
 
-    if (frameCounter10 >= 200){
+    if (frameCounter10 >= 50){
         currentAnimFrame0++;
 
         if (currentAnimFrame0 >= animFrames0) currentAnimFrame0 = 0;
@@ -63,7 +63,7 @@ void drawDeathScreen (){
             circle0++;
         }
         if (contador0 > 1500) DrawText ("Press ENTER to back to menu", 20, 420, 20, RED);
-        contador0 += 3;
+        contador0 += 7;
     //EndDrawing();
 }
 
