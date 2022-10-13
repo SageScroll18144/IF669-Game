@@ -62,7 +62,7 @@ void drawDeathScreen (){
         if(contador0%2 == 0 && circle0 < 200){
             circle0++;
         }
-        if (contador0 > 1500) DrawText ("Press ENTER to back to menu", 20, 420, 20, RED);
+        if (contador0 > 1500) DrawText ("Press F to pay respect", 20, 420, 20, RED);
         contador0 += 7;
     //EndDrawing();
 }
