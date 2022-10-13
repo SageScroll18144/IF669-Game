@@ -77,7 +77,10 @@ void update3DScene(){
         printf("ATACOU\n");
     } 
     else printf("NAO\n");
+
+    printf("%f %f %f\n", camera.position.x, camera.position.y, camera.position.z);
 }
+
 void draw3DScene(){
     BeginMode3D(camera);
 
@@ -87,8 +90,9 @@ void draw3DScene(){
         DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
         DrawCube((Vector3){ 0.0f, 2.5f, -16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
         //DrawCube(acm, 5.0f, 5.0f, 5.0f, GOLD);
-        DrawModel(model, acm, 3.0f, GRAY);
-        
+        // DrawModel(model, acm, 3.0f, GRAY);
+        drawBullet();
+
     EndMode3D();
 
     DrawRectangle( 10, 10, 220, 70, Fade(SKYBLUE, 0.5f));
@@ -126,6 +130,10 @@ void drawHpBar() {
     default:
         break;
     }
+}
+
+void drawBullet() {
+    DrawSphere((Vector3) {camera.position.x + 40.0f, camera.position.y - 100.0f, camera.position.z + 40.0f}, 100.0f, RED);
 }
 
 void unLoadModels(){

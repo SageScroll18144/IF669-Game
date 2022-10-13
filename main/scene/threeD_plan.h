@@ -7,6 +7,7 @@ void init3DScene();
 void update3DScene();
 void draw3DScene();
 void drawHpBar();
+void drawBullet();
 void unLoadModels();
 float mod(float a);
 
