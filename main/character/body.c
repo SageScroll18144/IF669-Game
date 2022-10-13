@@ -269,6 +269,8 @@ void unloadBodyTextures() {
     UnloadTexture(charaTexDown);
     UnloadTexture(charaTexAtkSide);
     UnloadTexture(charaTexAtkUp);
+    UnloadTexture(battext);
+    UnloadTexture(battext2);
 }
 
 Vector2 getCharacterPosition(){

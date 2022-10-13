@@ -32,7 +32,7 @@ void initMenu(){
 
 void updateMenu(){
     frameCounter1++;
-        if (frameCounter1 >= 150)
+        if (frameCounter1 >= 10)
         {
             currentAnimFrame++;
             if (currentAnimFrame >= animFrames) currentAnimFrame = 0;
