@@ -47,6 +47,7 @@ int main(void){
         }
         
         if (IsKeyPressed(KEY_ENTER) && getMenuPos() == 1){
+            //while(IsKeyPressed(KEY_ENTER));
              flag_screen = 6;
             
            }
@@ -103,8 +104,9 @@ int main(void){
             if(flag_screen == 3) printf("TELA DE MORTE");
             if(flag_screen == 5) draw3DScene();
             if(flag_screen == 6) {
-                drawInstructions();
-                if(IsKeyPressed(KEY_ENTER)) flag_screen = 0;
+                
+               drawInstructions();
+                if(IsKeyPressed(KEY_B)) flag_screen = 0;
             }
             
         EndDrawing();
