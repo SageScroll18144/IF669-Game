@@ -17,14 +17,14 @@ void drawTransition(){
     PlaySound (transition);
     while(raio < 1000){
         BeginDrawing();
-        ClearBackground(WHITE);
+        ClearBackground(RED);
         DrawCircle(400, 225, raio, BLACK);
         
         EndDrawing();
         raio = raio + 10;
 
     }
-    while(contador < 100) {DrawText("SURVIVE!", 350, 220, 20, DARKGRAY);contador = contador + 10;}
+    while(contador < 100) {DrawText("SURVIVE!", 350, 220, 20, WHITE);contador = contador + 1;}
 }
 
 void unLoadSoundTransition(){
