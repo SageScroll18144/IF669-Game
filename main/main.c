@@ -43,6 +43,10 @@ int main(void){
         if(IsKeyDown(KEY_ENTER) && getMenuPos()==0) {
             flag_screen = 1;
         }
+        
+        if (IsKeyPressed(KEY_ENTER) && getMenuPos() == 1){
+            instructions();
+        }
 
         if(flag_screen == 2){
             // zombie     
