@@ -41,7 +41,7 @@ int main(void){
         }
         // seta a transição de tela
         if(IsKeyDown(KEY_ENTER) && getMenuPos()==0) {
-            flag_screen = 5;
+            flag_screen = 1;
         }
 
         if(flag_screen == 2){

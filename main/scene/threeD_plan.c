@@ -15,7 +15,7 @@ void init3DScene(){
 
     SetCameraMode(camera, CAMERA_FIRST_PERSON); // Set a first person camera mode
 
-    model = LoadModel("resources/models/castle.obj");  
+    model = LoadModel("resources/models/peter_griffin.obj");  
 
     acm = (Vector3){ 0.0f, 3.0f, 0.0f };
     sen = 1;
@@ -54,7 +54,7 @@ void draw3DScene(){
         DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
         DrawCube((Vector3){ 0.0f, 2.5f, -16.0f }, 32.0f, 5.0f, 1.0f, BLACK);      // Draw a yellow wall
         //DrawCube(acm, 5.0f, 5.0f, 5.0f, GOLD);
-        DrawModel(model, acm, 0.2f, GRAY);
+        DrawModel(model, acm, 5.0f, GRAY);
         
     EndMode3D();
 
