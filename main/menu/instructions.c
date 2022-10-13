@@ -9,6 +9,7 @@ Texture2D texture;
 void initInstructions(){
     image = LoadImage("assets/Instructions.png");
     texture = LoadTextureFromImage(image);
+    ImageResize(&image, 800, 450);
 }
 
 void drawInstructions(){
