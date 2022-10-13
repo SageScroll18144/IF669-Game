@@ -102,7 +102,12 @@ int main(void){
                 flag_screen = 2;
             }
             if(flag_screen == 2) drawGame();
-            if(flag_screen == 3) drawDeathScreen();
+            if(flag_screen == 3){
+                BeginShaderMode(shaders);
+                drawGame();
+                EndShaderMode();
+                drawDeathScreen();
+            }
             if(flag_screen == 5) draw3DScene();
             if(flag_screen == 6) {
                 
