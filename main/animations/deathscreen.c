@@ -4,10 +4,14 @@
 #include <math.h>
 #include <stdlib.h>
 
+
+Shader shaders;
+Texture battext, battext2;
+
 void initDeathScreen(){
     Sound death = LoadSound ("sounds/death_sound_effect.mp3");
     SetSoundVolume(death, 0.7f);
-    Shader shaders = LoadShader(0, TextFormat("fonts/grayscale.fs", 330)); 
+    shaders = LoadShader(0, TextFormat("fonts/grayscale.fs", 330)); 
     Vector2 position0 = {400, 225};
     int circle0 = 0, contador0 = 0;
     int animFrames0 = 0;
@@ -16,8 +20,8 @@ void initDeathScreen(){
     int frameCounter10 = 0;  
     Image batgif = LoadImageAnim ("assets/flyingBat.gif", &animFrames0);
     Image batgif2 = LoadImageAnim ("assets/flyingBat2.gif", &animFrames0); 
-    Texture battext = LoadTextureFromImage(batgif); 
-    Texture battext2 = LoadTextureFromImage(batgif2); 
+    battext = LoadTextureFromImage(batgif); 
+    battext2 = LoadTextureFromImage(batgif2); 
     int jaTocou = 0;      
 }
 
