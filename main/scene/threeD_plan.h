@@ -10,5 +10,6 @@ void drawHpBar();
 void drawBullet();
 void unLoadModels();
 float mod(float a);
+void shotABullet();
 
 #endif
