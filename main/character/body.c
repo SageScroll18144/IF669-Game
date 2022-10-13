@@ -5,7 +5,7 @@
 #include "stdio.h"
 
 Player player;
-Texture2D charaTex, charaTexUp, charaTexDown, charaTexIdle, charaTexIdleUp, charaTexIdleDown, charaTexAtkSide, charaTexAtkUp, charaTexAtkDown;
+Texture2D charaTex, charaTexUp, charaTexDown, charaTexIdle, charaTexIdleUp, charaTexIdleDown, charaTexAtkSide, charaTexAtkUp, charaTexAtkDown, charaTexDead;
 Texture2D healthBarTex, healthBarTex2, healthBarTex3, healthBarTex4, healthBarTex5, healthBarTex6;
 //Rectangle frameRec;
 int currentFrame = 1, currentOrientation = 1, orientation = 1, axisOrientation = 0;
@@ -16,8 +16,6 @@ int currentFram = 0;
 
 Sound walk;
 Sound attack_sound;
-
-int life;
 
 void initCharacter(){
     //player = {0};
@@ -36,6 +34,7 @@ void initCharacter(){
     charaTexAtkSide = LoadTexture("sprites/ATTACK_SIDES.png");
     charaTexAtkUp = LoadTexture("sprites/ATTACK_UP.png");
     charaTexAtkDown = LoadTexture("sprites/ATTACK_DOWN.png");
+    charaTexDead = LoadTexture("sprites/morto.png");
 
     healthBarTex = LoadTexture("sprites/health_bar/b1.png");
     healthBarTex2 = LoadTexture("sprites/health_bar/b2.png");
@@ -49,8 +48,7 @@ void initCharacter(){
 
     attack_sound = LoadSound("sounds/sword.wav");
     SetSoundVolume(attack_sound, 0.5f);
-
-    life = 100;
+ 
 }
 
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime) {
@@ -206,25 +204,31 @@ void drawCharacter(){
         drawAttack(&player);
     } else {
 
-        switch (axisOrientation) {
-        case 0:
-            DrawTextureRec(charaTexIdle, player.playerRec, player.position, WHITE);
-            break;
-        case 1:
-            DrawTextureRec(charaTexUp, player.playerRec, player.position, WHITE);
-            break;
-        case 2:
-            DrawTextureRec(charaTexDown, player.playerRec, player.position, WHITE);
-            break;
-        case 3:
-            DrawTextureRec(charaTex, player.playerRec, player.position, WHITE);
-            break;
-        case 4:
-            DrawTextureRec(charaTexIdleUp, player.playerRec, player.position, WHITE);
-            break;
-        case 5:
-            DrawTextureRec(charaTexIdleDown, player.playerRec, player.position, WHITE);
-            break;
+        if (itsDead()) {
+            DrawTextureRec(charaTexDead, player.playerRec, player.position, RED);
+        } else {
+
+            switch (axisOrientation) {
+            case 0:
+                DrawTextureRec(charaTexIdle, player.playerRec, player.position, WHITE);
+                break;
+            case 1:
+                DrawTextureRec(charaTexUp, player.playerRec, player.position, WHITE);
+                break;
+            case 2:
+                DrawTextureRec(charaTexDown, player.playerRec, player.position, WHITE);
+                break;
+            case 3:
+                DrawTextureRec(charaTex, player.playerRec, player.position, WHITE);
+                break;
+            case 4:
+                DrawTextureRec(charaTexIdleUp, player.playerRec, player.position, WHITE);
+                break;
+            case 5:
+                DrawTextureRec(charaTexIdleDown, player.playerRec, player.position, WHITE);
+                break;
+            }
+
         }
 
     }
