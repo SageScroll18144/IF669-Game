@@ -65,7 +65,13 @@ void update3DScene(){
     if(acm.z > camera.position.z  + 3.0f) acm.z -= 0.01f;
     else if(acm.z < camera.position.z  + 3.0f) acm.z += 0.01f;
 
-    if(mod(acm.z - camera.position.z)  <= 3.01f && mod(acm.x - camera.position.x)  <= 3.01f) printf("ATACOU\n");
+    if(mod(acm.z - camera.position.z)  <= 3.01f && mod(acm.x - camera.position.x)  <= 3.01f){
+        if(acm.z>camera.position.z) acm.z+=2.0f;
+        else acm.z-=2.0f;
+        if(acm.x>camera.position.x) acm.x+=2.0f;
+        else acm.x-=2.0f;
+        printf("ATACOU\n");
+    } 
     else printf("NAO\n");
 }
 void draw3DScene(){
