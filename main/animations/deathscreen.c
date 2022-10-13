@@ -7,22 +7,29 @@
 
 Shader shaders;
 Texture battext, battext2;
+int circle0, contador0, animFrames0, currentAnimFrame0, frameCounter10, jaTocou;
+unsigned int nextFrameDataOffset0;
+Vector2 position0;
+Sound death;
+Image batgif;
+Image batgif2;
 
 void initDeathScreen(){
-    Sound death = LoadSound ("sounds/death_sound_effect.mp3");
+    death = LoadSound ("sounds/death_sound_effect.mp3");
     SetSoundVolume(death, 0.7f);
     shaders = LoadShader(0, TextFormat("fonts/grayscale.fs", 330)); 
-    Vector2 position0 = {400, 225};
-    int circle0 = 0, contador0 = 0;
-    int animFrames0 = 0;
-    unsigned int nextFrameDataOffset0 = 0;
-    int currentAnimFrame0 = 0;            
-    int frameCounter10 = 0;  
-    Image batgif = LoadImageAnim ("assets/flyingBat.gif", &animFrames0);
-    Image batgif2 = LoadImageAnim ("assets/flyingBat2.gif", &animFrames0); 
+    position0 = {400, 225};
+    circle0 = 0; 
+    contador0 = 0;
+    animFrames0 = 0;
+    nextFrameDataOffset0 = 0;
+    currentAnimFrame0 = 0;            
+    frameCounter10 = 0;  
+    batgif = LoadImageAnim ("assets/flyingBat.gif", &animFrames0);
+    batgif2 = LoadImageAnim ("assets/flyingBat2.gif", &animFrames0); 
     battext = LoadTextureFromImage(batgif); 
     battext2 = LoadTextureFromImage(batgif2); 
-    int jaTocou = 0;      
+    jaTocou = 0;      
 }
 
 void DrawDeathScreen (){
