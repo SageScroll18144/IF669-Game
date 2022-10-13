@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Font font;
 Image imagem;
 Texture2D texture;
 
