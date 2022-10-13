@@ -6,6 +6,7 @@
 void init3DScene();
 void update3DScene();
 void draw3DScene();
+void drawHpBar();
 void unLoadModels();
 
 #endif

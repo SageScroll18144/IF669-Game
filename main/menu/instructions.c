@@ -9,9 +9,9 @@ Texture2D texture;
 void instructions() {
   while(!IsKeyPressed(KEY_ENTER)) {
      fonte = LoadFont("fonts/jupiter_crash.png");
-     DrawTexture(textura, 0, 0, WHITE);
+     DrawTexture(texture, 0, 0, WHITE);
      image = LoadImage("assets/Instructions.png");
-     texture = LoadTextureFromImage(imagem);
+     texture = LoadTextureFromImage(image);
 }
 CloseWindow();
   }

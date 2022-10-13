@@ -6,6 +6,8 @@ Vector3 acm;//inimigo
 int sen;
 Model model;
 
+Texture2D barTex;
+
 void init3DScene(){
     camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };
     camera.target = (Vector3){ 0.0f, 1.8f, 0.0f };
@@ -16,6 +18,8 @@ void init3DScene(){
     SetCameraMode(camera, CAMERA_FIRST_PERSON); // Set a first person camera mode
 
     model = LoadModel("resources/models/peter_griffin.obj");  
+
+    barTex = LoadTexture("sprites/health_bar/HEALTH_BAR.png");
 
     acm = (Vector3){ 0.0f, 3.0f, 0.0f };
     sen = 1;
@@ -83,7 +87,15 @@ void draw3DScene(){
     DrawText("First person camera default controls:", 20, 20, 10, BLACK);
     DrawText("- Move with keys: W, A, S, D", 40, 40, 10, DARKGRAY);
     DrawText("- Mouse move to look around", 40, 60, 10, DARKGRAY);
+    drawHpBar();
 }
+
+void drawHpBar() {
+    Vector2 barPos = {0, 0};
+    Rectangle barRec = {barPos.x, barPos.y, (float) barTex.width, (float) barTex.height / 6};
+    DrawTextureRec(barTex, barRec, barPos, WHITE);
+}
+
 void unLoadModels(){
     UnloadModel(model);  
 }
