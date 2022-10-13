@@ -6,7 +6,7 @@
 Camera camera = { 0 };
 Vector3 acm;//inimigo
 int acm_life = 100;
-int sen, healthPoints = 6;
+int sen, healthPoints = 6, flagBullet = 0;
 Model model;
 
 Vector3 bullet;
@@ -97,8 +97,10 @@ void draw3DScene(){
         DrawModel(model, acm, 3.0f, RED);
         //DrawCircle3D((Vector3){ 0.0f, 2.0f, 0.0f }, earthOrbitRadius, (Vector3){ 1, 0, 0 }, 90.0f, Fade(RED, 0.5f));
         if(IsKeyPressed(KEY_P)){
-            shotABullet();     
+            flagBullet = 1;   
+            bullet = camera.position; 
         }
+        if (flagBullet) shotABullet();
     EndMode3D();
 
     DrawRectangle( 10, 10, 220, 70, Fade(SKYBLUE, 0.5f));
@@ -149,22 +151,23 @@ float mod(float a){
     if(a<0) return -a;
     return a;
 }
+
 void shotABullet(){
-    bullet = camera.position;
-    int sen_x, sen_z, flag_bullet = 1;
+    
+    int sen_x, sen_z;
     
     if(bullet.x >= 0) sen_x = 1;
     else sen_x = -1;
     if(bullet.z >= 0) sen_z = 1;
     else sen_z = -1;
 
-    while(flag_bullet){
+    
         DrawSphere(bullet, 2.0f, BLUE); 
-        if(bullet.x <= K * camera.position.x) bullet.x += (float)sen_x * 0.01f;
-        if(bullet.z <= K * camera.position.z) bullet.z += (float)sen_z * 0.01f;
+
+        if(bullet.x <= K * camera.position.x) bullet.x += (float)sen_x * 0.5f;
+        if(bullet.z <= K * camera.position.z) bullet.z += (float)sen_z * 0.5f;
         
         if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 10;
 
-        if(bullet.x > K * camera.position.x && bullet.z > K * camera.position.z) flag_bullet = 0;
+        if(bullet.x > K * camera.position.x && bullet.z > K * camera.position.z) flagBullet = 0;
     }
-}
