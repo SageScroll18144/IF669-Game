@@ -5,6 +5,5 @@
 
 void initInstructions();
 void drawInstructions();
-void unLoadSounds();
 
 #endif
