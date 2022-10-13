@@ -4,7 +4,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-void initdeathScreen(){
+void initDeathScreen(){
     Sound death = LoadSound ("sounds/death_sound_effect.mp3");
     SetSoundVolume(death, 0.7f);
     Shader shaders = LoadShader(0, TextFormat("fonts/grayscale.fs", 330)); 
