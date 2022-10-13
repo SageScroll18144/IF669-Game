@@ -81,6 +81,8 @@ void update3DScene(){
         printf("ATACOU\n");
     } 
     else printf("NAO\n");
+
+    //if()
 }
 void draw3DScene(){
     BeginMode3D(camera);
@@ -152,11 +154,11 @@ void shotABullet(){
 
     while(flag_bullet){
         
-        if(bullet.x <= K * begin.x) bullet.x += (float)sen_x * 0.5f;
-        if(bullet.z <= K * begin.z) bullet.z += (float)sen_z * 0.5f;
+        if(bullet.x <= K * camera.position.x) bullet.x += (float)sen_x * 0.5f;
+        if(bullet.z <= K * camera.position.z) bullet.z += (float)sen_z * 0.5f;
         
         if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 10;
 
-        if(bullet.x > K * begin.x && bullet.z > K * begin.z) flag_bullet = 0;
+        if(bullet.x > K * camera.position.x && bullet.z > K * camera.position.z) flag_bullet = 0;
     }
 }
