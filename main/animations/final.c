@@ -21,16 +21,16 @@ void drawVicScreen (){
         if(contador_ > 300){
                 DrawText("YOU", 360, 150, 40, RED);
         }
-        if(contador_ > 350){
+        if(contador_ > 330){
                 DrawText("ARE", 360, 200, 40, RED);
         }
-        if(contador_ > 400){
+        if(contador_ > 360){
                 DrawText("A", 390, 250, 40, RED);
         }
-        if(contador_ > 450){
+        if(contador_ > 390){
                 DrawText("LEGEND", 320, 300, 40, RED);
         }
-        if(contador_ > 700){
+        if(contador_ > 460){
                 DrawCircle(position_.x, position_.y, (circle_ + 10), RED);
                 DrawCircle(position_.x, position_.y, circle_, WHITE);
                 DrawText("By", 370, 60, 40, RED);
