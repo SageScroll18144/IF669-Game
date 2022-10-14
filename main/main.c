@@ -89,6 +89,7 @@ int main(void){
                     }
                 }
             }
+            if(CompareHowManyAlreadyDie()) flag_screen = 4;
         }
         if(flag_screen == 5) {
             update3DScene();
