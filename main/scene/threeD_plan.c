@@ -112,12 +112,12 @@ void draw3DScene(){
         if (flagBullet) shotABullet();
     EndMode3D();
 
-    DrawRectangle( 10, 10, 220, 70, Fade(SKYBLUE, 0.5f));
-    DrawRectangleLines( 10, 10, 220, 70, BLUE);
+    DrawRectangle( 300, 10, 220, 70, Fade(SKYBLUE, 0.5f));
+    DrawRectangleLines( 300, 10, 220, 70, BLUE);
 
-    DrawText("First person camera default controls:", 20, 20, 10, BLACK);
-    DrawText("- Move with keys: W, A, S, D", 40, 40, 10, DARKGRAY);
-    DrawText("- Mouse move to look around", 40, 60, 10, DARKGRAY);
+    DrawText("First person camera default controls:", 310, 20, 10, BLACK);
+    DrawText("- Move with keys: W, A, S, D", 340, 40, 10, DARKGRAY);
+    DrawText("- Mouse move to look around", 340, 60, 10, DARKGRAY);
     drawHpBar();
 
 }
