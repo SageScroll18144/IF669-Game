@@ -16,7 +16,7 @@ Image batgif2;
 
 void initDeathScreen(){
     death = LoadSound ("sounds/death_sound_effect.mp3");
-    SetSoundVolume(death, 0.7f);
+    SetSoundVolume(death, 1.0f);
     shaders = LoadShader(0, TextFormat("fonts/grayscale.fs", 330)); 
     position0 = (Vector2){400, 225};
     circle0 = 0; 
@@ -59,10 +59,10 @@ void drawDeathScreen (){
             DrawTexture (battext, 210, 180, WHITE);
             DrawTexture (battext2, 510, 180, WHITE);
         }
-        if(contador0%2 == 0 && circle0 < 200){
-            circle0+=2;
+        if(circle0 < 200){
+            circle0+=1;
         }
-        if (contador0 > 2000) DrawText ("Press F to pay respect", 20, 420, 20, RED);
+        if (contador0 > 1600) DrawText ("Press F to pay respect", 20, 420, 20, RED);
         contador0 += 7;
     //EndDrawing();
 }
