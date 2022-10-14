@@ -2,6 +2,7 @@
 #include "threeD_plan.h"
 #include "../character/body.h"
 #include <stdio.h>
+#include <math.h>
 
 Camera camera = { 0 };
 Vector3 acm;//inimigo
@@ -110,6 +111,7 @@ void draw3DScene(){
     DrawText("- Move with keys: W, A, S, D", 40, 40, 10, DARKGRAY);
     DrawText("- Mouse move to look around", 40, 60, 10, DARKGRAY);
     drawHpBar();
+    printf("%f x %f | %f y %f | %f z %f\n", camera.position.x, camera.target.x, camera.position.y, camera.target.y, camera.position.z, camera.target.z);
 }
 
 void drawHpBar() {
@@ -140,13 +142,10 @@ void drawHpBar() {
     }
 }
 
-void drawBullet() {
-    DrawSphere((Vector3) {camera.position.x + 40.0f, camera.position.y - 100.0f, camera.position.z + 40.0f}, 100.0f, RED);
-}
-
 void unLoadModels(){
     UnloadModel(model);  
 }
+
 float mod(float a){
     if(a<0) return -a;
     return a;
@@ -156,18 +155,16 @@ void shotABullet(){
     
     int sen_x, sen_z;
     
-    if(bullet.x >= 0) sen_x = 1;
-    else sen_x = -1;
-    if(bullet.z >= 0) sen_z = 1;
-    else sen_z = -1;
-
-    
     DrawSphere(bullet, 2.0f, BLUE); 
 
-    if(bullet.x <= K * camera.target.x) bullet.x += (float)sen_x * 0.5f;
-    if(bullet.z <= K * camera.target.z) bullet.z += (float)sen_z * 0.5f;
+    if (camera.position.x <= camera.target.x) bullet.x += ((camera.target.x - camera.position.x) * 0.5f);
+    else bullet.x -= ((camera.position.x - camera.target.x) * 0.5f);
+
+    if (camera.position.z <= camera.target.z) bullet.z += ((camera.target.z - camera.position.z) * 0.5f);
+    else bullet.z -= ((camera.position.z - camera.target.z) * 0.5f);;
     
     if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 10;
 
     if(bullet.x > K * camera.target.x && bullet.z > K * camera.target.z) flagBullet = 0;
+    printf("bala x %f y %f z %f\n", bullet.x, bullet.y, bullet.z);
 }
