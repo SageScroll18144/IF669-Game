@@ -16,6 +16,8 @@ const int K = 50;
 
 Sound walk3d;
 
+Texture2D acmBar1, acmBar2, acmBar3, acmBar4, acmBar5, acmBar6;
+
 void init3DScene(){
     camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };
     camera.target = (Vector3){ 0.0f, 1.8f, 0.0f };
@@ -28,7 +30,12 @@ void init3DScene(){
     model = LoadModel("resources/models/peter_griffin.obj");  
 
     acm = (Vector3){ 0.0f, 3.0f, 0.0f };
-    sen = 1;
+    acmBar1 = LoadTexture("sprites/health_bar/a1.png");
+    acmBar2 = LoadTexture("sprites/health_bar/a2.png");
+    acmBar3 = LoadTexture("sprites/health_bar/a3.png");
+    acmBar4 = LoadTexture("sprites/health_bar/a4.png");
+    acmBar5 = LoadTexture("sprites/health_bar/a5.png");
+    acmBar6 = LoadTexture("sprites/health_bar/a6.png");
 
     walk3d = LoadSound("sounds/walking_sound4.mp3");
 }
@@ -119,6 +126,7 @@ void draw3DScene(){
     DrawText("- Move with keys: W, A, S, D", 340, 40, 10, DARKGRAY);
     DrawText("- Mouse move to look around", 340, 60, 10, DARKGRAY);
     drawHpBar();
+    drawAcmBar();
 
 }
 
@@ -148,6 +156,40 @@ void drawHpBar() {
     default:
         break;
     }
+}
+
+void drawAcmBar() {
+    Vector2 barPos = {GetScreenWidth() / 2 - 100, 380};
+    Rectangle barRec = {barPos.x, barPos.y, (float) acmBar1.width, (float) acmBar1.height};
+    barRec.x = 220;
+    barRec.y = 300;
+    
+    switch ((int) (6 * acm_life) / 100) {
+    case 0:
+    case 1:
+        DrawTextureRec(acmBar1, barRec, barPos, WHITE);
+        break;
+    case 2:
+        DrawTextureRec(acmBar2, barRec, barPos, WHITE);
+        break;
+    case 3:
+        DrawTextureRec(acmBar3, barRec, barPos, WHITE);
+        break;
+    case 4:
+        DrawTextureRec(acmBar4, barRec, barPos, WHITE);
+        break;
+    case 5:
+        DrawTextureRec(acmBar5, barRec, barPos, WHITE);
+        break;
+    case 6:
+        DrawTextureRec(acmBar6, barRec, barPos, WHITE);
+        break;
+
+    default:
+        break;
+    }
+
+    
 }
 
 void unLoadModels(){
