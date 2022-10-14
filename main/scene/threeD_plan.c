@@ -126,7 +126,8 @@ void draw3DScene(){
     DrawRectangleLines( 300, 10, 220, 70, BLUE);
 
     DrawText("First person camera default controls:", 310, 20, 10, BLACK);
-    DrawText("- Move with keys: W, A, S, D and attack with P", 340, 40, 10, DARKGRAY);
+    DrawText("- Move with keys: W, A, S, D", 340, 40, 10, DARKGRAY);
+    DrawText("- Attack with P", 340, 50, 10, DARKGRAY);
     DrawText("- Mouse move to look around", 340, 60, 10, DARKGRAY);
     drawHpBar();
     drawAcmBar();
