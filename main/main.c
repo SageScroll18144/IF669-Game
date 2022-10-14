@@ -112,7 +112,7 @@ int main(void){
                 else drawGame();
                 EndShaderMode();
                 drawDeathScreen();
-                if(IsKeyPressed(KEY_F)) flag_screen = 0;
+                if(IsKeyPressed(KEY_F)) break;
             }
             if(flag_screen == 4) {
                 //draw transição
