@@ -30,7 +30,7 @@ void drawVicScreen (){
         if(contador_ > 450){
                 DrawText("LEGEND", 320, 300, 40, RED);
         }
-        if(contador_ > 650){
+        if(contador_ > 700){
                 DrawCircle(position_.x, position_.y, (circle_ + 10), RED);
                 DrawCircle(position_.x, position_.y, circle_, WHITE);
                 DrawText("By", 370, 60, 40, RED);
@@ -39,11 +39,11 @@ void drawVicScreen (){
                 DrawText("Guilherme Montenegro", 232, 230, 30, RED);
                 DrawText("Thyago Soares", 282, 280, 30, RED);
                 DrawText("Victor Mendonça", 265, 330, 30, RED);
-                DrawText("Press F to back to menu", 10, 410, 20, RED);
+                DrawText("Press ESC to EXIT", 10, 410, 20, RED);
         }
         
         if(circle_ < 200){
-            circle_+=1;
+            circle_+=3;
         }
         contador_++;
 }
