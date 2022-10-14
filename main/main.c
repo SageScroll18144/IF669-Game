@@ -11,6 +11,8 @@
 #include "animations/deathscreen.h"
 #include "animations/final.h"
 
+int count_aux = 0;
+
 void drawGame();
 int objectColision(Vector2 a, Vector2 b, int min);
 
@@ -106,7 +108,11 @@ int main(void){
                 BeginDrawing();
                 flag_screen = 2;
             }
-            if(flag_screen == 2) drawGame();
+            if(flag_screen == 2) {
+                drawGame();
+                if(flag_attack == 1) count_aux++;
+                if(count_aux == 1000) flag_attack = 0;
+             }
             if(flag_screen == 3){
                 blackAndWhite();
                 if (get3DPlayerHp() < 1) draw3DScene();
