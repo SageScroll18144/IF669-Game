@@ -132,7 +132,11 @@ int main(void){
                drawInstructions();
                 if(IsKeyPressed(KEY_B)) flag_screen = 0;
             }
-            if(flag_screen == 7) drawVicScreen();
+            if(flag_screen == 7){
+                drawGame();
+                drawVicScreen();
+                if(IsKeyPressed(KEY_ESC)) break;
+            }
             
         EndDrawing();
         //----------------------------------------------------------------------------------
