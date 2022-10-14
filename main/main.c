@@ -113,6 +113,10 @@ int main(void){
                 drawDeathScreen();
                 if(IsKeyPressed(KEY_F)) flag_screen = 0;
             }
+            if(flag_screen == 4) {
+                //draw transição
+                flag_screen = 5;
+            }
             if(flag_screen == 5) {
                 draw3DScene();
 
