@@ -9,7 +9,7 @@
 #include "animations/transition.h"
 #include "scene/threeD_plan.h"
 #include "animations/deathscreen.h"
-
+#include "animations/final.h"
 
 void drawGame();
 int objectColision(Vector2 a, Vector2 b, int min);
@@ -46,7 +46,7 @@ int main(void){
         }
         // seta a transição de tela
         if(IsKeyDown(KEY_ENTER) && getMenuPos()==0) {
-            flag_screen = 5;
+            flag_screen = 4;
         }
         
         if (IsKeyPressed(KEY_ENTER) && getMenuPos() == 1){
@@ -115,6 +115,7 @@ int main(void){
             }
             if(flag_screen == 4) {
                 //draw transição
+                transiton3Dto2D();
                 flag_screen = 5;
             }
             if(flag_screen == 5) {
