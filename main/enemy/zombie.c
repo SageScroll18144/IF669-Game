@@ -50,20 +50,20 @@ void goAt(Enemy *enemy, Vector2 player_pos){
         if (dist_x >= dist_y && dist_x != 0) {
             if (player_pos.x  > enemy->position.x) {
                 enemy->axisOrientation = 0;
-                enemy->position.x += 15;
+                enemy->position.x += 10;
             }
             else{
                 enemy->axisOrientation = 1;
-                enemy->position.x -= 15;
+                enemy->position.x -= 10;
             } 
         } else if(dist_x < dist_y) {
             if (player_pos.y > enemy->position.y){
                 enemy->axisOrientation = 2;
-                enemy->position.y += 15;
+                enemy->position.y += 10;
             } 
             else{
                 enemy->axisOrientation = 3;
-                enemy->position.y -= 15;
+                enemy->position.y -= 10;
             } 
         }
     }
