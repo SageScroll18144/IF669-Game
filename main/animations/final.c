@@ -8,7 +8,7 @@ int contador_aux = 0;
 
 void transiton3Dto2D(){
     while(contador_aux < 15){
-        
+        BeginDrawing();//
         if(contador_3d < 1500){
             DrawCircle(400, 225, raio_3d, BLACK);
             if(contador_3d%2 == 0){
@@ -33,6 +33,7 @@ void transiton3Dto2D(){
              contador_3d = 1001;
             contador_aux++;
         }
+        EndDrawing();//
     }
     return;
 }
