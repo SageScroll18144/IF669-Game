@@ -10,6 +10,7 @@ Texture2D healthBarTex, healthBarTex2, healthBarTex3, healthBarTex4, healthBarTe
 //Rectangle frameRec;
 int currentFrame = 1, currentOrientation = 1, orientation = 1, axisOrientation = 0;
 int frameCounter = 0, isAttacking = 0, atkCnt = 0;
+int flag_attack = 0, count_attack = 0;;
 
 float animTime = 0;
 int currentFram = 0;
@@ -58,7 +59,13 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
     player->playerRec.x = (float)*currentFrame * (float) player->playerRec.width;
     player->playerRec.y = (float)*currentFrame * (float) player->playerRec.height;
 
-    if (IsKeyPressed(KEY_SPACE)) {
+    if (IsKeyPressed(KEY_SPACE) && flag_attack == 0) {
+        //animacao stamina
+        count_attack++;
+        if(count_attack == 7){
+            flag_attack = 1;
+            count_attack = 0;
+        }
         isAttacking = 1;
         if(!IsSoundPlaying(attack_sound)) PlaySound(attack_sound);
     }
