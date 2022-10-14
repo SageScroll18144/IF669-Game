@@ -15,6 +15,7 @@ int frameCounter = 0, isAttacking = 0, atkCnt = 0;
 int flag_attack = 0, count_attack = 0, count_aux = 0;
 
 char frontendHS[110];
+Font font_counter_est;
 
 float animTime = 0;
 int currentFram = 0;
@@ -53,7 +54,9 @@ void initCharacter(){
 
     attack_sound = LoadSound("sounds/sword.wav");
     SetSoundVolume(attack_sound, 0.5f);
- 
+    
+    font_counter_est = LoadFont("fonts/jupiter_crash.png"); 
+    
 }
 
 void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *currentOrientation, int *axisOrientation, int deltaTime) {
@@ -65,7 +68,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
 
     if (IsKeyPressed(KEY_SPACE) && !flag_attack) {//== 0
         //animacao stamina
-        printf("ATAQUE\n");
+        //printf("ATAQUE\n");
         count_attack++;
         if(count_attack == 7){
             flag_attack = 1;
@@ -75,14 +78,14 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
         isAttacking = 1;
         if(!IsSoundPlaying(attack_sound)) PlaySound(attack_sound);
     }
-    if(flag_attack){ count_aux++; printf("BAIXA ESTAMINA\n");}
+    if(flag_attack){ count_aux++;}
     if(count_aux == 700) {
         count_aux = 0;
         flag_attack = 0;
     }
 
-    if(!flag_attack) sprintf(frontendHS, "%d", 7-count_attack);
-    else if(flag_attack) sprintf(frontendHS, "%d", count_aux/100);
+    if(!flag_attack) sprintf(frontendHS, "x%d", 7-count_attack);
+    else if(flag_attack) sprintf(frontendHS, "x%d", count_aux/100);
     if (!isAttacking) {
         if (IsKeyDown(KEY_RIGHT)) {
             
@@ -279,6 +282,10 @@ void drawHealthBar() {
         break;
     }
     
+    //desenha est
+    if(!flag_attack)DrawTextEx(font_counter_est, frontendHS, (Vector2){GetScreenWidth()*3/4,10}, font_counter_est.baseSize*2.0f , 1.0, BLUE);
+    else if(flag_attack) DrawTextEx(font_counter_est, frontendHS, (Vector2){GetScreenWidth()*3/4,10}, font_counter_est.baseSize*2.0f , 1.0, ORANGE);
+
 }
 
 void unloadBodyTextures() {
