@@ -7,7 +7,7 @@
 
 Camera camera = { 0 };
 Vector3 acm;//inimigo
-int acm_life = 100;
+float acm_life = 100.0;
 int sen, healthPoints = 6, flagBullet = 0;
 Model model;
 
@@ -175,10 +175,10 @@ void shotABullet(){
     if (camera.position.y <= camera.target.y) bullet.y += ((camera.target.y - camera.position.y) * 0.5f);
     else bullet.y -= ((camera.position.y - camera.target.y) * 0.5f);;
     
-    if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 10;
+    if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 0.1;
 
     if(bullet.x > K * camera.target.x && bullet.z > K * camera.target.z) flagBullet = 0;
-    printf("->%d\n", acm_life);
+    printf("->%.2f\n", acm_life);
 }
 
 int get3DPlayerHp() {
