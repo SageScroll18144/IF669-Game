@@ -54,7 +54,7 @@ void drawDeathScreen (){
     //BeginDrawing();
         //EndShaderMode();
         DrawCircle(position0.x, position0.y, circle0, BLACK);
-        if(contador0 > 1200){
+        if(contador0 > 1250){
             DrawText("SE FODEU", 298, 210, 40, RED);
             DrawTexture (battext, 210, 180, WHITE);
             DrawTexture (battext2, 510, 180, WHITE);
