@@ -3,6 +3,8 @@
 
 #include "raylib.h"
 
+void initVicScreen();
+void drawVicScreen();
 void transiton3Dto2D();
 
 #endif
