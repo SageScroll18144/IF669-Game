@@ -6,17 +6,13 @@ int contador_3d = 0;
 int raio_3d = 0;
 Vector2 position_;
 int circle_, contador_;
-Sound vicMusic;
 
 void initVicScreen (){
     position_ = (Vector2) {400, 225};
     circle_ = 0; 
-    contador_ = 0;
-    vicMusic = LoadSound ("sounds/VicMusic.mp3");
-    SetSoundVolume (vicMusic, 0.8f); 
+    contador_ = 0; 
 }
 void drawVicScreen (){
-        if (!IsSoundPlaying (vicMusic)) PlaySound (vicMusic);
         DrawCircle(position_.x, position_.y, (circle_ + 10), RED);
         DrawCircle(position_.x, position_.y, circle_, WHITE);
         if(contador_ > 220){
