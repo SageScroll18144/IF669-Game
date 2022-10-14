@@ -50,6 +50,7 @@ void drawScene(int cnt){
 }
 void closeScene(){
     UnloadTexture(backTex);
+    UnloadSound(backMusic);
 }
 int hasAColision(Vector2 object){
     int x = (int)object.x+40;
