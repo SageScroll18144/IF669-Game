@@ -39,7 +39,7 @@ void drawVicScreen (){
                 DrawText("Guilherme Montenegro", 232, 230, 30, RED);
                 DrawText("Thyago Soares", 282, 280, 30, RED);
                 DrawText("Victor Mendonça", 265, 330, 30, RED);
-                DrawText("Press ESC to EXIT", 10, 410, 20, GREEN);
+                DrawText("Press ESC to EXIT", 10, 410, 20, YELLOW);
         }
         
         if(circle_ < 200){
