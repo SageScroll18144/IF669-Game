@@ -7,7 +7,7 @@ int raio_3d = 0;
 int contador_aux = 0;
 
 void transiton3Dto2D(){
-    while(contador_aux < 100){
+    while(contador_aux < 15){
         
         if(contador_3d < 1500){
             DrawCircle(400, 225, raio_3d, BLACK);
