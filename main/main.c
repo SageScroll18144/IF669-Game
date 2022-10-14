@@ -31,6 +31,7 @@ int main(void){
     initTransition();
     init3DScene();
     initDeathScreen();
+    initVicScreen();
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -131,7 +132,7 @@ int main(void){
                drawInstructions();
                 if(IsKeyPressed(KEY_B)) flag_screen = 0;
             }
-            if(flag_screen == 7) printf("TELA DE WINNER!\n");
+            if(flag_screen == 7) drawVicScreen();
             
         EndDrawing();
         //----------------------------------------------------------------------------------
