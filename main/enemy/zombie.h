@@ -23,5 +23,6 @@ void receiveCharacterDamage(int idx);
 void killEnemy(int idx);
 void setCharacterHitKill(int value);
 int getHowManyAlreadyDie();
+int CompareHowManyAlreadyDie();
 
 #endif
