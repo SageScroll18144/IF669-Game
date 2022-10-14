@@ -3,7 +3,7 @@
 Para compilar o projeto basta rodar a seguinte linha de código:
 
 ```
-cc character/body.c scene/background.c enemy/zombie.c main.c menu/menu.c animations/transition.c scene/threeD_plan.c menu/instructions.c -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+cc character/body.c scene/background.c enemy/zombie.c main.c menu/menu.c animations/transition.c scene/threeD_plan.c menu/instructions.c animations/deathscreen.c animations/final.c -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 ```
 
 - Para ambiente linux
