@@ -11,4 +11,5 @@ O jogo é subdividido em duas fases:
 ![Screenshot](fase1.png)
 
 - II) Uma fase 3D, o confronto final!
+
 ![Screenshot](fase2.png)
