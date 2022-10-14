@@ -15,6 +15,7 @@ Vector3 bullet;
 const int K = 50;
 
 Sound walk3d;
+Sound shotsound;
 
 Texture2D acmBar1, acmBar2, acmBar3, acmBar4, acmBar5, acmBar6;
 
@@ -38,6 +39,7 @@ void init3DScene(){
     acmBar6 = LoadTexture("sprites/health_bar/a6.png");
 
     walk3d = LoadSound("sounds/walking_sound4.mp3");
+    shotsound = LoadSound("sounds/plasma.mp3");
 }
 
 void update3DScene(){
@@ -115,6 +117,7 @@ void draw3DScene(){
         if(IsKeyPressed(KEY_P)){
             flagBullet = 1;   
             bullet = camera.target; 
+            PlaySound(shotsound);
         }
         if (flagBullet) shotABullet();
     EndMode3D();
@@ -195,6 +198,7 @@ void drawAcmBar() {
 void unLoadModels(){
     UnloadModel(model);  
     UnloadSound(walk3d);
+    UnloadSound(shotsound);
 }
 
 float mod(float a){

@@ -6,6 +6,7 @@
 Font font_counter;
 Texture2D backTex;
 int bitmap[450][800];
+Sound backMusic;
 
 void loadImageColision(char *file_name){
     FILE *file = fopen(file_name, "r");
@@ -32,8 +33,10 @@ void initScene(){
     backTex = LoadTexture("assets/map.png");
     loadImageColision("bitmaps/mat.txt");  
     font_counter = LoadFont("fonts/jupiter_crash.png"); 
+    backMusic = LoadSound ("sounds/background.mp3");
 }
 void drawScene(int cnt){
+    if (!IsSoundPlaying (backMusic)) PlaySound (backMusic);
     Rectangle recSrc = {0, 0, backTex.width, backTex.height};
     Rectangle recDest = {0, 0, 800, 450};
     Vector2 vecOrigin = {0, 0};
@@ -47,6 +50,7 @@ void drawScene(int cnt){
 }
 void closeScene(){
     UnloadTexture(backTex);
+    UnloadSound(backMusic);
 }
 int hasAColision(Vector2 object){
     int x = (int)object.x+40;
