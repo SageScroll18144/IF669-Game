@@ -10,7 +10,7 @@ Texture2D healthBarTex, healthBarTex2, healthBarTex3, healthBarTex4, healthBarTe
 //Rectangle frameRec;
 int currentFrame = 1, currentOrientation = 1, orientation = 1, axisOrientation = 0;
 int frameCounter = 0, isAttacking = 0, atkCnt = 0;
-int flag_attack = 0, count_attack = 0;;
+int flag_attack = 0, count_attack = 0;
 
 float animTime = 0;
 int currentFram = 0;
