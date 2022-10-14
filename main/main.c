@@ -119,7 +119,7 @@ int main(void){
                 if (get3DPlayerHp() < 1) {
                     flag_screen = 3;
                 }
-            };
+            }
             if(flag_screen == 6) {
                 
                drawInstructions();
