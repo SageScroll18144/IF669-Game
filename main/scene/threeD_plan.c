@@ -162,6 +162,9 @@ void shotABullet(){
 
     if (camera.position.z <= camera.target.z) bullet.z += ((camera.target.z - camera.position.z) * 0.5f);
     else bullet.z -= ((camera.position.z - camera.target.z) * 0.5f);;
+
+    if (camera.position.y <= camera.target.y) bullet.y += ((camera.target.y - camera.position.y) * 0.5f);
+    else bullet.y -= ((camera.position.y - camera.target.y) * 0.5f);;
     
     if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 10;
 
