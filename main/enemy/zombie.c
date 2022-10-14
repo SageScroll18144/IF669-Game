@@ -153,3 +153,7 @@ void setCharacterHitKill(int value){
 int getHowManyAlreadyDie(){
     return how_many_already_die;
 }
+int CompareHowManyAlreadyDie(){
+    if(how_many_already_die == how_many) return 1;
+    return 0;
+}
