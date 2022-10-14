@@ -133,7 +133,7 @@ int main(void){
                 if(IsKeyPressed(KEY_B)) flag_screen = 0;
             }
             if(flag_screen == 7){
-                drawGame();
+                draw3DScene();
                 drawVicScreen();
                 if(IsKeyPressed(KEY_ESC)) break;
             }
