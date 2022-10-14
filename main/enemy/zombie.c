@@ -28,7 +28,7 @@ void initEnemy(){
 
     hit_kill = 50;
 
-    how_many = 13;
+    how_many = 5;
 
 }
 

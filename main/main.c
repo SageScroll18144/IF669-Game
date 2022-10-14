@@ -110,8 +110,8 @@ int main(void){
             }
             if(flag_screen == 2) {
                 drawGame();
-                if(flag_attack == 1) count_aux++;
-                if(count_aux == 1000) flag_attack = 0;
+                // if(flag_attack == 1) count_aux++;
+                // if(count_aux == 1000) flag_attack = 0;
              }
             if(flag_screen == 3){
                 blackAndWhite();
@@ -141,7 +141,7 @@ int main(void){
             if(flag_screen == 7){
                 draw3DScene();
                 drawVicScreen();
-                if(IsKeyPressed(KEY_ESC)) break;
+                //if(IsKeyPressed(KEY_ESC)) break;
             }
             
         EndDrawing();

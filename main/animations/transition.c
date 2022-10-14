@@ -20,7 +20,7 @@ void drawTransition(){
         ClearBackground(RED);
         DrawCircle(400, 225, raio, BLACK);
         if(raio > 200){
-            DrawText("SURVIVE!", 350, 220, 20, WHITE)
+            DrawText("SURVIVE!", 350, 220, 20, WHITE);
         }
         EndDrawing();
         raio = raio + 10;

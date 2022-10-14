@@ -59,7 +59,7 @@ void updatePlayer(Player *player, int *currentFrame, int *frameCounter, int *cur
     player->playerRec.x = (float)*currentFrame * (float) player->playerRec.width;
     player->playerRec.y = (float)*currentFrame * (float) player->playerRec.height;
 
-    if (IsKeyPressed(KEY_SPACE) && flag_attack == 0) {
+    if (IsKeyPressed(KEY_SPACE) ) {//&& flag_attack == 0
         //animacao stamina
         count_attack++;
         if(count_attack == 7){
