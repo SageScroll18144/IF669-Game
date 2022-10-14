@@ -4,7 +4,7 @@
 #include "zombie.h"
 
 //Inicialização do zumbi
-Enemy enemyArr[20];
+Enemy enemyArr[10];
 int how_many; 
 int hit_kill;
 
@@ -15,7 +15,7 @@ int currentFramZ = 0;
 int sideOrientation = 1;
 //Função de inicialização
 void initEnemy(){
-    for(int i=0;i<20;i++) {
+    for(int i=0;i<10;i++) {
         enemyArr[i].axisOrientation = 0;
         enemyArr[i].position = (Vector2) {rand() % 800, rand() % 450};
 
@@ -28,7 +28,7 @@ void initEnemy(){
 
     hit_kill = 50;
 
-    how_many = 20;
+    how_many = 10;
 
 }
 
