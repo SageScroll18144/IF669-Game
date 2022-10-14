@@ -15,6 +15,7 @@ Vector3 bullet;
 const int K = 50;
 
 Sound walk3d;
+Sound shotsound;
 
 void init3DScene(){
     camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };
@@ -31,6 +32,7 @@ void init3DScene(){
     sen = 1;
 
     walk3d = LoadSound("sounds/walking_sound4.mp3");
+    shotsound = LoadSound("sounds/plasma.mp3");
 }
 
 void update3DScene(){
@@ -108,6 +110,7 @@ void draw3DScene(){
         if(IsKeyPressed(KEY_P)){
             flagBullet = 1;   
             bullet = camera.target; 
+            PlaySound(shotsound);
         }
         if (flagBullet) shotABullet();
     EndMode3D();
@@ -153,6 +156,7 @@ void drawHpBar() {
 void unLoadModels(){
     UnloadModel(model);  
     UnloadSound(walk3d);
+    UnloadSound(shotsound);
 }
 
 float mod(float a){
