@@ -14,6 +14,8 @@ Model model;
 Vector3 bullet;
 const int K = 50;
 
+Sound walk3d;
+
 void init3DScene(){
     camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };
     camera.target = (Vector3){ 0.0f, 1.8f, 0.0f };
@@ -27,10 +29,15 @@ void init3DScene(){
 
     acm = (Vector3){ 0.0f, 3.0f, 0.0f };
     sen = 1;
+
+    walk3d = LoadSound("sounds/walking_sound4.mp3");
 }
 
 void update3DScene(){
-    if (healthPoints > 0) UpdateCamera(&camera);
+    if (healthPoints > 0) {
+        UpdateCamera(&camera);
+        if(IsKeyDown(KEY_W) || IsKeyDown(KEY_S) || IsKeyDown(KEY_A) || IsKeyDown(KEY_D)) if(!IsSoundPlaying(walk3d)) PlaySound(walk3d);
+    }
     //colisao
     if((camera.position.x>=15)) {
         camera.position.x -= 0.05f;
@@ -80,9 +87,9 @@ void update3DScene(){
 
         healthPoints--;
 
-        printf("ATACOU\n");
+        //printf("ATACOU\n");
     } 
-    else printf("NAO\n");
+    //else printf("NAO\n");
 
     //if()
 }
@@ -145,6 +152,7 @@ void drawHpBar() {
 
 void unLoadModels(){
     UnloadModel(model);  
+    UnloadSound(walk3d);
 }
 
 float mod(float a){
@@ -170,7 +178,7 @@ void shotABullet(){
     if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 10;
 
     if(bullet.x > K * camera.target.x && bullet.z > K * camera.target.z) flagBullet = 0;
-    printf("%d\n", acm_life);
+    printf("->%d\n", acm_life);
 }
 
 int get3DPlayerHp() {
