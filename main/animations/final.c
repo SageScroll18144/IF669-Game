@@ -13,7 +13,7 @@ void initVicScreen (){
     contador_ = 0; 
 }
 void drawVicScreen (){
-        DrawCircle(position_.x, position_.y, (circle_ + 10), RED);
+        DrawCircle(position_.x, position_.y, (circle_ + 10), BLACK);
         DrawCircle(position_.x, position_.y, circle_, WHITE);
         if(contador_ > 220){
             DrawText("CONGRATS!", 282, 100, 40, RED);
@@ -31,7 +31,7 @@ void drawVicScreen (){
                 DrawText("LEGEND", 320, 300, 40, RED);
         }
         if(contador_ > 460){
-                DrawCircle(position_.x, position_.y, (circle_ + 10), RED);
+                DrawCircle(position_.x, position_.y, (circle_ + 10), BLACK);
                 DrawCircle(position_.x, position_.y, circle_, WHITE);
                 DrawText("By", 370, 60, 40, RED);
                 DrawText("Felipe Santos", 302, 130, 30, RED);
@@ -39,7 +39,7 @@ void drawVicScreen (){
                 DrawText("Guilherme Montenegro", 232, 230, 30, RED);
                 DrawText("Thyago Soares", 282, 280, 30, RED);
                 DrawText("Victor Mendonça", 265, 330, 30, RED);
-                DrawText("Press ESC to EXIT", 10, 410, 20, RED);
+                DrawText("Press ESC to EXIT", 10, 410, 20, GREEN);
         }
         
         if(circle_ < 200){
