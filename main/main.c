@@ -90,8 +90,10 @@ int main(void){
                 }
             }
         }
-        if(flag_screen == 5) update3DScene();
-        // Draw
+        if(flag_screen == 5) {
+            update3DScene();
+            if(ACMDie()) flag_screen = 7;
+        }// Draw
         BeginDrawing();
 
             ClearBackground(RAYWHITE);
@@ -123,6 +125,7 @@ int main(void){
                drawInstructions();
                 if(IsKeyPressed(KEY_B)) flag_screen = 0;
             }
+            if(flag_screen == 7) printf("TELA DE WINNER!\n");
             
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -150,7 +153,5 @@ void drawGame(){
     drawEnemy();
 }
 int objectColision(Vector2 a, Vector2 b, int min){
-    //printf("%f\n", a.x*b.x + a.y*b.y );
     return abs((int)a.x-(int)b.x)<=min && abs((int)a.y-(int)b.y)<=min;
-
 }

@@ -175,7 +175,7 @@ void shotABullet(){
     if (camera.position.y <= camera.target.y) bullet.y += ((camera.target.y - camera.position.y) * 0.5f);
     else bullet.y -= ((camera.position.y - camera.target.y) * 0.5f);;
     
-    if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 0.1;
+    if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 0.5;
 
     if(bullet.x > K * camera.target.x && bullet.z > K * camera.target.z) flagBullet = 0;
     printf("->%.2f\n", acm_life);
@@ -183,4 +183,7 @@ void shotABullet(){
 
 int get3DPlayerHp() {
     return healthPoints;
+}
+int ACMDie(){
+    return acm_life < 0;
 }
