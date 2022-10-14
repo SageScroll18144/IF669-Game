@@ -54,15 +54,15 @@ void drawDeathScreen (){
     //BeginDrawing();
         //EndShaderMode();
         DrawCircle(position0.x, position0.y, circle0, BLACK);
-        if(contador0 > 900){
+        if(contador0 > 1200){
             DrawText("SE FODEU", 298, 210, 40, RED);
             DrawTexture (battext, 210, 180, WHITE);
             DrawTexture (battext2, 510, 180, WHITE);
         }
         if(contador0%2 == 0 && circle0 < 200){
-            circle0++;
+            circle0+=2;
         }
-        if (contador0 > 1500) DrawText ("Press F to pay respect", 20, 420, 20, RED);
+        if (contador0 > 3000) DrawText ("Press F to pay respect", 20, 420, 20, RED);
         contador0 += 7;
     //EndDrawing();
 }
