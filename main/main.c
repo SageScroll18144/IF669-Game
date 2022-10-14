@@ -11,7 +11,7 @@
 #include "animations/deathscreen.h"
 #include "animations/final.h"
 
-int count_aux = 0;
+//int count_aux = 0;
 
 void drawGame();
 int objectColision(Vector2 a, Vector2 b, int min);
