@@ -11,5 +11,6 @@ void drawBullet();
 void unLoadModels();
 float mod(float a);
 void shotABullet();
+int get3DPlayerHp();
 
 #endif

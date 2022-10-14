@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "threeD_plan.h"
 #include "../character/body.h"
+#include "../animations/deathscreen.h"
 #include <stdio.h>
 #include <math.h>
 
@@ -29,7 +30,7 @@ void init3DScene(){
 }
 
 void update3DScene(){
-    UpdateCamera(&camera);
+    if (healthPoints > 0) UpdateCamera(&camera);
     //colisao
     if((camera.position.x>=15)) {
         camera.position.x -= 0.05f;
@@ -111,7 +112,7 @@ void draw3DScene(){
     DrawText("- Move with keys: W, A, S, D", 40, 40, 10, DARKGRAY);
     DrawText("- Mouse move to look around", 40, 60, 10, DARKGRAY);
     drawHpBar();
-    printf("%f x %f | %f y %f | %f z %f\n", camera.position.x, camera.target.x, camera.position.y, camera.target.y, camera.position.z, camera.target.z);
+
 }
 
 void drawHpBar() {
@@ -169,5 +170,9 @@ void shotABullet(){
     if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 10;
 
     if(bullet.x > K * camera.target.x && bullet.z > K * camera.target.z) flagBullet = 0;
-    printf("bala x %f y %f z %f\n", bullet.x, bullet.y, bullet.z);
+    printf("%d\n", acm_life);
+}
+
+int get3DPlayerHp() {
+    return healthPoints;
 }

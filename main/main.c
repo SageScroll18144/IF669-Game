@@ -105,12 +105,19 @@ int main(void){
             if(flag_screen == 2) drawGame();
             if(flag_screen == 3){
                 blackAndWhite();
-                drawGame();
+                if (get3DPlayerHp() < 1) draw3DScene();
+                else drawGame();
                 EndShaderMode();
                 drawDeathScreen();
                 if(IsKeyPressed(KEY_F)) flag_screen = 0;
             }
-            if(flag_screen == 5) draw3DScene();
+            if(flag_screen == 5) {
+                draw3DScene();
+
+                if (get3DPlayerHp() < 1) {
+                    flag_screen = 3;
+                }
+            };
             if(flag_screen == 6) {
                 
                drawInstructions();
