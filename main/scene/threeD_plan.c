@@ -114,7 +114,7 @@ void draw3DScene(){
         //DrawCube(acm, 5.0f, 5.0f, 5.0f, GOLD);
         DrawModel(model, acm, 3.0f, RED);
         //DrawCircle3D((Vector3){ 0.0f, 2.0f, 0.0f }, earthOrbitRadius, (Vector3){ 1, 0, 0 }, 90.0f, Fade(RED, 0.5f));
-        if(IsKeyPressed(KEY_P)){
+        if(IsKeyPressed(KEY_P)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
             flagBullet = 1;   
             bullet = camera.target; 
             PlaySound(shotsound);
@@ -225,7 +225,7 @@ void shotABullet(){
     if(mod(bullet.x - acm.x) <= 3.0f && mod(bullet.z - acm.z) <= 3.0f) acm_life -= 0.5;
 
     if(bullet.x > K * camera.target.x && bullet.z > K * camera.target.z) flagBullet = 0;
-    printf("->%.2f\n", acm_life);
+    //printf("->%.2f\n", acm_life);
 }
 
 int get3DPlayerHp() {
